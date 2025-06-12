@@ -31,7 +31,7 @@ try {
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
 		$assetJsonArray = json_decode($response->getBody(), true);
-
+		print_r($assetJsonArray);
 		//if asset doesn't exist in inventory
 		if(array_key_exists('status',$assetJsonArray)) {
 			echo "Asset not found";
