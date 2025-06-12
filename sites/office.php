@@ -8,5 +8,10 @@
 <body>
 	<h1>Who up holding they place?</h1>
 	<h1>Return Assets to Office</h1>
+	<form action="../api_requests/getIDBySerial.php" method="GET">
+		<label for="serial">Scan Serial #</label>
+		<input type="hidden" name="source" value="office">
+		<input type="text" id="serial" name="serial" required>
+		<button type="submit">Submit (not needed?)</button>
 </body>
 </html>
