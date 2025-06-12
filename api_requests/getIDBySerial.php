@@ -33,12 +33,12 @@ try {
 		$assetJsonArray = json_decode($response->getBody(), true);
 
 		//if asset doesn't exist in inventory
-		if($assetJsonArray["status"] == "error") {
+		if(array_key_exists('status',$assetJsonArray)) {
 			echo "Asset not found";
 			//in SnipeTools, an id of -2 means the asset was not found in inventory
 			$id = -2;
 		} else {
-			$id = $assetJsonArrya["id"];
+			$id = $assetJsonArray["id"];
 			echo $id;
 		}
 	}
