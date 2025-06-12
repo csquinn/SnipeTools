@@ -28,7 +28,7 @@ try {
 			'content-type' => 'application/json',
 		],
 	]);
-
+	echo $response->getBody();
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
 } catch (\Exception $e) {
