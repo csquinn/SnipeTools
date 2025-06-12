@@ -1,3 +1,4 @@
+<html lang="en">
 <?php
 //Creates messages based on the status of api requests
 //creates a success message when the specified goal is completed (SnipeRequestStatus=1)
@@ -24,6 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		if(isset($_GET['serial'])) {
 			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Try searching for the asset on inventory</a>';
 		}
+
+		//set a pretty background color
+		echo "<style> body {background-color: red; </style>}";
+
 	} else if ($_GET['SnipeRequestStatus'] == 1) { //if SnipeRequestStatus is 1, then the asset was found and all desired actions were completed (this value is set in the xxxAPI.php)
 		//assetMessage is set to a scucess message
 		$assetMessage = "Successfully Updated Asset " . $_GET['serial'];
@@ -32,6 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		if(isset($_GET['serial'])) {
 			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Check this action on inventory</a>';
 		}
+
+		//set a pretty background color
+		echo "<style> body {background-color: green; </style>}";
 
 	}
 }
