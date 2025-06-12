@@ -21,7 +21,7 @@ try {
 	$client = new \GuzzleHttp\Client();
 
 	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
-		'body' =>'{"last_checkout":"null","assigned_user":0,"assigned_location":null,"assigned_asset":null,"company_id":null,"serial":"null","warranty_months":null,"purchase_cost":null,"purchase_date":"null","requestable":false,"archived":false,"rtd_location_id":15,"name":"null","location_id":null,"image":"null","asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
+		'body' =>'{"last_checkout":null,"assigned_user":null,"assigned_location":null,"assigned_asset":null,"company_id":null,"serial":null,"warranty_months":null,"purchase_cost":null,"purchase_date":null,"requestable":false,"archived":false,"rtd_location_id":15,"name":null,"location_id":null,"image":null,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
 		'headers' => [
 			'Authorization' => 'Bearer ' . $api_key,
 			'accept' => 'application/json',
