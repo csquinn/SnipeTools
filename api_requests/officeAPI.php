@@ -35,7 +35,7 @@ try {
 	echo 'General Error: ' . $e->getMessage();
 }
 
-echo "trying checkin now"
+echo "trying checkin now";
 
 try {
 
