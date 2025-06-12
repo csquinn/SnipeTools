@@ -14,6 +14,9 @@ $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 $assetMessage='';
 $assetLink='';
 
+
+//set a pretty background color
+echo "<style> body {background-color: #337ab7;} </style>";
 if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus'])) {
 	//SnipeRequestStatus is sent after each cycle of api calls. If it's -1, then the asset wasn't found (this status value is set in getIDBySerial.php)
 	if($_GET['SnipeRequestStatus'] == -1) {
