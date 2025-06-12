@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 require handleMissingAsset.php
->
+?>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
