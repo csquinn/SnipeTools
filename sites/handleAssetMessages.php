@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		}
 
 		//set a pretty background color
-		echo "<style> body {background-color: red; </style>}";
+		echo "<style> body {background-color: red;} </style>";
 
 	} else if ($_GET['SnipeRequestStatus'] == 1) { //if SnipeRequestStatus is 1, then the asset was found and all desired actions were completed (this value is set in the xxxAPI.php)
 		//assetMessage is set to a scucess message
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		}
 
 		//set a pretty background color
-		echo "<style> body {background-color: green; </style>}";
+		echo "<style> body {background-color: green;} </style>";
 
 	}
 }
