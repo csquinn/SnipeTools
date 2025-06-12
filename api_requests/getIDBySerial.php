@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	$serial = $_GET['serial']; //serial number of asset
 }
 
-//get request api call
+//the api call, a get request copied from SnipeIT's documentation
 try {
 	$client = new \GuzzleHttp\Client();
 
@@ -46,6 +46,7 @@ try {
 			exit;
 		}
 	}
+//catch any internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
 } catch (\Exception $e) {

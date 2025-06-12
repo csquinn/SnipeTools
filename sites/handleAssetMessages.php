@@ -14,9 +14,9 @@ $assetMessage='';
 $assetLink='';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus'])) {
-	//RequestStatus is sent after each cycle of api calls. If it's -1, then the asset wasn't found (this status value is set in getIDBySerial.php)
+	//SnipeRequestStatus is sent after each cycle of api calls. If it's -1, then the asset wasn't found (this status value is set in getIDBySerial.php)
 	if($_GET['SnipeRequestStatus'] == -1) {
-		//assetMessage is set to a failure message. If an asset is found, then assetMessage is set to a success message in office.php, deprovision.php, or validate.php
+		//assetMessage is set to a failure message
 		$assetMessage = "This asset couldn't be found :(";
 
 		//create a link to search inventory for the missing asset
@@ -24,8 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		if(isset($_GET['serial'])) {
 			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Try searching for the asset on inventory</a>';
 		}
-	} else if ($_GET['SnipeRequestStatus'] == 1) {
+	} else if ($_GET['SnipeRequestStatus'] == 1) { //if SnipeRequestStatus is 1, then the asset was found and all desired actions were completed (this value is set in the xxxAPI.php)
+		//assetMessage is set to a scucess message
 		$assetMessage = "Successfully Updated Asset " . $_GET['serial'];
+
+		//create link to inventory for updated asset
 		if(isset($_GET['serial'])) {
 			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Check this action on inventory</a>';
 		}

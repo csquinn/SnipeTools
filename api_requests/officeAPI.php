@@ -10,17 +10,23 @@ $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 
 use GuzzleHttp\Client;
 
+//assign variables from request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$id = $_GET['id'];
 	$modelID = $_GET['modelID'];
 	$serial = $_GET['serial'];
 }
 
-//Everything besides checkin
+//Two requests are sent by officeAPI.php. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
+
+//Put request, Everything besides checkin
 try {
 
 	$client = new \GuzzleHttp\Client();
 
+	//api request copied from snipeIT
+	//important note: I did not have to list every single asset field in this request, just the ones I wanted to update. Anything not mentioned is not touched
+	//rtd_location_id 15 = Office, status_id 2 = Ready to Deploy
 	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
 		'body' =>'{"rtd_location_id":15,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
 		'headers' => [
@@ -29,7 +35,8 @@ try {
 			'content-type' => 'application/json',
 		],
 	]);
-	
+
+//catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
 } catch (\Exception $e) {
@@ -41,6 +48,7 @@ try {
 
 	$client = new \GuzzleHttp\Client();
 
+	//api request copied from snipeIT
 	$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
 		'body' =>'{"status_id":2}',
 		'headers' => [
@@ -50,7 +58,10 @@ try {
 		],
 	]);
 	
+	//redirect back to office.php with a confirmation code so assetMessage and assetLink can be set
 	header("Location: ../sites/office.php?SnipeRequestStatus=1&serial=". $serial);
+
+//catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
 } catch (\Exception $e) {
