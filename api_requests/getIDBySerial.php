@@ -35,7 +35,7 @@ try {
 		//if asset doesn't exist in inventory
 		if(array_key_exists('status',$assetJsonArray)) {
 			//route back to where request came from sending error code and og serial, further logic handled in handleMissingAsset.php 
-			header("Location: ../sites/" . $source . ".php?RequestStatus=-1&serial=". $serial);
+			header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial);
 			exit;
 
 		} else { //if asset does exist in inventory

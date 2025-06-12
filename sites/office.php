@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-include 'handleMissingAsset.php'
+include 'handleAssetMessages.php'
 ?>
 <html lang="en">
 <head>

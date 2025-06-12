@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$serial = $_GET['serial'];
 }
 
+//Everything besides checkin
 try {
 
 	$client = new \GuzzleHttp\Client();
@@ -28,15 +29,14 @@ try {
 			'content-type' => 'application/json',
 		],
 	]);
-	echo $response->getBody();
+	
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
 } catch (\Exception $e) {
 	echo 'General Error: ' . $e->getMessage();
 }
 
-echo "trying checkin now";
-
+//checkin
 try {
 
 	$client = new \GuzzleHttp\Client();
@@ -49,7 +49,8 @@ try {
 			'content-type' => 'application/json',
 		],
 	]);
-	echo $response->getBody();
+	
+	header("Location: ../sites/office.php?SnipeRequestStatus=1&serial=". $serial);
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
 } catch (\Exception $e) {
