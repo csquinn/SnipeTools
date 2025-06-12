@@ -26,5 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		}
 	} else if ($_GET['SnipeRequestStatus'] == 1) {
 		$assetMessage = "Successfully Updated Asset " . $_GET['serial'];
+		if(isset($_GET['serial'])) {
+			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Check this action on inventory</a>';
+		}
+
 	}
 }

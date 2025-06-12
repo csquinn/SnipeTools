@@ -19,5 +19,6 @@ include 'handleAssetMessages.php'
 	</form>
 	<h2><?php echo $assetMessage; ?></h2>
 	<h3><?php echo $assetLink; ?></h3>
+	<a href="../index.php">Return Home</a>
 </body>
 </html>
