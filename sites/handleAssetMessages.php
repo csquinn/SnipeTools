@@ -9,8 +9,11 @@
 $snipe_url = file_get_contents("../snipe_url.txt");
 $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 
+//hopefully remove errors
+$assetMessage='';
+$assetLink='';
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus'])) {
 	//RequestStatus is sent after each cycle of api calls. If it's -1, then the asset wasn't found (this status value is set in getIDBySerial.php)
 	if($_GET['SnipeRequestStatus'] == -1) {
 		//assetMessage is set to a failure message. If an asset is found, then assetMessage is set to a success message in office.php, deprovision.php, or validate.php
