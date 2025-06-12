@@ -38,7 +38,7 @@ try {
 			//in SnipeTools, an id of -2 means the asset was not found in inventory
 			$id = -2;
 		} else {
-			$id = $assetJsonArray["id"];
+			$id = $assetJsonArray["rows][0]["id"];
 			echo $id;
 		}
 	}
