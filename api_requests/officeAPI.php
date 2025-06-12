@@ -21,7 +21,28 @@ try {
 	$client = new \GuzzleHttp\Client();
 
 	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
-		'body' =>'{"last_checkout":null,"assigned_user":null,"assigned_location":null,"assigned_asset":null,"company_id":null,"serial":null,"warranty_months":null,"purchase_cost":null,"purchase_date":null,"requestable":false,"archived":false,"rtd_location_id":15,"name":null,"location_id":null,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
+		'body' =>'{"rtd_location_id":15,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
+		'headers' => [
+			'Authorization' => 'Bearer ' . $api_key,
+			'accept' => 'application/json',
+			'content-type' => 'application/json',
+		],
+	]);
+	echo $response->getBody();
+} catch (\GuzzleHttp\Exception\RequestException $e) {
+	echo 'API Request Error: ' . $e->getMessage();
+} catch (\Exception $e) {
+	echo 'General Error: ' . $e->getMessage();
+}
+
+echo "trying checkin now"
+
+try {
+
+	$client = new \GuzzleHttp\Client();
+
+	$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin, [
+		'body' =>'{"status_id":2}',
 		'headers' => [
 			'Authorization' => 'Bearer ' . $api_key,
 			'accept' => 'application/json',
