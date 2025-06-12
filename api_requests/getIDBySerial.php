@@ -31,16 +31,18 @@ try {
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
 		$assetJsonArray = json_decode($response->getBody(), true);
-		print_r($assetJsonArray["rows"][0]["id"]);
+
 		//if asset doesn't exist in inventory
 		if(array_key_exists('status',$assetJsonArray)) {
-			echo "Asset not found";
-			//in SnipeTools, an id of -2 means the asset was not found in inventory
-			$id = -2;
-			echo $id;
-		} else {
+			//route back to where request came from sending error code and og serial, further logic handled in handleMissingAsset.php 
+			header("Location: ../sites/" . $source . ".php?RequestStatus=-1&serial=". $serial);
+			exit;
+
+		} else { //if asset does exist in inventory
+			//routes to the php file 
 			$id = $assetJsonArray["rows"][0]["id"];
-			echo $id;
+			header("Location: " . $source . "API.php?id=" . $id);
+			exit;
 		}
 	}
 } catch (\GuzzleHttp\Exception\RequestException $e) {
