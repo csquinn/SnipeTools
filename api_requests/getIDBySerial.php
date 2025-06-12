@@ -44,7 +44,7 @@ try {
 	}
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
-} catch (\Exception $e {
+} catch (\Exception $e) {
 	echo 'General Error: ' . $e->getMessage();
 }
 ?>
