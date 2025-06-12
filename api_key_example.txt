@@ -1,0 +1,2 @@
+REPLACE_ME_WITH_SNIPEIT_API_KEY_NO_SPACES_OR_LABEL
+then, delete this second line and rename the file to "api_key.txt"

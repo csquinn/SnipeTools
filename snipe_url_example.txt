@@ -1,0 +1,2 @@
+https://your.snipeit.url.here
+delete this line and rename this file to "snipe_url.txt" MAKE SURE YOUR URL DOES NOT END IN A SLASH
