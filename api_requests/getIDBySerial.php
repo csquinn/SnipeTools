@@ -41,7 +41,8 @@ try {
 		} else { //if asset does exist in inventory
 			//routes to the php file 
 			$id = $assetJsonArray["rows"][0]["id"];
-			header("Location: " . $source . "API.php?id=" . $id);
+			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
+			header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial);
 			exit;
 		}
 	}

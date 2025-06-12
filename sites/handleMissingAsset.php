@@ -1,6 +1,7 @@
+<?php
 //creates an error message to display when an asset can't be found
 //should be included in the office.php, deprovision.php, and validate.php to reduce redundancy
-<?php
+
 
 //get snipe_url
 $snipe_url = file_get_contents("../snipe_url.txt");
