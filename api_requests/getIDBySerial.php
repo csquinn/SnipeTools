@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 $client = new \GuzzleHttp\Client();
 
-$response = $client->request('GET', $source.'/api/v1/hardware/byserial/'.$serial.'?deleted=false', [
+$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?deleted=false', [
 	'headers' => [
 		'Authorization' => 'Bearer '.$api_key,
 		'accept' => 'application/json',
