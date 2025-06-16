@@ -28,15 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($callGoogle == "on") {
 	try {
 		//create new connection to Google API
-		$client = new Google\Client();
-		$client->setAuthConfig('../user_variables/google-auth.json');
-		$client->addScope('https://www.googleapis.com/auth/admin.directory.device.chromeos');
+		$gclient = new Google\Client();
+		$gclient->setAuthConfig('../user_variables/google-auth.json');
+		$gclient->addScope('https://www.googleapis.com/auth/admin.directory.device.chromeos');
 
 		//impersonate an admin account(?) for proper permissions
-		$client->setSubject('admin@example.com');
+		$gclient->setSubject('admin@example.com');
 
 		//create directory object from client
-		$service = new Directory($client);
+		$service = new Directory($gclient);
 
 		//create array specifying api call parameters
 		$optParams = array(
