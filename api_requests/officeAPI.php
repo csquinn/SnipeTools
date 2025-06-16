@@ -23,9 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$serial = $_GET['serial'];
 }
 
-//variable that keeps track of Google API requests. 1 is success, -1 is failure, 0 is no call made
+//variable that keeps track of Google API requests. 1 is success, -1 is found but deprovisioned, -2 is not found, 0 is no call made
 $gSuccess = 0;
-//optional Google Request to ensure that 
+
+//optional Google Request to ensure that a device exists in google admin
 if (isset($_GET['GAdmin'])) {
 	try {
 		//create new connection to Google API
@@ -48,7 +49,12 @@ if (isset($_GET['GAdmin'])) {
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 	
 
-		echo json_encode($results->toSimpleObject(), JSON_PRETTY_PRINT);	
+		//if search is too ambiguous and returns multiple or if it returns none
+		if(count($results) != 1) {
+			$gSuccess = -2;
+		}
+		
+		if(
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
 	} catch (Google_Exception $e) {
