@@ -48,6 +48,9 @@ if (isset($_GET['GAdmin'])) {
 
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 	
+	
+		//assume success on the call, then check it
+		$gSuccess = 1;
 
 		//if search is too ambiguous and returns multiple or if it returns none
 		if(count($results) != 1) {
@@ -60,10 +63,10 @@ if (isset($_GET['GAdmin'])) {
 		}
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
-		$gSuccess = -3;
+		$gSuccess = -2;
 	} catch (Google_Exception $e) {
 		echo 'General Error: ' . $e->getMessage();
-		$gSuccess = -3;
+		$gSuccess = -2;
 	}
 }
 
