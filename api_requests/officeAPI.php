@@ -52,15 +52,16 @@ if (isset($_GET['GAdmin'])) {
 		//assume success on the call, then check it
 		$gSuccess = 1;
 
+		//if cb is found but is deprovisioned
+		if($results->getChromeosdevices()[0]->getStatus() != "ACTIVE") {
+			$gSuccess = -1;
+		}
+
 		//if search is too ambiguous and returns multiple or if it returns none
 		if(count($results) != 1) {
 			$gSuccess = -2;
 		}
 		
-		//if cb is found but is deprovisioned
-		if($results->getChromeosdevices()[0]->getStatus() != "ACTIVE") {
-			$gSuccess = -1;
-		}
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
 		$gSuccess = -2;
