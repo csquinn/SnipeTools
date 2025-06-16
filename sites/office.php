@@ -7,7 +7,7 @@ include 'handleAssetMessages.php'
 	<title>Return Assets to Office</title>
 </head>
 <body>
-	<div style="text-align:center;">
+	<div style="text-align:center; justify-content: center; align-items: center;">
 	<h1>Return Assets to Office</h1>
 
 	<form action="../api_requests/getIDBySerial.php" method="GET" autocomplete="on">
