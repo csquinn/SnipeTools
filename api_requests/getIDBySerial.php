@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($callGoogle == "on") {
 	try {
 		//create new connection to Google API
-		$gclient = new Google\Client();
+		$gclient = new Client();
 		$gclient->setAuthConfig('../user_variables/google-auth.json');
 		$gclient->addScope('https://www.googleapis.com/auth/admin.directory.device.chromeos');
 
