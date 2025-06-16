@@ -82,7 +82,7 @@ try {
 			$id = $assetJsonArray["rows"][0]["id"];
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
 			//route to individual php script that handles logic. Many ternary if statements for different variables depending on what $source is
-			header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial . (isset($_GET['GAdmin']) ? ("GAdmin=on") : ""));
+			header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial . (isset($_GET['GAdmin']) ? ("&GAdmin=on") : ""));
 			exit;
 		}
 	}
