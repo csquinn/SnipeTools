@@ -13,7 +13,7 @@ $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 $google_admin_email = file_get_contents("../user_variables/google_admin_email.txt");
 $google_admin_email = str_replace(array("\r", "\n"), '', $google_admin_email);
 $google_customer_id = file_get_contents("../user_variables/google_customer_id.txt");
-$google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id_);
+$google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id);
 
 //assign variables gotten from request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -45,7 +45,7 @@ if ($callGoogle == "on") {
 		);
 
 		//make api call with the directory object
-		$results = $service->chromeosdevices->listChromeosdevices($customerId, $optParams); 	
+		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 	
 
 		echo json_encode($results->toSimpleObject(), JSON_PRETTY_PRINT);	
 	} catch (Google_Service_Exception $e) {
