@@ -16,7 +16,7 @@ include 'handleAssetMessages.php'
 		<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
 		<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
 		<br>
-		<input type="checkbox" id="GAdmin" name="GAdmin" value="on" autocomplete="on">
+		<input type="checkbox" id="GAdmin" name="GAdmin" value="on" <?php echo (isset($_GET['GoogleRequestStatus']) ? 'checked' : '') >
 		<label> Make sure this asset is provisioned in Google Admin (optional, only for Chromebooks)</label>
 		<br>
 	</form>
