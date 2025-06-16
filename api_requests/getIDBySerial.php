@@ -19,13 +19,12 @@ $google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id);
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	$source = $_GET['source']; //which php file sent us here, used to decide which api call to make
 	$serial = $_GET['serial']; //serial number of asset
-	$callGoogle = $_GET['GAdmin'];
 }
 
 //first api call, a get request copied from Google's documentation
 //Gets Google ID
 //optional, only if user checks the box to enable this call
-if ($callGoogle == "on") {
+if (isset($_GET['GAdmin'])) {
 	try {
 		//create new connection to Google API
 		$gclient = new GoogleClient();
@@ -41,7 +40,7 @@ if ($callGoogle == "on") {
 		//create array specifying api call parameters
 		$optParams = array(
 			'projection' => 'BASIC',
-			'query' => 'serialNumber:' . $serial
+			'query' => 'id:' . $serial
 		);
 
 		//make api call with the directory object
