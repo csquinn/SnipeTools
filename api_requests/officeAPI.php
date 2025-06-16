@@ -60,8 +60,10 @@ if (isset($_GET['GAdmin'])) {
 		}
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
+		$gSuccess = -3;
 	} catch (Google_Exception $e) {
 		echo 'General Error: ' . $e->getMessage();
+		$gSuccess = -3;
 	}
 }
 
