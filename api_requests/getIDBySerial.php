@@ -1,8 +1,8 @@
 <?php
 require '../vendor/autoload.php';
 
-use GuzzleHttp\Client;
-use Google\Client;
+use GuzzleHttp\Client as GuzzleClient;
+use Google\Client as GoogleClient;
 use Google\Service\Directory;
 
 //get api key, snipe_url, google_admin_email, and google_customer_id
@@ -28,12 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($callGoogle == "on") {
 	try {
 		//create new connection to Google API
-		$gclient = new \Google\Client();
+		$gclient = new GoogleClient();
 		$gclient->setAuthConfig('../user_variables/google-auth.json');
 		$gclient->addScope('https://www.googleapis.com/auth/admin.directory.device.chromeos');
 
 		//impersonate an admin account(?) for proper permissions
-		$gclient->setSubject('admin@example.com');
+		$gclient->setSubject($google_admin_email);
 
 		//create directory object from client
 		$service = new Directory($gclient);
@@ -58,7 +58,7 @@ if ($callGoogle == "on") {
 //Snipe api call, a get request copied from SnipeIT's documentation
 //Gets Snipe ID
 try {
-	$client = new \GuzzleHttp\Client();
+	$client = new GuzzleClient();
 
 	//utilizes $api_key and $snipe_url
 	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?	deleted=false', [
