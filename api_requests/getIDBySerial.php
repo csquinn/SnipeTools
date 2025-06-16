@@ -46,7 +46,7 @@ if (isset($_GET['GAdmin'])) {
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 	
 
-		echo json_encode($results->toSimpleObject(), JSON_PRETTY_PRINT);	
+		echo $results;	
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
 	} catch (Google_Exception $e) {
@@ -75,14 +75,15 @@ try {
 		//if asset doesn't exist in inventory
 		if(array_key_exists('status',$assetJsonArray)) {
 			//route back to where request came from sending error code and og serial, further logic handled in handleMissingAsset.php 
-			//header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial);
+			header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial);
 			exit;
 
 		} else { //if asset does exist in inventory
 			//routes to the php file 
 			$id = $assetJsonArray["rows"][0]["id"];
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
-			//header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial);
+			//route to individual php script that handles logic. Many ternary if statements for different variables depending on what $source is
+			header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial . (isset($_GET['GAdmin']) ? ("GAdmin=on") : ""));
 			exit;
 		}
 	}
