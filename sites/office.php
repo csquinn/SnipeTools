@@ -10,10 +10,10 @@ include 'handleAssetMessages.php'
 	<div style="text-align:center;">
 	<h1>Return Assets to Office</h1>
 
-	<form action="../api_requests/getIDBySerial.php" method="GET" autocomplete="off">
+	<form action="../api_requests/getIDBySerial.php" method="GET" autocomplete="on">
 		<label for="serial">Scan Serial #</label>
 		<input type="hidden" name="source" value="office">
-		<input type="text" id="serial" name="serial" autofocus required>
+		<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
 		<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
 		<br>
 		<input type="checkbox" id="GAdmin" name="GAdmin" value="on" autocomplete="on">
