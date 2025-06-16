@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 //first api call, a get request copied from Google's documentation
 //Gets Google ID
 //optional, only if user checks the box to enable this call
-if ($callGoogle == "yes") {
+if ($callGoogle == "on") {
 	try {
 		$client = new \GuzzleHttp\Client();
 

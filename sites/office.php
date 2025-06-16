@@ -16,7 +16,7 @@ include 'handleAssetMessages.php'
 		<input type="text" id="serial" name="serial" autofocus required>
 		<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
 		<br>
-		<input type="checkbox" id="GAdmin" name="GAdmin" value="yes">
+		<input type="checkbox" id="GAdmin" name="GAdmin" value="on">
 		<label> Make sure this asset is provisioned in Google Admin (optional, only for Chromebooks)</label>
 		<br>
 	</form>
