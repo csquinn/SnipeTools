@@ -58,7 +58,7 @@ if (isset($_GET['GAdmin'])) {
 		}
 
 		//if search is too ambiguous and returns multiple or if it returns none
-		if(count($results) != 1) {
+		if(count($results->getChromeosdevices()) != 1) {
 			$gSuccess = -2;
 		}
 		
