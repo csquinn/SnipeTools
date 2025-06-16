@@ -56,7 +56,7 @@ if (isset($_GET['GAdmin'])) {
 		
 		//if cb is found but is deprovisioned
 		if($results->getChromeosdevices()[0]->getStatus() != "ACTIVE") {
-			$gSuccess = -1
+			$gSuccess = -1;
 		}
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
