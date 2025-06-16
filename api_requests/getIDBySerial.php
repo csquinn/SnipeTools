@@ -6,13 +6,13 @@ use Google\Client as GoogleClient;
 use Google\Service\Directory;
 
 //get api key, snipe_url, google_admin_email, and google_customer_id
-$api_key = file_get_contents(__DIR__ ."../user_variables/api_key.txt");
+$api_key = file_get_contents("\..\user_variables\api_key.txt");
 $api_key = str_replace(array("\r", "\n"), '', $api_key);
-$snipe_url = file_get_contents(__DIR__ ."../user_variables/snipe_url.txt");
+$snipe_url = file_get_contents("\..\user_variables\snipe_url.txt");
 $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
-$google_admin_email = file_get_contents(__DIR__ ."../user_variables/google_admin_email.txt");
+$google_admin_email = file_get_contents("\..\user_variables\google_admin_email.txt");
 $google_admin_email = str_replace(array("\r", "\n"), '', $google_admin_email);
-$google_customer_id = file_get_contents(__DIR__ ."../user_variables/google_customer_id.txt");
+$google_customer_id = file_get_contents("\..\user_variables\google_customer_id.txt");
 $google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id_);
 
 //assign variables gotten from request
@@ -29,7 +29,7 @@ if ($callGoogle == "on") {
 	try {
 		//create new connection to Google API
 		$gclient = new GoogleClient();
-		$gclient->setAuthConfig(__DIR__ .'../user_variables/google-auth.json');
+		$gclient->setAuthConfig('\..\user_variables\google-auth.json');
 		$gclient->addScope('https://www.googleapis.com/auth/admin.directory.device.chromeos');
 
 		//impersonate an admin account(?) for proper permissions

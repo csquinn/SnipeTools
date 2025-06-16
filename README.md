@@ -6,6 +6,8 @@ the cacert.pm file is a file that contains many root CAs. Without it, cURL has n
 
 Need to figure out some sort of authentication. Probably a group policy
 
+Might have issues on unix system with \ and / in directories. remember to mention the user_variables folder
+
 General Project information:
 
 SnipeTools is a set of the three following tools
