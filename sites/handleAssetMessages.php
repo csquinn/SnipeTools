@@ -7,7 +7,7 @@
 
 
 //get snipe_url
-$snipe_url = file_get_contents("../snipe_url.txt");
+$snipe_url = file_get_contents("../user_variables/snipe_url.txt");
 $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 
 //hopefully remove errors

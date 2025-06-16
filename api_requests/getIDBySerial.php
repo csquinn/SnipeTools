@@ -2,14 +2,18 @@
 require '../vendor/autoload.php';
 
 use GuzzleHttp\Client;
+use Google\Client;
+use Google\Service\Directory;
 
-//get api key, snipe_url, and google_customer_id
-$api_key = file_get_contents("../api_key.txt");
+//get api key, snipe_url, google_admin_email, and google_customer_id
+$api_key = file_get_contents("../user_variables/api_key.txt");
 $api_key = str_replace(array("\r", "\n"), '', $api_key);
-$snipe_url = file_get_contents("../snipe_url.txt");
+$snipe_url = file_get_contents("../user_variables/snipe_url.txt");
 $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
-$google_customer_id = file_get_contents("../google_customer_id.txt");
-$google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id);
+$google_admin_email = file_get_contents("../user_variables/google_admin_email.txt");
+$google_admin_email = str_replace(array("\r", "\n"), '', $google_admin_email);
+$google_customer_id = file_get_contents("../user_variables/google_customer_id.txt");
+$google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id_);
 
 //assign variables gotten from request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -23,14 +27,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 //optional, only if user checks the box to enable this call
 if ($callGoogle == "on") {
 	try {
-		$client = new \GuzzleHttp\Client();
+		//create new connection to Google API
+		$client = new Google\Client();
+		$client->setAuthConfig('../user_variables/google-auth.json');
+		$client->addScope('https://www.googleapis.com/auth/admin.directory.device.chromeos');
 
-		//utilizes 
-		$response = $client->request('GET', 'https://admin.googleapis.com/admin/directory/v1/customer/'.$google_customer_id.'/devices/chromeos?query=serialNumber:'.$serial.'&projection=BASIC', []);
-		echo $response->getBody();
-	} catch (\GuzzleHttp\Exception\RequestException $e) {
+		//impersonate an admin account(?) for proper permissions
+		$client->setSubject('admin@example.com');
+
+		//create directory object from client
+		$service = new Directory($client);
+
+		//create array specifying api call parameters
+		$optParams = array(
+			'projection' => 'BASIC',
+			'query' => 'serialNumber:' . $serial
+		);
+
+		//make api call with the directory object
+		$results = $service->chromeosdevices->listChromeosdevices($customerId, $optParams); 	
+
+		echo json_encode($results->toSimpleObject(), JSON_PRETTY_PRINT);	
+	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
-	} catch (\Exception $e) {
+	} catch (Google_Exception $e) {
 		echo 'General Error: ' . $e->getMessage();
 	}
 }

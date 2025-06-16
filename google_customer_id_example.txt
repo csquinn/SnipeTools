@@ -1,2 +1,0 @@
-CUstoMerIdherE
-then, delete this second line and rename the file to "google_customer_id.txt"

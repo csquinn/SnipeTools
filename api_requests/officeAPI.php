@@ -2,13 +2,14 @@
 require '../vendor/autoload.php';
 
 //get api key and snipe_url
-$api_key = file_get_contents("../api_key.txt");
+$api_key = file_get_contents("../user_variables/api_key.txt");
 $api_key = str_replace(array("\r", "\n"), '', $api_key);
-$snipe_url = file_get_contents("../snipe_url.txt");
+$snipe_url = file_get_contents("../user_variables/snipe_url.txt");
 $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 
 
 use GuzzleHttp\Client;
+
 
 //assign variables from request
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {

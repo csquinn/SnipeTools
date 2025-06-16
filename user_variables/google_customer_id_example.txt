@@ -1,0 +1,2 @@
+CustomerIDHere
+Delete this 2nd line, then rename this file to "google_customer_id.txt"

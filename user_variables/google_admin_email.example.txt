@@ -1,0 +1,2 @@
+your.admin@email.here
+then, delete this second line and rename the file to "google_admin_email.txt"

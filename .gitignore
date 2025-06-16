@@ -1,3 +1,5 @@
-api_key.txt
-snipe_url.txt
-google_customer_id.txt
+user_variables/api_key.txt
+user_variables/snipe_url.txt
+user_variables/google_admin_email.txt
+user_variables/google_customer_id.txt
+user_variables/google-auth.json
