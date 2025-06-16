@@ -46,7 +46,9 @@ if (isset($_GET['GAdmin'])) {
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 
 	
-		echo ($results->getChromeosdevices()[0])->getStatus();	
+		$response = json_decode($results, true);
+	
+		$status = $response['chromeosdevices'][0]['status'];	
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
 	} catch (Google_Exception $e) {
