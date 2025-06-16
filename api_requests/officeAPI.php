@@ -54,7 +54,10 @@ if (isset($_GET['GAdmin'])) {
 			$gSuccess = -2;
 		}
 		
-		if(
+		//if cb is found but is deprovisioned
+		if($results->getChromeosdevices()[0]->getStatus() != "ACTIVE") {
+			$gSuccess = -1
+		}
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
 	} catch (Google_Exception $e) {
@@ -104,8 +107,10 @@ try {
 		],
 	]);
 	
-	//redirect back to office.php with a confirmation code so assetMessage and assetLink can be set
-	header("Location: ../sites/office.php?SnipeRequestStatus=1&serial=". $serial);
+
+
+	//redirect back to office.php with a request statuses so that handleAssetMessages.php can display right info
+	header("Location: ../sites/office.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : $gSuccess) ."&serial=". $serial);
 
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
