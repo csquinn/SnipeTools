@@ -49,7 +49,7 @@ if (isset($_GET['GAdmin'])) {
 	
 		//powerwash chromebook
 		$command = new Google_Service_Directory_ChromeOsDeviceAction();
-		$command->setCommandType('REMOTE_POWERWASH');
+		$command->setAction('REMOTE_POWERWASH');
 		$response = $service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $command);
 
 		//assume success on the call, failure is indicated in catch statements
@@ -62,7 +62,7 @@ if (isset($_GET['GAdmin'])) {
 
 			//powerwash chromebook
 			$command = new Google_Service_Directory_ChromeOsDeviceAction();
-			$command->setCommandType('REMOTE_POWERWASH');
+			$command->setAction('REMOTE_POWERWASH');
 			$response = $service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $command);
 
 			$gSuccess = 3;
