@@ -101,7 +101,7 @@ try {
 	]);
 
 	//redirect back to deprovision.php with a request statuses so that handleAssetMessages.php can display right info
-	//header("Location: ../sites/deprovision.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
+	header("Location: ../sites/deprovision.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
 
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
