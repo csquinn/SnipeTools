@@ -42,7 +42,7 @@ include 'handleAssetMessages.php'
 			<option>West Shamokin High School</option>
 			<option>Admin</option>
 			<option>Office</option>
-			<option>Elderton High School (Storage)</o
+			<option>Elderton High School (Storage)</option>
 		</select>
 		<br>
 
