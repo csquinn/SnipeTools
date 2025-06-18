@@ -1,27 +1,5 @@
 <?php
-require '../vendor/autoload.php';
-
-use GuzzleHttp\Client as GuzzleClient;
-use Google\Client as GoogleClient;
-use Google\Service\Directory;
-
-//get api key and snipe_url
-$api_key = file_get_contents("../user_variables/api_key.txt");
-$api_key = str_replace(array("\r", "\n"), '', $api_key);
-$snipe_url = file_get_contents("../user_variables/snipe_url.txt");
-$snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
-$google_admin_email = file_get_contents("../user_variables/google_admin_email.txt");
-$google_admin_email = str_replace(array("\r", "\n"), '', $google_admin_email);
-$google_customer_id = file_get_contents("../user_variables/google_customer_id.txt");
-$google_customer_id = str_replace(array("\r", "\n"), '', $google_customer_id);
-
-
-//assign variables from request
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-	$id = $_GET['id'];
-	$modelID = $_GET['modelID'];
-	$serial = $_GET['serial'];
-}
+include 'getIDBySerial.php';
 
 //variable that keeps track of Google API requests. 1 is success, -1 is found but deprovisioned, -2 is not found, 0 is no call made
 $gSuccess = 0;
