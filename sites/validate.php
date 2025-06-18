@@ -14,7 +14,7 @@ include 'handleAssetMessages.php'
 <body>
 	<?php echo $audioMessage; ?>
 	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
-	<h1>Return Assets to Office</h1>
+	<h1>Validate Assets</h1>
 
 	<form action="../api_requests/validateAPI.php" method="GET" autocomplete="on">
 		<label for="serial">Scan Serial #</label>
@@ -30,7 +30,8 @@ include 'handleAssetMessages.php'
 			<option>Deprovisioned</option>
 			<option>Leave as is</option>
 		</select>
-
+		<br>
+		
 		<label>Asset Location: </label>
 		<select name="location" id="location" required>
 			<option>Dayton</option>
