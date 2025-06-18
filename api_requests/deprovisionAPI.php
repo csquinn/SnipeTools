@@ -71,13 +71,13 @@ try {
 	//important note: I did not have to list every single asset field in this request, just the ones I wanted to update. Anything not mentioned is not touched
 	//rtd_location_id 15 = Office, status_id 2 = Ready to Deploy
 	//$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
-		'body' =>'{"rtd_location_id":15,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
-		'headers' => [
-			'Authorization' => 'Bearer ' . $api_key,
-			'accept' => 'application/json',
-			'content-type' => 'application/json',
-		],
-	]);
+//		'body' =>'{"rtd_location_id":15,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . //'}',
+//		'headers' => [
+//			'Authorization' => 'Bearer ' . $api_key,
+//			'accept' => 'application/json',
+//			'content-type' => 'application/json',
+//		],
+//	]);
 
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
