@@ -49,6 +49,7 @@ if (isset($_GET['GAdmin'])) {
 	
 		//powerwash chromebook
 		$requestBody = new Google_Service_Directory_ChromeOsDeviceAction();
+		$requestBody->setAction('issueCommand');
 		$requestBody->setCommandType('REMOTE_POWERWASH');
 		$service->chromeosdevices->issueCommand($google_customer_id, $_GET['googleId'], $requestBody);
 
@@ -62,6 +63,7 @@ if (isset($_GET['GAdmin'])) {
 
 			//powerwash chromebook
 			$requestBody = new Google_Service_Directory_ChromeOsDeviceAction();
+			$requestBody->setAction('issueCommand');
 			$requestBody->setCommandType('REMOTE_POWERWASH');
 			$service->chromeosdevices->issueCommand($google_customer_id, $_GET['googleId'], $requestBody);
 
