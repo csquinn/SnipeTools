@@ -15,6 +15,7 @@ $snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
 $assetMessage1='';
 $assetMessage2='';
 $assetLink='';
+$audioMessage='';
 
 
 //set a pretty background and text color
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 	if ($_GET['SnipeRequestStatus'] >= 1){
 		$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
 	} else if ($_GET['SnipeRequestStatus'] <= -1){
-		echo "";
+		$audioMessage = "<audio src='../sfx/buzzer.mp3' autoplay='autoplay'></audio>";
 	}
 	
 	//GoogleRequestStatus logic, follows similar guidelines to SnipeRequestStatus
@@ -93,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		
 		//set sound effect, same logic as yellow background
 		if($_GET['SnipeRequestStatus'] >= 1 && $_GET['GoogleRequestStatus'] <= -1){
-			echo "";
+			$audioMessage = "<audio src='../sfx/buzzer.mp3' autoplay='autoplay'></audio>";
 		}
 	}
 }
