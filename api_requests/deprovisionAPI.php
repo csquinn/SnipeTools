@@ -44,10 +44,15 @@ if (isset($_GET['GAdmin'])) {
 		$requestBody->setAction('deprovision');
 		$requestBody->setDeprovisionReason('retiring_device');
 
-		//make api call with the directory object
+		//make api call with the directory object to deprovision object
 		$service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $requestBody); 	
 	
-		//assume success on the call, failure is i
+		//powerwash chromebook
+		$requestBody = new Google_ServiceDirectory_ChromeOsDeviceAction();
+		$requestBody->setCommandType('REMOTE_POWERWASH');
+		$service->chromeosdevices->issueCommand($google_customer_id, $_GET['googleId'], $requestBody);
+
+		//assume success on the call, failure is indicated in catch statements
 		$gSuccess = 1;
 		
 	} catch (Google_Service_Exception $e) {
