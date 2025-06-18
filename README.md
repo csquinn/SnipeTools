@@ -25,8 +25,9 @@ Each of the tools work in a similar way
 
 1. Each tool can be accessed from the SnipeTools homepage
 2. Each tool is run from a simple php file (validate.php, office.php, and deprovision.php) that hosts an html form designed to get an asset's serial number.
-3. Those html forms then send a get request to getIDBySerial.php containing both the asset's serial as well as a variable that denotes which tool the serial came from.
-4. getIDBySerial.php then sends an API call to Snipe IT to get an asset's internal Snipe ID based on its serial number.
-5. If the asset doesn't exist, the user is routed back to the original tool php page with a failure message. Otherwise, they are routed to another php file that is strictly for api calls.
-6. These api php files (validateAPI.php, officeAPI.php, and deprovisionAPI.php) perform one or more api calls to Snipe IT to update the asset.
+3. Those html forms then send a get request to a php file that is strictly for api calls (validateAPI.php, officeAPI.php, and deprovisionAPI.php)
+4. The api call php files each "include" getIDBySerial.php. This php feature basically means that the contents of getIDBySerial.php are copy pasted on top of the three api php files. This is to eliminate redundancy
+4. getIDBySerial.php then sends an API call to Snipe IT and Google to get an asset's internal Snipe ID and Google ID based on its serial number.
+5. If the asset doesn't exist, the user is routed back to the original tool php page with a failure message. Otherwise, the logic continues.
+6. These api php files (validateAPI.php, officeAPI.php, and deprovisionAPI.php) perform one or more api calls to Snipe IT and Google to update the asset.
 7. Then, the user is routed back to the original tool php page with a success message. The html form is autofocused, meaning that the user can immediately begin typing or scanning the next asset.
