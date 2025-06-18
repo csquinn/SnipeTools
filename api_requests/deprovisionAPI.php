@@ -61,13 +61,6 @@ if (isset($_GET['GAdmin'])) {
 
 		//if the error was caused because the device is already deprovisioned. This is okay, as all that matters is the device was deprovisioned in some way
 		if (isset($error['domain']) && $error['domain'] === 'global' &&isset($error['reason']) && $error['reason'] === 'conditionNotMet' && isset($error['message']) && $error['message'] === 'Illegal device state transition.') {
-
-			//powerwash chromebook
-			$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
-			$command->setCommandType('REMOTE_POWERWASH');
-			$command->setPayload('');
-			$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, $_GET['googleId'], $command);
-
 			$gSuccess = 3;
 		} else {
 			echo 'API Request Error: ' . $e->getMessage();
