@@ -136,7 +136,7 @@ try {
 		.'"model_id": '.$modelID.','	//model_id
 		.((isset($location) and $location != "lai")?('"rtd_location_id": '.$location.','):(''))	//rtd_location_id
 		.((isset($remName) and $remName=="on")?('"name": ""'):(''))	//name
-		'"}',
+		.'"}',
 		'headers' => [
 			'Authorization' => 'Bearer ' . $api_key,
 			'accept' => 'application/json',
