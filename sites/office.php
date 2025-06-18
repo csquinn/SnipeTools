@@ -4,7 +4,7 @@ include 'handleAssetMessages.php'
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Return Assets to Office</title>
+	<title>Return Assets to Office | SnipeTools</title>
 </head>
 <body>
 	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
