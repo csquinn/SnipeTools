@@ -48,6 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		echo "<style> body {background-color: green; color: black;} </style>";
 
 	}
+
+	//set sound effect
+	if ($_GET['SnipeRequestStatus'] >= 1){
+		$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
+	} else if ($_GET['SnipeRequestStatus'] <= -1){
+		echo "";
+	}
 	
 	//GoogleRequestStatus logic, follows similar guidelines to SnipeRequestStatus
 	if($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['GoogleRequestStatus'])) {
@@ -84,12 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 			echo "<style> body {background-color: yellow; color: black;} </style>";
 		}
 		
-		//set sound effect
+		//set sound effect, same logic as yellow background
 		if($_GET['SnipeRequestStatus'] >= 1 && $_GET['GoogleRequestStatus'] <= -1){
-			echo "";
-		} else if ($_GET['SnipeRequestStatus'] >= 1){
-			$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
-		} else if ($_GET['SnipeRequestStatus'] == -1){
 			echo "";
 		}
 	}
