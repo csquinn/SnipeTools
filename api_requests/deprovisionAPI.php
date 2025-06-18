@@ -33,7 +33,7 @@ if (isset($_GET['GAdmin']) and (googleId != -1)) {
 		$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
 		$command->setCommandType('REMOTE_POWERWASH');
 		$command->setPayload('');
-		$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, googleId], $command);
+		$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, googleId, $command);
 
 		//assume success on the call, failure is indicated in catch statements
 		$gSuccess = 2;
