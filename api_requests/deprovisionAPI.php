@@ -51,7 +51,7 @@ if (isset($_GET['GAdmin'])) {
 		$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
 		$command->setCommandType('REMOTE_POWERWASH');
 		$command->setPayload('');
-		$response = $service->customer_devices_chromeos->action($google_customer_id, $_GET['googleId'], $command);
+		$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, $_GET['googleId'], $command);
 
 		//assume success on the call, failure is indicated in catch statements
 		$gSuccess = 2;
@@ -65,7 +65,7 @@ if (isset($_GET['GAdmin'])) {
 			$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
 			$command->setCommandType('REMOTE_POWERWASH');
 			$command->setPayload('');
-			$response = $service->customer_devices_chromeos->action($google_customer_id, $_GET['googleId'], $command);
+			$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, $_GET['googleId'], $command);
 
 			$gSuccess = 3;
 		} else {
