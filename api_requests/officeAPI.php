@@ -1,6 +1,10 @@
 <?php
 include 'getIDBySerial.php';
 
+use GuzzleHttp\Client as GuzzleClient;
+use Google\Client as GoogleClient;
+use Google\Service\Directory;
+
 //variable that keeps track of Google API requests. 1 is success, -1 is found but deprovisioned, -2 is not found, 0 is no call made
 $gSuccess = 0;
 
