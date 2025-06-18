@@ -46,7 +46,9 @@ if (isset($_GET['GAdmin']) and $source != "office") {
 
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 
-		echo $results->getChromeosdevices()[0]->getDeviceId();
+
+		//assign the Google Device ID to a variable
+		$googleId = $results->getChromeosdevices()[0]->getDeviceId();
 
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
@@ -84,7 +86,7 @@ try {
 			$id = $assetJsonArray["rows"][0]["id"];
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
 			//route to individual php script that handles logic. Many ternary if statements for different variables depending on what $source is
-			//header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial . (isset($_GET['GAdmin']) ? ("&GAdmin=on") : ""));
+			header("Location: " . $source . "API.php?id=" . $id . "&modelID=" . $modelID . "&serial=" . $serial . (isset($_GET['GAdmin']) ? ("&GAdmin=on") : "") . (isset($googleId) ? ("&googleId=".$googleId) : ("")));
 			exit;
 		}
 	}

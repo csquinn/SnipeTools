@@ -45,9 +45,9 @@ if (isset($_GET['GAdmin'])) {
 		$requestBody->setDeprovisionReason('retiring_device');
 
 		//make api call with the directory object
-		$service->chromeosdevices->action($google_customer_id, $serial, $requestBody); 	
+		$service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $requestBody); 	
 	
-		//assume success on the call, failure could 
+		//assume success on the call, failure is i
 		$gSuccess = 1;
 		
 	} catch (Google_Service_Exception $e) {
