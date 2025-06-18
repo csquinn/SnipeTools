@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 //first api call, a get request copied from Google's documentation
-//Gets Google ID
+//Gets Google ID of asset
 //optional, only if user checks the box to enable this call
 //not needed for office.php
 if (isset($_GET['GAdmin']) and $source != "office") {
@@ -52,8 +52,10 @@ if (isset($_GET['GAdmin']) and $source != "office") {
 
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
+		$googleId = -1;
 	} catch (Google_Exception $e) {
 		echo 'General Error: ' . $e->getMessage();
+		$googleId = -1;
 	}
 }
 

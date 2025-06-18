@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 //variable that keeps track of Google API requests. 2 is success, 3 is success and device was already deprovisioned, -2 is not found, 0 is no call made
 $gSuccess = 0;
 
-//optional Google Request to ensure that a device exists in google admin
+//optional Google Request to deprovision asset on Google Admin
 if (isset($_GET['GAdmin'])) {
 	try {
 		//create new connection to Google API
@@ -58,6 +58,7 @@ if (isset($_GET['GAdmin'])) {
 		
 	} catch (Google_Service_Exception $e) {
 		$error = $e->getErrors()[0];
+
 		//if the error was caused because the device is already deprovisioned. This is okay, as all that matters is the device was deprovisioned in some way
 		if (isset($error['domain']) && $error['domain'] === 'global' &&isset($error['reason']) && $error['reason'] === 'conditionNotMet' && isset($error['message']) && $error['message'] === 'Illegal device state transition.') {
 
@@ -79,7 +80,30 @@ if (isset($_GET['GAdmin'])) {
 }
 
 
-//Two requests are sent by officeAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
+//Two requests are sent by deprovisionAPI.php to SnipeIT. A post request checks the asset in from any users, and a put request updates everything else as deprovisioned
+
+//checkin
+try {
+
+	$client = new \GuzzleHttp\Client();
+
+	//api request copied from snipeIT
+	$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
+		'body' =>'{"status_id":2}',
+		'headers' => [
+			'Authorization' => 'Bearer ' . $api_key,
+			'accept' => 'application/json',
+			'content-type' => 'application/json',
+		],
+	]);
+
+//catch internal/api/server errors
+} catch (\GuzzleHttp\Exception\RequestException $e) {
+	echo 'API Request Error: ' . $e->getMessage();
+} catch (\Exception $e) {
+	echo 'General Error: ' . $e->getMessage();
+}
+
 
 //Put request, Everything besides checkin
 try {
@@ -88,42 +112,18 @@ try {
 
 	//api request copied from snipeIT
 	//important note: I did not have to list every single asset field in this request, just the ones I wanted to update. Anything not mentioned is not touched
-	//rtd_location_id 15 = Office, status_id 2 = Ready to Deploy
-//	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
-//		'body' =>'{"rtd_location_id":15,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . //'}',
-//		'headers' => [
-//			'Authorization' => 'Bearer ' . $api_key,
-//			'accept' => 'application/json',
-//			'content-type' => 'application/json',
-//		],
-//	]);
-
-//catch internal/api/server errors
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-	echo 'API Request Error: ' . $e->getMessage();
-} catch (\Exception $e) {
-	echo 'General Error: ' . $e->getMessage();
-}
-
-//checkin
-try {
-
-	$client = new \GuzzleHttp\Client();
-
-	//api request copied from snipeIT
-//	$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
-//		'body' =>'{"status_id":2}',
-//		'headers' => [
-//			'Authorization' => 'Bearer ' . $api_key,
-//			'accept' => 'application/json',
-//			'content-type' => 'application/json',
-//		],
-//	]);
-	
-
+	//rtd_location_id 16 = Storage, status_id 6 = Deprovisioned
+	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
+		'body' =>'{"rtd_location_id":16,"asset_tag":"' . $serial .'","status_id":6,"model_id":' . $modelID . //'}',
+		'headers' => [
+			'Authorization' => 'Bearer ' . $api_key,
+			'accept' => 'application/json',
+			'content-type' => 'application/json',
+		],
+	]);
 
 	//redirect back to office.php with a request statuses so that handleAssetMessages.php can display right info
-	//header("Location: ../sites/office.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
+	header("Location: ../sites/office.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
 
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -131,5 +131,6 @@ try {
 } catch (\Exception $e) {
 	echo 'General Error: ' . $e->getMessage();
 }
+
 
 ?>
