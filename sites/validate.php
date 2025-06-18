@@ -21,7 +21,7 @@ include 'handleAssetMessages.php'
 		<input type="hidden" name="source" value="office">
 		<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
 		<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
-		<br>
+		<br><br>
 
 		<label>Asset Status: </label>
 		<select name="status" id="location" required>
@@ -42,11 +42,23 @@ include 'handleAssetMessages.php'
 			<option>West Shamokin High School</option>
 			<option>Admin</option>
 			<option>Office</option>
-			<option>Elderton High School (Storage)</option>
-			<option>Leave as is</option>
-		<br>
+			<option>Elderton High School (Storage)</o
 		</select>
+		<br>
 
+		<input type="checkbox" id="remName" name="remName" value="on">
+		<label> Remove Asset Name</label>
+		<br>
+		
+		<input type="checkbox" id="retag" name="retag" value="on">
+		<label> Set Asset Tag equal to Serial Number</label>
+		<br>
+		
+		<input type="checkbox" id="checkin" name="checkin" value="on">
+		<label> Check the Asset in from any Users</label>
+		<br>
+		
+		
 		<input type="checkbox" id="GAdmin" name="GAdmin" value="on" <?php echo (isset($_GET['GoogleRequestStatus']) ? 'checked' : ''); ?>>
 		<label> Make sure this asset is provisioned in Google Admin (optional, only for Chromebooks)</label>
 		<br>
