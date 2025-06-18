@@ -53,6 +53,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 	if($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['GoogleRequestStatus'])) {
 		//no status=0 because that means no api call was sent to Google
 
+		//if cb was found in Google Admin and was already deprovisioned (while attempting to be deprovisioned)
+		if($_GET['GoogleRequestStatus'] == 3) {
+			$assetMessage2 = "Asset was Already Deprovisioned in Google Admin";
+		}
+
+		//if cb was found in Google Admin and then deprovisioned successfully
+		if($_GET['GoogleRequestStatus'] == 2) {
+			$assetMessage2 = "Asset was Deprovisioned in Google Admin";
+		}
+
 		//if cb was found in Google Admin and is provisioned
 		if($_GET['GoogleRequestStatus'] == 1) {
 			$assetMessage2 = "Asset is Provisioned in Google Admin";

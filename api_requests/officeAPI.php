@@ -43,7 +43,8 @@ if (isset($_GET['GAdmin'])) {
 		//create array specifying api call parameters
 		$optParams = array(
 			'projection' => 'BASIC',
-			'query' => 'id:' . $serial
+			'query' => 'id:' . $serial,
+			'maxResults' => 2
 		);
 
 		//make api call with the directory object
