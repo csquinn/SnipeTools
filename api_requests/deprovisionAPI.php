@@ -48,9 +48,10 @@ if (isset($_GET['GAdmin'])) {
 		$service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $requestBody); 	
 	
 		//powerwash chromebook
-		$command = new Google_Service_Directory_ChromeOsDeviceAction();
-		$command->setAction('REMOTE_POWERWASH');
-		$response = $service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $command);
+		$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
+		$command->setCommandType('REMOTE_POWERWASH');
+		$command->setPayload('');
+		$response = $service->customer_devices_chromeos->action($google_customer_id, $_GET['googleId'], $command);
 
 		//assume success on the call, failure is indicated in catch statements
 		$gSuccess = 2;
@@ -61,9 +62,10 @@ if (isset($_GET['GAdmin'])) {
 		if (isset($error['domain']) && $error['domain'] === 'global' &&isset($error['reason']) && $error['reason'] === 'conditionNotMet' && isset($error['message']) && $error['message'] === 'Illegal device state transition.') {
 
 			//powerwash chromebook
-			$command = new Google_Service_Directory_ChromeOsDeviceAction();
-			$command->setAction('REMOTE_POWERWASH');
-			$response = $service->chromeosdevices->action($google_customer_id, $_GET['googleId'], $command);
+			$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
+			$command->setCommandType('REMOTE_POWERWASH');
+			$command->setPayload('');
+			$response = $service->customer_devices_chromeos->action($google_customer_id, $_GET['googleId'], $command);
 
 			$gSuccess = 3;
 		} else {
