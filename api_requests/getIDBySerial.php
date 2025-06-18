@@ -49,7 +49,7 @@ if (isset($_GET['GAdmin']) and $source != "office") {
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 
 
 		//assign the Google Device ID to a variable
-		if(!(isempty($results->getChromeosdevices()))){
+		if(!(empty($results->getChromeosdevices()))){
 			$googleId = $results->getChromeosdevices()[0]->getDeviceId();
 		} else {
 			$googleId = -1;
