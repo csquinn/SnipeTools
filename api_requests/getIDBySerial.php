@@ -24,7 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 //first api call, a get request copied from Google's documentation
 //Gets Google ID
 //optional, only if user checks the box to enable this call
-if (isset($_GET['GAdmin'])) {
+//not needed for office.php
+if (isset($_GET['GAdmin']) and $source != "office") {
 	try {
 		//create new connection to Google API
 		$gclient = new GoogleClient();
@@ -45,7 +46,8 @@ if (isset($_GET['GAdmin'])) {
 
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 
-	
+		echo $results->getChromeosdevices()[0]->getDeviceId();
+
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
 	} catch (Google_Exception $e) {
