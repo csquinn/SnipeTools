@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		if($_GET['SnipeRequestStatus'] >= 1 && $_GET['GoogleRequestStatus'] <= -1){
 			echo "";
 		} else if ($_GET['SnipeRequestStatus'] >= 1){
-			echo "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
+			$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
 		} else if ($_GET['SnipeRequestStatus'] == -1){
 			echo "";
 		}
