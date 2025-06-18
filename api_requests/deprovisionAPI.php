@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$serial = $_GET['serial'];
 }
 
-//variable that keeps track of Google API requests. 1 is success, -1 is found but can't be deprovisioned, -2 is not found, 0 is no call made
+//variable that keeps track of Google API requests. 2 is success, 3 is success and device was already deprovisioned, -2 is not found, 0 is no call made
 $gSuccess = 0;
 
 //optional Google Request to ensure that a device exists in google admin
@@ -53,11 +53,23 @@ if (isset($_GET['GAdmin'])) {
 		$service->chromeosdevices->issueCommand($google_customer_id, $_GET['googleId'], $requestBody);
 
 		//assume success on the call, failure is indicated in catch statements
-		$gSuccess = 1;
+		$gSuccess = 2;
 		
 	} catch (Google_Service_Exception $e) {
-		echo 'API Request Error: ' . $e->getMessage();
-		$gSuccess = -2;
+		$error = $e->getErrors()[0];
+		//if the error was caused because the device is already deprovisioned. This is okay, as all that matters is the device was deprovisioned in some way
+		if (isset($error['domain']) && $error['domain'] === 'global' &&isset($error['reason']) && $error['reason'] === 'conditionNotMet' && isset($error['message']) && $error['message'] === 'Illegal device state transition.') {
+
+			//powerwash chromebook
+			$requestBody = new Google_ServiceDirectory_ChromeOsDeviceAction();
+			$requestBody->setCommandType('REMOTE_POWERWASH');
+			$service->chromeosdevices->issueCommand($google_customer_id, $_GET['googleId'], $requestBody);
+
+			$gSuccess = 3;
+		} else {
+			echo 'API Request Error: ' . $e->getMessage();
+			$gSuccess = -2;
+		}
 	} catch (Google_Exception $e) {
 		echo 'General Error: ' . $e->getMessage();
 		$gSuccess = -2;
