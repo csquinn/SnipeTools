@@ -92,6 +92,8 @@ try {
 			//routes to the php file 
 			$id = $assetJsonArray["rows"][0]["id"];
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
+			$assetTag = $assetJsonArray["rows"][0]["asset_tag"];
+			$currentStatus = $assetJsonArray["rows"[0]["status_label"]["id"];
 		}
 	}
 //catch any internal/api/server errors

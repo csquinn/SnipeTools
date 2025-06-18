@@ -62,6 +62,63 @@ $remName=$_GET['remName'];
 $retag=$_GET['retag'];
 $checkin=$_GET['checkin'];
 
+//correlate status_id to plaintext status
+//status_id 2=Ready to Deploy,4=Deployed,6=Deprovisioned
+switch ($status) {
+	case "Ready+to+Deploy":
+		$status="2";
+		break;
+	case "Deployed":
+		$status="4";
+		break;
+	case "Deprovisioned":
+		$status="6";
+		break;
+	case "Leave+as+is":
+		$location="lai";
+		break;
+
+
+}
+
+//correlate rtd_location_id to plaintext location
+//rtd_location_id 1=Admin,2=WHP,3=AHS,4=WHI,5=DE,6=WSHS,7=EE,8=LE,9=SV,15=Office,16=Storage
+switch ($location) {
+	case "Dayton":
+		$location="5";
+		break;
+	case "Elderton":
+		$location="7";
+		break;
+	case "Shannock+Valley":
+		$location="9";
+		break;
+	case "West+Hills+Primary":
+		$location="2";
+		break;
+	case "West+Hills+Intermediate":
+		$location="4";
+		break;
+	case "Armstrong+High+School":
+		$location="3";
+		break;
+	case "West+Shamokin+High+School":
+		$location="6";
+		break;
+	case "Admin":
+		$location="1";
+		break;
+	case "Office":
+		$location="15";
+		break;
+	case "Elderton+High+School+(Storage)":
+		$location="16";
+		break;
+	case "Leave+as+is":
+		$location="lai";
+		break;
+} 
+
 //Two requests are sent by validateAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
 
 //Put request, Everything besides checkin
@@ -71,9 +128,15 @@ try {
 
 	//api request copied from snipeIT
 	//important note: I did not have to list every single asset field in this request, just the ones I wanted to update. Anything not mentioned is not touched
-	//rtd_location_id 15 = Office, status_id 2 = Ready to Deploy
-	$response = $client->request('PT', $snipe_url.'/api/v1/hardware/'.$id, [
-		'body' =>'{"rtd_location_id":15,"asset_tag":"' . $serial .'","status_id":2,"model_id":' . $modelID . '}',
+	
+	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
+		'body' =>'{"'
+		.((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'",'):('"asset_tag": "'.$assetTag.'",'))	//asset_tag
+		.((isset($status))?('"status_id": '.$status.','):('"status_id": '.$currentStatus.','))	//status_id
+		.'"model_id": '.$modelID.','	//model_id
+		.((isset($location) and $location != "lai")?('"rtd_location_id": '.$location.','):(''))	//rtd_location_id
+		.((isset($remName) and $remName=="on")?('"name": ""'):(''))	//name
+		'"}',
 		'headers' => [
 			'Authorization' => 'Bearer ' . $api_key,
 			'accept' => 'application/json',
@@ -90,30 +153,31 @@ try {
 
 
 //checkin
-try {
+if(isset($checkin) and $checkin=="on"){
+	try {
 
-	$client = new \GuzzleHttp\Client();
-
-	//api request copied from snipeIT
-	$response = $client->request('OST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
-		'body' =>'{"status_id":2}',
-		'headers' => [
-			'Authorization' => 'Bearer ' . $api_key,
-			'accept' => 'application/json',
-			'content-type' => 'application/json',
-		],
-	]);
+		$client = new \GuzzleHttp\Client();
 	
-
-
-	//redirect back to office.php with a request statuses so that handleAssetMessages.php can display right info
-	//header("Location: ../sites/office.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
-
-//catch internal/api/server errors
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-	echo 'API Request Error: ' . $e->getMessage();
-} catch (\Exception $e) {
-	echo 'General Error: ' . $e->getMessage();
+		//api request copied from snipeIT
+		$response = $client->request('OST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
+			'body' =>'{"status_id":2}',
+			'headers' => [
+				'Authorization' => 'Bearer ' . $api_key,
+				'accept' => 'application/json',
+				'content-type' => 'application/json',
+			],
+		]);
+		
+	
+	
+		//redirect back to office.php with a request statuses so that handleAssetMessages.php can display right info
+		//header("Location: ../sites/office.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
+	
+	//catch internal/api/server errors
+	} catch (\GuzzleHttp\Exception\RequestException $e) {
+		echo 'API Request Error: ' . $e->getMessage();
+	} catch (\Exception $e) {
+		echo 'General Error: ' . $e->getMessage();
+	}
 }
-
 ?>
