@@ -42,7 +42,7 @@ if (isset($_GET['GAdmin'])) {
 
 		$requestBody = new Google_Service_Directory_ChromeOsDeviceAction();
 		$requestBody->setAction('deprovision');
-		$requestBody->setDeprovisionReason('retiring device');
+		$requestBody->setDeprovisionReason('DEPROVISION_REASON_RETIRING_DEVICE');
 
 		//make api call with the directory object
 		$service->chromeosdevices->action($google_customer_id, $serial, $requestBody); 	
