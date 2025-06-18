@@ -1,7 +1,7 @@
 <?php
 $retag = "on";
 $serial = "1";
-$assetTag" = "2";
+$assetTag = "2";
 $status = "4";
 $currentStatus="5";
 $modelID = "6";
