@@ -9,7 +9,7 @@ use Google\Service\Directory;
 $gSuccess = 0;
 
 //optional Google Request to deprovision asset on Google Admin
-if (isset($_GET['GAdmin']) and (googleId != -1)) {
+if (isset($_GET['GAdmin']) and ($googleId != -1)) {
 	try {
 		//create new connection to Google API
 		$gclient = new GoogleClient();
@@ -27,13 +27,13 @@ if (isset($_GET['GAdmin']) and (googleId != -1)) {
 		$requestBody->setDeprovisionReason('retiring_device');
 
 		//make api call with the directory object to deprovision object
-		$service->chromeosdevices->action($google_customer_id, googleId, $requestBody); 	
+		$service->chromeosdevices->action($google_customer_id, $googleId, $requestBody); 	
 	
 		//powerwash chromebook
 		$command = new Google_Service_Directory_DirectoryChromeosdevicesIssueCommandRequest();
 		$command->setCommandType('REMOTE_POWERWASH');
 		$command->setPayload('');
-		$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, googleId, $command);
+		$response = $service->customer_devices_chromeos->issueCommand($google_customer_id, $googleId, $command);
 
 		//assume success on the call, failure is indicated in catch statements
 		$gSuccess = 2;
