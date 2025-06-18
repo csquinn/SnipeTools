@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $gSuccess = 0;
 
 //optional Google Request to deprovision asset on Google Admin
-if (isset($_GET['GAdmin'])) {
+if (isset($_GET['GAdmin']) and ($_GET['googleId'] != -1)) {
 	try {
 		//create new connection to Google API
 		$gclient = new GoogleClient();
@@ -70,6 +70,9 @@ if (isset($_GET['GAdmin'])) {
 		echo 'General Error: ' . $e->getMessage();
 		$gSuccess = -2;
 	}
+//if Google Device ID wasn't found on getIDBySerial for whatever reason
+} else if(isset($_GET['GAdmin'])) {
+	$gSuccess = -2;
 }
 
 

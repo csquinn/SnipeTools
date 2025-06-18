@@ -41,14 +41,19 @@ if (isset($_GET['GAdmin']) and $source != "office") {
 		//create array specifying api call parameters
 		$optParams = array(
 			'projection' => 'BASIC',
-			'query' => 'id:' . $serial
+			'query' => 'id:' . $serial,
+			'maxResults' => 2
 		);
 
 		//make api call with the directory object
 		$results = $service->chromeosdevices->listChromeosdevices($google_customer_id, $optParams); 
 
 		//assign the Google Device ID to a variable
-		$googleId = $results->getChromeosdevices()[0]->getDeviceId();
+		if(!(isempty($results->getChromeosdevices()))){
+			$googleId = $results->getChromeosdevices()[0]->getDeviceId();
+		} else {
+			$googleId = -1;
+		}
 
 	} catch (Google_Service_Exception $e) {
 		echo 'API Request Error: ' . $e->getMessage();
