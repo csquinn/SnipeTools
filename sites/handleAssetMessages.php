@@ -78,9 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 			$assetMessage2 = "Asset couldn't be found on Google Admin";
 		}
 
+		
 		//set background color to yellow if SnipeIT worked but Google Admin did not
 		if($_GET['SnipeRequestStatus'] >= 1 && $_GET['GoogleRequestStatus'] <= -1){
 			echo "<style> body {background-color: yellow; color: black;} </style>";
+		}
+		
+		//set sound effect
+		if($_GET['SnipeRequestStatus'] >= 1 && $_GET['GoogleRequestStatus'] <= -1){
+			echo "";
+		} else if ($_GET['SnipeRequestStatus'] >= 1){
+			echo "<audio src='../ding.mp3'></audio>";
+		} else if ($_GET['SnipeRequestStatus'] == -1){
+			echo "";
 		}
 	}
 }
