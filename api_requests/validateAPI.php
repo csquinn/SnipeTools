@@ -84,7 +84,7 @@ switch ($status) {
 	case "Deprovisioned":
 		$status="6";
 		break;
-	case "Leave+as+is":
+	case urlencode("Leave as is"):
 		$location="lai";
 		break;
 
