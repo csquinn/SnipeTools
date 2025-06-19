@@ -56,7 +56,7 @@ if (isset($_GET['GAdmin'])) {
 }
 
 //assign all of the variables that were set by user
-if (isset($_GET['status']
+if (isset($_GET['status'])){
 	$status=$_GET['status'];
 }
 if (isset($_GET['location'])){
