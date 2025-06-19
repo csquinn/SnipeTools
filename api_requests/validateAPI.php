@@ -145,7 +145,8 @@ try {
 		.', "model_id": '.$modelID	//model_id
 		.((isset($location) and $location != "lai")?(', "rtd_location_id": '.$location):(''))	//rtd_location_id
 		.((isset($remName) and $remName=="on")?(', "name": null'):(''))	//name
-		.'}'
+		.'}';
+
 	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
 		'body' =>'{'
 		.((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
