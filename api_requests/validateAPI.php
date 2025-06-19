@@ -176,7 +176,7 @@ if(isset($checkin) and $checkin=="on"){
 			((isset($location))?("&location=".$location):("")).
 			((isset($remName))?("&remName=on"):("")).
 			((isset($retag))?("&retag=on"):("")).
-			((isset(?checkin))?("&checkin=on"):("")).
+			((isset($checkin))?("&checkin=on"):(""))
 			);
 	
 	//catch internal/api/server errors
