@@ -81,14 +81,6 @@ try {
 
 	//api request copied from snipeIT
 	//important note: I did not have to list every single asset field in this request, just the ones I wanted to update. Anything not mentioned is not touched
-	echo '{'
-		.((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
-		.((isset($status))?(', "status_id": '.$status):(', "status_id": '.$currentStatus))	//status_id
-		.', "model_id": '.$modelID	//model_id
-		.((isset($location) and $location != "lai")?(', "rtd_location_id": '.$location):(''))	//rtd_location_id
-		.((isset($remName) and $remName=="on")?(', "name": null'):(''))	//name
-		.'}';
-	echo $currentStatus;
 	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
 		'body' =>'{'
 		.((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
@@ -139,11 +131,11 @@ if(isset($checkin) and $checkin=="on"){
 	}
 }
 //redirect back to validate.php with a request statuses so that handleAssetMessages.php can display right info
-//header("Location: ../sites/validate.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial.
-//	((isset($status))?("&status=".$status):("")).
-//	((isset($location))?("&location=".$location):("")).
-//	((isset($remName))?("&remName=on"):("")).
-//	((isset($retag))?("&retag=on"):("")).
-//	((isset($checkin))?("&checkin=on"):(""))
-//	);
+header("Location: ../sites/validate.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial.
+	((isset($status))?("&status=".$status):("")).
+	((isset($location))?("&location=".$location):("")).
+	((isset($remName))?("&remName=on"):("")).
+	((isset($retag))?("&retag=on"):("")).
+	((isset($checkin))?("&checkin=on"):(""))
+	);
 ?>
