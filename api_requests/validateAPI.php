@@ -72,63 +72,6 @@ if (isset($_GET['checkin'])){
 	$checkin=$_GET['checkin'];
 }
 
-//correlate status_id to plaintext status
-//status_id 2=Ready to Deploy,4=Deployed,6=Deprovisioned
-switch ($status) {
-	case "Ready+to+Deploy":
-		$status="2";
-		break;
-	case "Deployed":
-		$status="4";
-		break;
-	case "Deprovisioned":
-		$status="6";
-		break;
-	case urlencode("Leave as is"):
-		$location="lai";
-		break;
-
-
-}
-
-//correlate rtd_location_id to plaintext location
-//rtd_location_id 1=Admin,2=WHP,3=AHS,4=WHI,5=DE,6=WSHS,7=EE,8=LE,9=SV,15=Office,16=Storage
-switch ($location) {
-	case "Dayton":
-		$location="5";
-		break;
-	case "Elderton":
-		$location="7";
-		break;
-	case "Shannock+Valley":
-		$location="9";
-		break;
-	case "West+Hills+Primary":
-		$location="2";
-		break;
-	case "West+Hills+Intermediate":
-		$location="4";
-		break;
-	case "Armstrong+High+School":
-		$location="3";
-		break;
-	case "West+Shamokin+High+School":
-		$location="6";
-		break;
-	case "Admin":
-		$location="1";
-		break;
-	case "Office":
-		$location="15";
-		break;
-	case "Elderton+High+School+(Storage)":
-		$location="16";
-		break;
-	case "Leave+as+is":
-		$location="lai";
-		break;
-} 
-
 //Two requests are sent by validateAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
 
 //Put request, Everything besides checkin
