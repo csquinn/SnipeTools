@@ -56,11 +56,21 @@ if (isset($_GET['GAdmin'])) {
 }
 
 //assign all of the variables that were set by user
-$status=$_GET['status'];
-$location=$_GET['location'];
-$remName=$_GET['remName'];
-$retag=$_GET['retag'];
-$checkin=$_GET['checkin'];
+if (isset($_GET['status']
+	$status=$_GET['status'];
+}
+if (isset($_GET['location'])){
+	$location=$_GET['location'];
+}
+if (isset($_GET['remName'])){
+	$remName=$_GET['remName'];
+}
+if (isset($_GET['retag'])){
+	$retag=$_GET['retag'];
+}
+if (isset($_GET['checkin'])){
+	$checkin=$_GET['checkin'];
+}
 
 //correlate status_id to plaintext status
 //status_id 2=Ready to Deploy,4=Deployed,6=Deprovisioned
