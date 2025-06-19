@@ -75,7 +75,7 @@ if (isset($_GET['checkin'])){
 //correlate status_id to plaintext status
 //status_id 2=Ready to Deploy,4=Deployed,6=Deprovisioned
 switch ($status) {
-	case "Ready+to+Deploy":
+	case "Ready to Deploy":
 		$status="2";
 		break;
 	case "Deployed":
@@ -84,7 +84,7 @@ switch ($status) {
 	case "Deprovisioned":
 		$status="6";
 		break;
-	case "Leave+as+is":
+	case "Leave as is":
 		$location="lai";
 		break;
 
@@ -100,19 +100,19 @@ switch ($location) {
 	case "Elderton":
 		$location="7";
 		break;
-	case "Shannock+Valley":
+	case "Shannock Valley":
 		$location="9";
 		break;
-	case "West+Hills+Primary":
+	case "West Hills Primary":
 		$location="2";
 		break;
-	case "West+Hills+Intermediate":
+	case "West Hills Intermediate":
 		$location="4";
 		break;
-	case "Armstrong+High+School":
+	case "Armstrong High School":
 		$location="3";
 		break;
-	case "West+Shamokin+High+School":
+	case "West Shamokin High School":
 		$location="6";
 		break;
 	case "Admin":
@@ -121,10 +121,10 @@ switch ($location) {
 	case "Office":
 		$location="15";
 		break;
-	case "Elderton+High+School+(Storage)":
+	case "Elderton High School (Storage)":
 		$location="16";
 		break;
-	case "Leave+as+is":
+	case "Leave as is":
 		$location="lai";
 		break;
 } 
@@ -141,7 +141,7 @@ try {
 	
 	echo '{'
 		.((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
-		.((isset($status))?(', "status_id": '.$status):(', "status_id": '.$currentStatus))	//status_id
+		.((isset($status) and $status != "lai")?(', "status_id": '.$status):(', "status_id": '.$currentStatus))	//status_id
 		.', "model_id": '.$modelID	//model_id
 		.((isset($location) and $location != "lai")?(', "rtd_location_id": '.$location):(''))	//rtd_location_id
 		.((isset($remName) and $remName=="on")?(', "name": null'):(''))	//name
@@ -178,7 +178,7 @@ if(isset($checkin) and $checkin=="on"){
 	
 		//api request copied from snipeIT
 		$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
-			'body' =>'{"status_id":2}',
+			'body' =>'{"status_id":'. ((isset($status))?($status):($currentStatus)) .'}',
 			'headers' => [
 				'Authorization' => 'Bearer ' . $api_key,
 				'accept' => 'application/json',

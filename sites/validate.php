@@ -26,26 +26,26 @@ include 'handleAssetMessages.php'
 
 		<label>Asset Status: </label>
 		<select name="status" id="location" required>
-			<option <?php echo ((isset($_GET['status']) and urldecode($_GET['status']) == "Ready to Deploy")?("selected"):(""));?>>Ready to Deploy</option>
-			<option <?php echo ((isset($_GET['status']) and $_GET['status'] == "Deployed")?("selected"):(""));?>>Deployed</option>
-			<option <?php echo ((isset($_GET['status']) and $_GET['status'] == "Deprovisioned")?("selected"):(""));?>>Deprovisioned</option>
-			<option>Leave as is</option>
+			<option <?php echo ((isset($_GET['status']) and $_GET['status'] == "2")?("selected"):(""));?>>Ready to Deploy</option>
+			<option <?php echo ((isset($_GET['status']) and $_GET['status'] == "4")?("selected"):(""));?>>Deployed</option>
+			<option <?php echo ((isset($_GET['status']) and $_GET['status'] == "6")?("selected"):(""));?>>Deprovisioned</option>
+			<option <?php echo ((isset($_GET['status']) and $_GET['status'] == "lai")?("selected"):(""));?>>Leave as is</option>
 		</select>
 		<br>
 		
 		<label>Asset Location: </label>
 		<select name="location" id="location" required>
-			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "Dayton")?("selected"):(""));?>>Dayton</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "Elderton Elementary")?("selected"):(""));?>>Elderton Elementary</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "Shannock Valley")?("selected"):(""));?>>Shannock Valley</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "West Hills Primary")?("selected"):(""));?>>West Hills Primary</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "West Hills Intermediate")?("selected"):(""));?>>West Hills Intermediate</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "Armstrong High School")?("selected"):(""));?>>Armstrong High School</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "West Shamokin High School")?("selected"):(""));?>>West Shamokin High School</option>
-			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "Admin")?("selected"):(""));?>>Admin</option>
-			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "Office")?("selected"):(""));?>>Office</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "Elderton High School (Storage)")?("selected"):(""));?>>Elderton High School (Storage)</option>
-			<option <?php echo ((isset($_GET['location']) and urldecode($_GET['location']) == "Leave as is")?("selected"):(""));?>>Leave as is</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "5")?("selected"):(""));?>>Dayton</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "7")?("selected"):(""));?>>Elderton Elementary</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "9")?("selected"):(""));?>>Shannock Valley</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "2")?("selected"):(""));?>>West Hills Primary</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "4")?("selected"):(""));?>>West Hills Intermediate</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "3")?("selected"):(""));?>>Armstrong High School</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "6")?("selected"):(""));?>>West Shamokin High School</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "1")?("selected"):(""));?>>Admin</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "15")?("selected"):(""));?>>Office</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "16")?("selected"):(""));?>>Elderton High School (Storage)</option>
+			<option <?php echo ((isset($_GET['location']) and $_GET['location'] == "lai")?("selected"):(""));?>>Leave as is</option>
 		</select>
 		<br>
 
