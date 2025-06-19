@@ -12,7 +12,7 @@
 <body>
 	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
 	<h1>SnipeTools</h1>
-	<?php echo ((time()-filemtime("../snipe-it/.github") > 3600)?('<h3 style="color:lightred">SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop</h3>'):("")); ?>
+	<?php echo ((time()-filemtime("../snipe-it/.github") > 3600)?("<h3 style='color:lightred'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop</h3>"):("")); ?>
 	<a style="padding:15px;" href="sites/validate.php">Asset Validation</a>
 	<a style="padding:15px;" href="sites/office.php">Return to Office</a>
 	<a style="padding:15px;" href="sites/deprovision.php">Deprovisioning</a>
