@@ -75,7 +75,7 @@ if (isset($_GET['checkin'])){
 //correlate status_id to plaintext status
 //status_id 2=Ready to Deploy,4=Deployed,6=Deprovisioned
 switch ($status) {
-	case "Ready%20to%20Deploy":
+	case "Ready+to+Deploy":
 		$status="2";
 		break;
 	case "Deployed":
@@ -84,7 +84,7 @@ switch ($status) {
 	case "Deprovisioned":
 		$status="6";
 		break;
-	case "Leave%20as%20is":
+	case "Leave+as+is":
 		$location="lai";
 		break;
 
@@ -100,19 +100,19 @@ switch ($location) {
 	case "Elderton":
 		$location="7";
 		break;
-	case "Shannock%20Valley":
+	case "Shannock+Valley":
 		$location="9";
 		break;
-	case "West%20Hills%20Primary":
+	case "West+Hills+Primary":
 		$location="2";
 		break;
-	case "West%20Hills%20Intermediate":
+	case "West+Hills+Intermediate":
 		$location="4";
 		break;
-	case "Armstrong%20High%20School":
+	case "Armstrong+High+School":
 		$location="3";
 		break;
-	case "West%20Shamokin%20High%20School":
+	case "West+Shamokin+High+School":
 		$location="6";
 		break;
 	case "Admin":
@@ -121,10 +121,10 @@ switch ($location) {
 	case "Office":
 		$location="15";
 		break;
-	case "Elderton%20High%20School%20(Storage)":
+	case "Elderton+High+School+(Storage)":
 		$location="16";
 		break;
-	case "Leave%20as%20is":
+	case "Leave+as+is":
 		$location="lai";
 		break;
 } 
