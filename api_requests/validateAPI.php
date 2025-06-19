@@ -133,9 +133,9 @@ try {
 		'body' =>'{'
 		.((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'",'):('"asset_tag": "'.$assetTag.'",'))	//asset_tag
 		.((isset($status))?('"status_id": '.$status.','):('"status_id": '.$currentStatus.','))	//status_id
-		.'"model_id": '.$modelID.','	//model_id
-		.((isset($location) and $location != "lai")?('"rtd_location_id": '.$location.','):(''))	//rtd_location_id
-		.((isset($remName) and $remName=="on")?('"name": null'):(''))	//name
+		.'"model_id": '.$modelID	//model_id
+		.((isset($location) and $location != "lai")?(', "rtd_location_id": '.$location.','):(''))	//rtd_location_id
+		.((isset($remName) and $remName=="on")?(', "name": null'):(''))	//name
 		.'}',
 		'headers' => [
 			'Authorization' => 'Bearer ' . $api_key,
