@@ -122,14 +122,6 @@ if(isset($checkin) and $checkin=="on"){
 		
 	
 	
-		//redirect back to validate.php with a request statuses so that handleAssetMessages.php can display right info
-		header("Location: ../sites/validate.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial.
-			((isset($status))?("&status=".$status):("")).
-			((isset($location))?("&location=".$location):("")).
-			((isset($remName))?("&remName=on"):("")).
-			((isset($retag))?("&retag=on"):("")).
-			((isset($checkin))?("&checkin=on"):(""))
-			);
 	
 	//catch internal/api/server errors
 	} catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -138,4 +130,12 @@ if(isset($checkin) and $checkin=="on"){
 		echo 'General Error: ' . $e->getMessage();
 	}
 }
+//redirect back to validate.php with a request statuses so that handleAssetMessages.php can display right info
+header("Location: ../sites/validate.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial.
+	((isset($status))?("&status=".$status):("")).
+	((isset($location))?("&location=".$location):("")).
+	((isset($remName))?("&remName=on"):("")).
+	((isset($retag))?("&retag=on"):("")).
+	((isset($checkin))?("&checkin=on"):(""))
+	);
 ?>
