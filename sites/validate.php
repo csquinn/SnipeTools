@@ -1,10 +1,11 @@
 <?php
 include 'handleAssetMessages.php'
 
-//determine which options should be autoselected upon page refresh
+//the frequent inline php for every option determines which options should be autoselected upon page refresh
 //This all comes from my stubbornnesss to not use JavaScript
-
-
+//I would like to apologize to anyone who knows how software development works
+//I should maybe take a course
+//Also, I apologize if my ternary operator usage is a poor style choice, they seem counterintuitive but I figured that was just my inexperience
 ?>
 <head>
 	<meta charset="UTF-8">
@@ -25,38 +26,38 @@ include 'handleAssetMessages.php'
 
 		<label>Asset Status: </label>
 		<select name="status" id="location" required>
-			<option>Ready to Deploy</option>
-			<option>Deployed</option>
-			<option>Deprovisioned</option>
+			<option <?php ((isset($_GET['status'] and $_GET['status'] == "Ready+to+Deploy"))?(echo "selected";):(echo "";))?>>Ready to Deploy</option>
+			<option <?php ((isset($_GET['status'] and $_GET['status'] == "Deployed"))?(echo "selected";):(echo "";))?>>Deployed</option>
+			<option <?php ((isset($_GET['status'] and $_GET['status'] == "Deprovisioned"))?(echo "selected";):(echo "";))?>>Deprovisioned</option>
 			<option>Leave as is</option>
 		</select>
 		<br>
 		
 		<label>Asset Location: </label>
 		<select name="location" id="location" required>
-			<option>Dayton</option>
-			<option>Elderton Elementary</option>
-			<option>Shannock Valley</option>
-			<option>West Hills Primary</option>
-			<option>West Hills Intermediate</option>
-			<option>Armstrong High School</option>
-			<option>West Shamokin High School</option>
-			<option>Admin</option>
-			<option>Office</option>
-			<option>Elderton High School (Storage)</option>
-			<option>Leave as is</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Dayton"))?(echo "selected";):(echo "";))?>>Dayton</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Elderton+Elementary"))?(echo "selected";):(echo "";))?>>Elderton Elementary</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Shannock+Valley"))?(echo "selected";):(echo "";))?>>Shannock Valley</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "West+Hills+Primary"))?(echo "selected";):(echo "";))?>>West Hills Primary</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "West+Hills+Intermediate"))?(echo "selected";):(echo "";))?>>West Hills Intermediate</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Armstrong+High+School"))?(echo "selected";):(echo "";))?>>Armstrong High School</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "West+Shamokin+High+School"))?(echo "selected";):(echo "";))?>>West Shamokin High School</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Admin"))?(echo "selected";):(echo "";))?>>Admin</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Office"))?(echo "selected";):(echo "";))?>>Office</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Elderton+High+School+(Storage)"))?(echo "selected";):(echo "";))?>>Elderton High School (Storage)</option>
+			<option <?php ((isset($_GET['location'] and $_GET['location'] == "Leave+as+is"))?(echo "selected";):(echo "";))?>>Leave as is</option>
 		</select>
 		<br>
 
-		<input type="checkbox" id="remName" name="remName" value="on">
+		<input type="checkbox" id="remName" name="remName" value="on" <?php ((isset($_GET['remName']))?(echo "checked";):(echo "";))?>>
 		<label> Remove Asset Name</label>
 		<br>
 		
-		<input type="checkbox" id="retag" name="retag" value="on">
+		<input type="checkbox" id="retag" name="retag" value="on" <?php ((isset($_GET['retag']))?(echo "checked";):(echo "";))?>>
 		<label> Set Asset Tag equal to Serial Number</label>
 		<br>
 		
-		<input type="checkbox" id="checkin" name="checkin" value="on">
+		<input type="checkbox" id="checkin" name="checkin" value="on" <?php ((isset($_GET['checkin']))?(echo "checked";):(echo "";))?>>
 		<label> Check the Asset in from any Users</label>
 		<br>
 		

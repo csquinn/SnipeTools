@@ -84,8 +84,17 @@ try {
 
 		//if asset doesn't exist in inventory
 		if(array_key_exists('status',$assetJsonArray)) {
-			//route back to where request came from sending error code and og serial, further logic handled in handleMissingAsset.php 
-			header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial . (isset($_GET['GAdmin']) ? ("&GoogleRequestStatus") : ""));
+			//route back to where request came from sending error code and og serial, further logic handled in handleAssetMessage.php
+			//extra header information is optionally provided if the source is validate.php to keep previously checked boxes checked 
+			header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial . 
+				(isset($_GET['GAdmin']) ? ("&GoogleRequestStatus") : "").
+				((isset($_GET['status']))?("&status=".$_GET['status']):("")).
+				((isset($_GET['location']))?("&location=".$_GET['location']):("")).
+				((isset($_GET['remName']))?("&remName=on"):("")).
+				((isset($_GET['retag']))?("&retag=on"):("")).
+				((isset($_GET['checkin']))?("&checkin=on"):(""))
+				);
+
 			exit;
 
 		} else { //if asset does exist in inventory
