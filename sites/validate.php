@@ -16,7 +16,7 @@ include 'handleAssetMessages.php'
 	<?php echo $audioMessage; ?>
 	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
 	<h1>Validate Assets</h1>
-
+	<h1><?php echo $_GET['location']; ?></h1>
 	<form action="../api_requests/validateAPI.php" method="GET" autocomplete="on">
 		<label for="serial">Scan Serial #</label>
 		<input type="hidden" name="source" value="validate">
