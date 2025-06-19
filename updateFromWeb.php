@@ -2,7 +2,7 @@
 
 if(isset($_GET['update'])){
 	// Launch the batch file
-	exec('psexec -i 1 cmd.exe /k "update.bat"'); //I should make this script use a modifiable directory, but I don't want to :)
+	exec("start update.bat"); //I should make this script use a modifiable directory, but I don't want to :)
 	
 	// After the batch completes, redirect
 	header("Location: index.html");
