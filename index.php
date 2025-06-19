@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-if (time()-filemtime("../snipe-it/.github") > 2 * 3600) {
+if (time()-filemtime("../snipe-it/.github/config.yml") > 2 * 3600) {
 	
 } else {
 	// file younger than 2 hours
