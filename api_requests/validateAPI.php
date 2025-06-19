@@ -159,7 +159,7 @@ if(isset($checkin) and $checkin=="on"){
 		$client = new \GuzzleHttp\Client();
 	
 		//api request copied from snipeIT
-		$response = $client->request('OST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
+		$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/checkin', [
 			'body' =>'{"status_id":2}',
 			'headers' => [
 				'Authorization' => 'Bearer ' . $api_key,
