@@ -2,8 +2,7 @@
 
 if(isset($_GET['update'])){
 	// Launch the batch file
-	$WshShell = new COM("WScript.Shell");
-	$exitCode = $WshShell->Run('cmd /C update.php', 1, true); //I should make this script use a 	modifiable directory, but I don't want to :)
+	exec("start update.bat"); //I should make this script use a modifiable directory, but I don't want to :)
 	
 	// After the batch completes, redirect
 	header("Location: index.html");
