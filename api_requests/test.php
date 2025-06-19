@@ -12,7 +12,7 @@ echo '{'
 		.((isset($status))?(', "status_id": '.$status):(', "status_id": '.$currentStatus))	//status_id
 		.', "model_id": '.$modelID	//model_id
 		.''	//rtd_location_id
-		.''	//name
+		.((isset($remName) and $remName=="on")?(', "name": null'):(''))	//name
 		.'}';
 
 ?>
