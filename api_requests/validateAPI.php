@@ -153,10 +153,12 @@ try {
 			'content-type' => 'application/json',
 		],
 	]);
+	
 
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
+	echo print_r($response);
 } catch (\Exception $e) {
 	echo 'General Error: ' . $e->getMessage();
 }
