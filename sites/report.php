@@ -45,8 +45,7 @@ a:active{color:white;}
 
 	// Associative array
 	$row = $result -> fetch_assoc();
-	echo $row['assets.asset_tag'];
-	echo $row['users.username'];
+	print_r($row);
 
 	// Free result set
 	$result -> free_result();
