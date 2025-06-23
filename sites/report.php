@@ -45,11 +45,27 @@ a:active{color:white;}
 	<br>
 	
 	<?php
-
-	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null;';
-
+	//All assets where test is in asset tag but not testing
+	$sql = 'select * from assets where asset_tag like "%test%" and asset_tag not like "%testing%" and deleted_at is null;';
 	$result = $mysqli -> query($sql);
-	
+	echo "<details>";
+	echo "<summary>Assets believed to be SnipeIT tests that were never deleted</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+
+	<?php
+	//look for weird student accounts
+	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null;';
+	$result = $mysqli -> query($sql);
 	echo "<details>";
 	echo "<summary>Assets signed out to students with strange accounts</summary>";
 	// Associative array
@@ -60,13 +76,10 @@ a:active{color:white;}
 	}
 	echo"</table>";
 	echo "</details>";
-
 	// Free result set
 	$result -> free_result();
-
-	$mysqli -> close();
-	
 	?>
+
 	</div>
 </body>
 </html>
