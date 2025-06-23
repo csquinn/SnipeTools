@@ -274,7 +274,7 @@ a:active{color:white;}
 
 	<?php
 	//assets with no letters in the asset tag
-	$sql = 'select * from assets where asset_tag not regexp '[a-zA-Z]' and deleted_at is null;';
+	$sql = 'select * from assets where asset_tag not regexp "[a-zA-Z]" and deleted_at is null;';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
 	echo "<summary>Assets without letters in their Asset Tags</summary>";
