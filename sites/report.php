@@ -62,6 +62,7 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
 	<?php
 	//look for import error accounts
 	$sql = 'select * from users where username like "%delete%" and deleted_at is null;';
@@ -80,6 +81,7 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
 	<?php
 	//Accounts with more than 1 asset assigned
 	$sql = 'select assigned_to, username, first_name, last_name, count(assigned_to) as "num" from assets inner join users on assets.assigned_to = users.id where assets.deleted_at is null group by assigned_to having count(*) > 1;';
@@ -98,12 +100,13 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
 	<?php
-	//non chromebooks with spaces in their asset tags
-	$sql = 'select * from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name != "Chromebook" and assets.asset_tag like "% %" and assets.deleted_at is null;';
+	//chromebooks with spaces in their asset tags and asset tag != serial
+	$sql = 'select * from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.asset_tag not like "% %" and assets.asset_tag != assets.serial and assets.deleted_at is null;';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Non-Chromebook assets with a space in their Asset Tag</summary>";
+	echo "<summary>Chromebooks with improper Asset Tags</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -116,6 +119,7 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
 	<?php
 	//Assets with 7 character or less asset tags
 	$sql = 'select * from assets where length(asset_tag) < 7 and deleted_at is null;';
@@ -134,6 +138,7 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
 	<?php
 	//Assets with 8 character or less asset tags, may not all be errors
 	$sql = 'select * from assets where length(asset_tag) < 8 and asset_tag not like "%TV%" and asset_tag not like "%TC%" and deleted_at is null;';
@@ -152,6 +157,26 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
+	<?php
+	//assigned assets who's asset tags aren't serial
+	$sql = 'select * from assets where assigned_to is not null and asset_tag != serial;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Assets checked out to users with their Asset Tag not matching their serial</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
 	<?php
 	//look for weird student accounts
 	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null;';
@@ -170,6 +195,7 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
 	</div>
 </body>
 </html>
