@@ -31,7 +31,7 @@ a:active{color:white;}
 	<title>Inventory Health Report | SnipeTools</title>
 </head>
 <body>
-	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
+	<div style="text-align: center;">
 	<h1>Inventory Health Report</h1>
 	<h3>This site queries SnipeIT and returns assets that are believed to be errors. Each different section can be expanded below</h3>
 	<h3><b>*Please note: This report does not actually modify SnipeIT in any way</b></h3>
@@ -44,10 +44,10 @@ a:active{color:white;}
 	$result = $mysqli -> query($sql);
 
 	// Associative array
-	$row = $result -> fetch_assoc();
-	echo $row['asset_tag'];
-	echo $row['username'];
-
+	while($row = $result -> fetch_assoc()){
+		echo $row['asset_tag']." ";
+		echo $row['username']."<br>";
+	}
 	// Free result set
 	$result -> free_result();
 
