@@ -51,7 +51,7 @@ a:active{color:white;}
 	echo "<details>";
 	echo "<summary>Assets signed out to students with strange accounts</summary>";
 	// Associative array
-	echo "<table border="1">;
+	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
 	while($row = $result -> fetch_assoc()){
 		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
