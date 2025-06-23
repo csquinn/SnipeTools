@@ -45,7 +45,7 @@ a:active{color:white;}
 	$result = $mysqli -> query($sql);
 	
 	echo "<details>";
-	echo "<h4><summary>Assets signed out to students with strange accounts</summary></h4>";
+	echo "<summary><h4>Assets signed out to students with strange accounts</h4></summary>";
 	// Associative array
 	while($row = $result -> fetch_assoc()){
 		echo $row['asset_tag']." ";
