@@ -217,7 +217,7 @@ a:active{color:white;}
 
 	<?php
 	//Ready to Deploy or Deprovisioned assets with improper locations
-	$sql = 'select * from assets where status_id != 4 and (rtd_location_id != 15 and rtd_location_id != 16) and deleted_at is null;';
+	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where status_id != 4 and (rtd_location_id != 15 and rtd_location_id != 16) and assets.deleted_at is null;';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
 	echo "<summary>Ready to Deploy and Deprovisioned assets with improper locations</summary>";
@@ -252,6 +252,45 @@ a:active{color:white;}
 	$result -> free_result();
 	?>
 	<br>
+
+	<?php
+	//Assets with no location
+	$sql = 'select * from assets where rtd_location_id = "" or rtd_location_id is null and deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Assets with no location set</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['rtd_location_id'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//assets with no letters in the asset tag
+	$sql = 'select * from assets where asset_tag not regexp '[a-zA-Z]' and deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Assets without letters in their Asset Tags</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
 	</div>
 </body>
 </html>
