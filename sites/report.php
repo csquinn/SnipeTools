@@ -88,9 +88,63 @@ a:active{color:white;}
 	echo "<summary>Users with more than 1 asset assigned to them</summary>";
 	// Associative array
 	echo "<table border='1'>";
-	echo "<tr><td>Amount of assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
+	echo "<tr><td>Amount of Assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
 	while($row = $result -> fetch_assoc()){
 		echo "<tr><td>". $row['num'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/users/" . $row['assigned_to'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+	<?php
+	//non chromebooks with spaces in their asset tags
+	$sql = 'select * from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name != "Chromebook" and assets.asset_tag like "% %" and assets.deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Non-Chromebook assets with a space in their Asset Tag</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+	<?php
+	//Assets with 7 character or less asset tags
+	$sql = 'select * from assets where length(asset_tag) < 7 and deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Assets with 7 character or less Asset Tags</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+	<?php
+	//Assets with 8 character or less asset tags, may not all be errors
+	$sql = 'select * from assets where length(asset_tag) < 8 and asset_tag not like "%TV%" and asset_tag not like "%TC%" and deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Assets with 8 character or less Asset Tags (may not all be errors)</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
 	}
 	echo"</table>";
 	echo "</details>";
