@@ -2,8 +2,12 @@
 <html lang="en">
 <?php
 
+//get mysql password
+$db_password = file_get_contents("../user_variables/snipe_mysql_password.txt");
+$db_password = str_replace(array("\r", "\n"), '', $db_password);
+
 //Create mysqli connection
-$mysqli = new mysqli("localhost","snipe_user","notrealpassword","snipeit");
+$mysqli = new mysqli("localhost","snipe_user",$db_password,"snipeit");
 
 // Check connection
 if ($mysqli -> connect_errno) {
@@ -33,9 +37,9 @@ a:active{color:white;}
 	<h3><b>*Please note: This report does not actually modify SnipeIT in any way</b></h3>
 	<br>
 	
-	<php?
+	<?php
 
-	$sql = "select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null;";
+	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null;';
 
 	$result = $mysqli -> query($sql);
 
