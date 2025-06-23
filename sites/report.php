@@ -216,6 +216,25 @@ a:active{color:white;}
 	<br>
 
 	<?php
+	//Ready to Deploy or Deprovisioned assets with improper locations
+	$sql = 'select * from assets where status_id != 4 and (rtd_location_id != 15 and rtd_location_id != 16) and deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Ready to Deploy and Deprovisioned assets with improper locations</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Status</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td>".(($row['status_id'] == 2)?("Ready to Deploy"):("Deprovisioned"))."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
 	//Deployed Assets with improper locations
 	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where status_id = 4 and (rtd_location_id = 15 or rtd_location_id = 16) and assets.deleted_at is null;';
 	$result = $mysqli -> query($sql);
