@@ -61,7 +61,43 @@ a:active{color:white;}
 	// Free result set
 	$result -> free_result();
 	?>
-
+	<br>
+	<?php
+	//look for import error accounts
+	$sql = 'select * from users where username like "%delete%" and deleted_at is null;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Assets assigned to mistakenly created accounts during CSV import errors</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+	<?php
+	//Accounts with more than 1 asset assigned
+	$sql = 'select assigned_to, username, first_name, last_name, count(assigned_to) as "num" from assets inner join users on assets.assigned_to = users.id where assets.deleted_at is null group by assigned_to having count(*) > 1;';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Users with more than 1 asset assigned to them</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Amount of assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['num'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/users/" . $row['assigned_to'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
 	<?php
 	//look for weird student accounts
 	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null;';
@@ -79,7 +115,7 @@ a:active{color:white;}
 	// Free result set
 	$result -> free_result();
 	?>
-
+	<br>
 	</div>
 </body>
 </html>
