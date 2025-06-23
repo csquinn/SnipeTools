@@ -6,6 +6,10 @@
 $db_password = file_get_contents("../user_variables/snipe_mysql_password.txt");
 $db_password = str_replace(array("\r", "\n"), '', $db_password);
 
+//get snipe_url
+$snipe_url = file_get_contents("../user_variables/snipe_url.txt");
+$snipe_url = str_replace(array("\r", "\n"), '', $snipe_url);
+
 //Create mysqli connection
 $mysqli = new mysqli("localhost","snipe_user",$db_password,"snipeit");
 
@@ -47,10 +51,12 @@ a:active{color:white;}
 	echo "<details>";
 	echo "<summary>Assets signed out to students with strange accounts</summary>";
 	// Associative array
+	echo "<table border="1">;
+	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
 	while($row = $result -> fetch_assoc()){
-		echo $row['asset_tag']." ";
-		echo $row['username']."<br>";
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
 	}
+	echo"</table>";
 	echo "</details>";
 
 	// Free result set
