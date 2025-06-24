@@ -47,7 +47,7 @@ if (!$handle) {
 // Read file line by line
 while (($line = fgets($handle)) !== false) {
 	$line = trim($line);      // Remove line breaks and spaces
-	if(!($line == "null" or $line == " " or $line == "" or $line == null))
+	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
 		$prepSql->execute();
 		if ($prepSql->errno) {
 			error_log("Insert error on line: $line — " . $prepSql->error);
