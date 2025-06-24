@@ -19,6 +19,9 @@ if ($mysqli -> connect_errno) {
   exit();
 }
 
+//delete old table if it still exists
+$mysqli -> query('drop table if exists "tempExclusions"');
+
 //create temporary table for asset and user exceptions
 $sql = 'create table tempExclusions (name varchar(255) not null);';
 if($mysqli -> query($sql) === FALSE) {
