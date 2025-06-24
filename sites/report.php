@@ -23,13 +23,10 @@ if ($mysqli -> connect_errno) {
 $mysqli -> query('drop table if exists tempExclusions;');
 
 //create temporary table for asset and user exceptions
-$sql = 'create table tempExclusions (name varchar(255) not null);';
+$sql = 'create table tempExclusions (name varchar(255) not null) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;';
 if($mysqli -> query($sql) === FALSE) {
 	echo "error creating the exclusions table";
 }
-
-//set proper character set
-$mysqli->set_charset('utf8mb4');
 
 //prepare parameterized query
 $sql = "INSERT INTO tempExclusions (name) VALUES (?)";
