@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	//write input to file
 	file_put_contents("../exclusions.txt", $exclusionList);
 	//pretty color
-	echo "body {background-color: green; color: black;}";
+	echo "<style>body {background-color: green; color: black;}</style>";
 	$successMessage = "Successfully updated the Exclusion List";
 }
 
