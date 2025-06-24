@@ -4,10 +4,6 @@ SnipeTools is a web app that contains various tools for the Snipe IT Asset Manag
 IMPORTANT! If you get a PHP error about a self-signed certificate with cURL, follow this guide https://php.watch/articles/php-curl-windows-cainfo-fix
 the cacert.pm file is a file that contains many root CAs. Without it, cURL has no source to validate any certs with and will throw an error
 
-Need to figure out some sort of authentication. Probably a group policy
-
-Make another tool that scans inventory for common mistakes and points them out 
-
 General Project information:
 
 SnipeTools is a set of the three following tools
@@ -19,7 +15,7 @@ SnipeTools is a set of the three following tools
 	- Marks each scanned asset as ready to deploy at the office, following all inventory conventions
 
 3. Deprovision
-	- Marks each scanned asset as deprovisioned at the office or storage, following all inventory conventions (any maybe also on Google Admin)
+	- Marks each scanned asset as deprovisioned at the office or storage, following all inventory conventions (and also optionally on Google Admin)
 
 Each of the tools work in a similar way
 
@@ -31,3 +27,8 @@ Each of the tools work in a similar way
 5. If the asset doesn't exist, the user is routed back to the original tool php page with a failure message. Otherwise, the logic continues.
 6. These api php files (validateAPI.php, officeAPI.php, and deprovisionAPI.php) perform one or more api calls to Snipe IT and Google to update the asset.
 7. Then, the user is routed back to the original tool php page with a success message. The html form is autofocused, meaning that the user can immediately begin typing or scanning the next asset.
+
+A fourth, bonus tool was created called the "Inventory Health Check." This tool directly queries the Snipe IT MySQL database for common inventory errors found in my internship's environment.
+Each located asset that was found to contain an error is then displayed in a table. A link is also created to view each asset on Snipe IT.
+
+Because this was my first development project in a real-world environment, I had a little fun with it.

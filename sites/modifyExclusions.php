@@ -48,5 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<h2><?php echo $successMessage; ?></h2>
 	<a href = "report.php">Back to Inventory Health Report</a>
 	</div>
+
+	<div style="position: fixed; bottom: 0; right: 0; padding: 15px;">
+	<a href="../sfx/nut/nut.html">Butternut</a>
+	</div>
 </body>
 </html>
