@@ -47,9 +47,11 @@ if (!$handle) {
 // Read file line by line
 while (($line = fgets($handle)) !== false) {
 	$line = trim($line);      // Remove line breaks and spaces
-	$prepSql->execute();
-	if ($prepSql->errno) {
-		error_log("Insert error on line: $line — " . $prepSql->error);
+	if(!($line == "null" or $line == " " or $line == "" or $line == null))
+		$prepSql->execute();
+		if ($prepSql->errno) {
+			error_log("Insert error on line: $line — " . $prepSql->error);
+		}
 	}
 }
 ?>
@@ -76,7 +78,8 @@ a:active{color:white;}
 	<h4>Each different section can be expanded below</h4>
 	<h4>This report is <b>NOT</b> exhaustive and inventory should be examined regularly in addition to this report</h4>
 	<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
-	<a href="../index.php">Return Home</a>
+	<h5>Click the link below to specify exclusions from this report (so violating assets that are confirmed as okay don't continue to show up)</h5>
+	<p><a href="modifyExclusions.php">Create Exclusions from Report</a><a href="../index.php">Return Home</a></p>
 	<br>
 	
 	<?php
