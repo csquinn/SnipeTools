@@ -27,12 +27,12 @@ a:active{color:white;}
 	<title>Modify Exclusions | SnipeTools</title>
 </head>
 <body>
-	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
+	<div style="text-align: center;">
 	<h2>Enter any Asset Tags, Serial Numbers, and Usernames (99#s) you would like to exclude from the Inventory Health Report</h2>
 	<h3>Enter each value as a new line with <b>NO</b> commas</h3>
 	<h3>It doesn't matter if you separate tags, serials, or usernames, enter them in any order</h3>
 	<form action="modifyExclusions.php" method="POST">
-		<textarea id="exclusions" name="exclusions" rows="75" cols="35"><?php echo $exclusionList; ?></textarea>
+		<textarea id="exclusions" name="exclusions" rows="35" cols="35"><?php echo $exclusionList; ?></textarea>
 		<br>
 		<input type="submit" value="Submit">
 	</form>
