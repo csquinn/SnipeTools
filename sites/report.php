@@ -77,7 +77,7 @@ a:active{color:white;}
 	<br>
 	
 	<?php
-	print_r($mysqli -> query("select * from tempExclusions"));
+	print_r($mysqli -> query("select name from tempExclusions"));
 	//Assets without a serial number or a highly shortened serial
 	$sql = 'select * from assets where (serial = "" or serial is null or serial = " " or length(serial) < 7) and deleted_at is null;';
 	$result = $mysqli -> query($sql);
