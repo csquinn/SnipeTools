@@ -92,7 +92,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where (serial = "" or serial is null or serial = " " or length(serial) < 7) and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets with Incorrect Serial Numbers". $result->num_rows ."</summary>";
+	echo "<summary>Assets with Incorrect Serial Numbers (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -111,7 +111,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where asset_tag like "%test%" and asset_tag not like "%testing%" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets Believed to be SnipeIT Tests that were Never Deleted</summary>";
+	echo "<summary>Assets Believed to be SnipeIT Tests that were Never Deleted (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -130,7 +130,7 @@ a:active{color:white;}
 	$sql = 'select * from users where username like "%delete%" and deleted_at is null and username not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets Assigned to Mistakenly Created Accounts During CSV Import Errors</summary>";
+	echo "<summary>Assets Assigned to Mistakenly Created Accounts During CSV Import Errors (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
@@ -149,7 +149,7 @@ a:active{color:white;}
 	$sql = 'select assigned_to, username, first_name, last_name, count(assigned_to) as "num" from assets inner join users on assets.assigned_to = users.id where assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions) and username not in (select name from tempExclusions) group by assigned_to having count(*) > 1;';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Users with More Than 1 Asset Assigned to Them</summary>";
+	echo "<summary>Users with More Than 1 Asset Assigned to Them (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Amount of Assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
@@ -168,7 +168,7 @@ a:active{color:white;}
 	$sql = 'select * from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.asset_tag not like "% %" and assets.asset_tag != assets.serial and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Chromebooks with Improper Asset Tags</summary>";
+	echo "<summary>Chromebooks with Improper Asset Tags (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -187,7 +187,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where length(asset_tag) < 7 and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets with 7 Character or Less Asset Tags</summary>";
+	echo "<summary>Assets with 7 Character or Less Asset Tags (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -206,7 +206,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where length(asset_tag) < 8 and asset_tag not like "%TV%" and asset_tag not like "%TC%" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets with 8 Character or Less Asset Tags (may not all be errors)</summary>";
+	echo "<summary>Assets with 8 Character or Less Asset Tags (may not all be errors) (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -225,7 +225,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where assigned_to is not null and asset_tag != serial and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets Checked Out to Users with their Asset Tag not Matching their Serial</summary>";
+	echo "<summary>Assets Checked Out to Users with their Asset Tag not Matching their Serial (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -244,7 +244,7 @@ a:active{color:white;}
 	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions) and username not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets Checked Out to Students with Strange Accounts</summary>";
+	echo "<summary>Assets Checked Out to Students with Strange Accounts (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
@@ -263,7 +263,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where ((name != "" and name is not null)) and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets with Non-Necessary Fields Set (mostly asset name, this is huge)</summary>";
+	echo "<summary>Assets with Non-Necessary Fields Set (mostly asset name, this is huge) (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Asset Name</td><td>Link</td></tr>";
@@ -282,7 +282,7 @@ a:active{color:white;}
 	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where status_id != 4 and (rtd_location_id != 15 and rtd_location_id != 16) and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Ready to Deploy and Deprovisioned Assets with Improper Locations</summary>";
+	echo "<summary>Ready to Deploy and Deprovisioned Assets with Improper Locations (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Status</td><td>Link</td></tr>";
@@ -301,7 +301,7 @@ a:active{color:white;}
 	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where status_id = 4 and (rtd_location_id = 15 or rtd_location_id = 16) and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Deployed Assets with Improper Locations</summary>";
+	echo "<summary>Deployed Assets with Improper Locations (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
@@ -320,7 +320,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where rtd_location_id = "" or rtd_location_id is null and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets with No Location Set</summary>";
+	echo "<summary>Assets with No Location Set (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
@@ -339,7 +339,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where asset_tag not regexp "[a-zA-Z]" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets Without Letters in their Asset Tags</summary>";
+	echo "<summary>Assets Without Letters in their Asset Tags (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
