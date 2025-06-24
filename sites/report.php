@@ -74,13 +74,16 @@ a:active{color:white;}
 <body>
 	<div style="text-align: center;">
 	<h1>Inventory Health Report</h1>
-	<h4>This site queries SnipeIT and returns assets that are believed to be errors.</h4>
-	<h4>Each different section can be expanded below</h4>
+	<h4>This site queries SnipeIT and returns potential asset errors.</h4>
+	<h4>Each section below can be expanded by clicking the dropdown arrow.</h4>
 	<h4>This report is <b>NOT</b> exhaustive and inventory should be examined regularly in addition to this report</h4>
 	<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
-	<h5>Click the link below to specify exclusions from this report (so violating assets that are confirmed as okay don't continue to show up)</h5>
+	<h5>Click the link below to specify exclusions from this report</h5>
+	<h5>(Exclusions will not appear in results even if they are errors</h5>
 	<a style="padding:15px;" href="modifyExclusions.php">Create Exclusions from Report</a>
+	<br>
 	<a style="padding:15px;" href="../index.php">Return Home</a>
+	<br>
 	<br>
 	
 	<?php
