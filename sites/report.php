@@ -29,7 +29,7 @@ if($mysqli -> query($sql) === FALSE) {
 }
 
 //set proper character set
-$mysqli->set_charset('utf8mb4_unicode_ci');
+$mysqli->set_charset('utf8mb4');
 
 //prepare parameterized query
 $sql = "INSERT INTO tempExclusions (name) VALUES (?)";
