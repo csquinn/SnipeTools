@@ -79,8 +79,9 @@ a:active{color:white;}
 	<h4>This report is <b>NOT</b> exhaustive and inventory should be examined regularly in addition to this report</h4>
 	<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
 	<h5>Click the link below to specify exclusions from this report</h5>
-	<h5>(Exclusions will not appear in results even if they are errors</h5>
+	<h5>(Exclusions will not appear in results even if they are errors)</h5>
 	<a style="padding:15px;" href="modifyExclusions.php">Create Exclusions from Report</a>
+	<br>
 	<br>
 	<a style="padding:15px;" href="../index.php">Return Home</a>
 	<br>
@@ -91,7 +92,7 @@ a:active{color:white;}
 	$sql = 'select * from assets where (serial = "" or serial is null or serial = " " or length(serial) < 7) and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Assets with Incorrect Serial Numbers</summary>";
+	echo "<summary>Assets with Incorrect Serial Numbers". $result->num_rows ."</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
