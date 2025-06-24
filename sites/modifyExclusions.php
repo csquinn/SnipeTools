@@ -2,14 +2,14 @@
 <html lang="en">
 
 <?php
-
+//create 
+$exclusionList = file_get_contents("../exclusions.txt");
 //assign variable to write to file and prefill textarea
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$exclusionList = $_POST['exclusions'];
+	//write input to file
+	file_put_contents("../exclusions.txt", $exclusionList);
 }
-
-//write input to file
-file_put_contents("../exclusions.txt", $exclusionList);
 
 ?>
 
@@ -32,7 +32,6 @@ a:active{color:white;}
 	<h3>Enter each value as a new line with <b>NO</b> commas</h3>
 	<h3>It doesn't matter if you separate tags, serials, or usernames, enter them in any order</h3>
 	<form action="modifyExclusions.php" method="POST">
-		<label>Enter text below</label>
 		<textarea id="exclusions" name="exclusions" rows="75" cols="35"><?php echo $exclusionList; ?></textarea>
 		<br>
 		<input type="submit" value="Submit">
