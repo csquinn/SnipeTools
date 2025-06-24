@@ -25,6 +25,9 @@ if($mysqli -> query($sql) === FALSE) {
 	echo "error creating the exclusions table";
 }
 
+//set proper character set
+$mysqli->set_charset('utf8mb4_0900_ai_ci');
+
 //prepare parameterized query
 $sql = "INSERT INTO tempExclusions (name) VALUES (?)";
 $prepSql = $mysqli->prepare($sql);
