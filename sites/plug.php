@@ -269,6 +269,25 @@ table {text-align: center; margin: auto;}
 	?>
 	<br>
 
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and (rtd_location_id="" or rtd_location_id is null) and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>No Location (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
 	</div>
 </body>
 
