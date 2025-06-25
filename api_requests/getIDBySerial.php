@@ -85,6 +85,10 @@ try {
 		//if asset doesn't exist in inventory
 		if(array_key_exists('status',$assetJsonArray)) {
 			//route back to where request came from sending error code and og serial, further logic handled in handleAssetMessage.php
+
+			//write this scan to the badscans.txt file for logging purposes
+			file_put_contents("../logs/badscans.txt", $serial."\n", FILE_APPEND);
+
 			//extra header information is optionally provided if the source is validate.php to keep previously checked boxes checked 
 			header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial . 
 				(isset($_GET['GAdmin']) ? ("&GoogleRequestStatus") : "").
@@ -98,6 +102,10 @@ try {
 			exit;
 
 		} else { //if asset does exist in inventory
+			
+			//write to proper log
+			file_put_contents("../logs/".$source."LOG.txt", $serial."\n", FILE_APPEND);
+
 			//routes to the php file 
 			$id = $assetJsonArray["rows"][0]["id"];
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];

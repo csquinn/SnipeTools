@@ -163,7 +163,7 @@ table {text-align: center; margin: auto;}
 	$sql = 'select * from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.asset_tag not like "% %" and assets.asset_tag != assets.serial and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
-	echo "<summary>Chromebooks with Improper Asset Tags (". $result->num_rows .")</summary>";
+	echo "<summary>Chromebooks without a space in their Asset Tags (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
