@@ -4,3 +4,7 @@ user_variables/google_admin_email.txt
 user_variables/google_customer_id.txt
 user_variables/google-auth.json
 user_variables/snipe_mysql_password.txt
+logs/deprovisionLOG.txt
+logs/officeLOG.txt
+logs/validateLOG.txt
+logs/badscans.txt

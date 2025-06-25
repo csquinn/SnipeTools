@@ -352,7 +352,7 @@ table {text-align: center; margin: auto;}
 </body>
 
 <?php
-//drop tempExlclusions (it's recreated every time the page refreshes)
+//drop tempExclusions (it's recreated every time the page refreshes)
 $sql = 'drop table tempExclusions;';
 if($mysqli -> query($sql) === false){
 	echo "couldn't drop table";

@@ -21,6 +21,7 @@ a:active{color:white;}
 	<a style="padding:15px;" href="sites/office.php">Return to Office</a>
 	<a style="padding:15px;" href="sites/deprovision.php">Deprovisioning</a>
 	<a style="padding:15px;" href="sites/report.php">Inventory Health Report</a>
+	<a style="padding:15px;" href="sites/plug.php">TEMPORARY</a>
 	</div>
 
 	<div style="position: fixed; bottom: 0; right: 0; padding: 15px;">
