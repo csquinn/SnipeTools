@@ -60,11 +60,6 @@ while (($line = fgets($handle)) !== false) {
 body {background-color: #337ab7; color: white;} 
 details {text-align: center; margin: auto;}
 table {text-align: center; margin: auto;}
-a:link{color:white;}
-a:visited{color:white;}
-a:hover{color:white;}
-a:focus{color:white;}
-a:active{color:white;}
 </style>
 <head>
 	<meta charset="UTF-8">
