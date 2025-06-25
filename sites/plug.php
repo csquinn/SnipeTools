@@ -106,7 +106,7 @@ table {text-align: center; margin: auto;}
 <body>
 	<div style="text-align: center;">
 	<h1>Missing Assets</h1>
-	<h4>This site shows all of the assets that have never been scanned into SnipeTools</h4>
+	<h4>This site shows all of the assets that have never been scanned into SnipeTools and aren't checked out</h4>
 	<h4>Each section below can be expanded by clicking the dropdown arrow.</h4>
 	<h4>After all of the known Chromebooks in the district have been scanned into SnipeTools,</h4>
 	<h4>Connor will delete all other Chromebooks not assigned to students in inventory. Better not miss any :)</h4>
@@ -123,6 +123,139 @@ table {text-align: center; margin: auto;}
 	$result = $mysqli -> query($sql);
 	echo "<details>";
 	echo "<summary>Dayton (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=7 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Elderton Elementary (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=9 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Shannock Valley (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=2 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>West Hills Primary (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+	
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=4 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>West Hills Intermediate (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=3 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Armstrong (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=6 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>West Shamokin (". $result->num_rows .")</summary>";
+	// Associative array
+	echo "<table border='1'>";
+	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
+	while($row = $result -> fetch_assoc()){
+		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+	}
+	echo"</table>";
+	echo "</details>";
+	// Free result set
+	$result -> free_result();
+	?>
+	<br>
+
+	<?php
+	//Dayton
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=1 and serial not in (select name from goodAssets);';
+	$result = $mysqli -> query($sql);
+	echo "<details>";
+	echo "<summary>Admin?? (". $result->num_rows .")</summary>";
 	// Associative array
 	echo "<table border='1'>";
 	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Name</td><td>Link</td></tr>";
