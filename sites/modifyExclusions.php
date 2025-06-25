@@ -3,11 +3,6 @@
 
 <style> 
 body {background-color: #337ab7; color: white;} 
-a:link{color:white;}
-a:visited{color:white;}
-a:hover{color:white;}
-a:focus{color:white;}
-a:active{color:white;}
 </style>
 
 <?php
