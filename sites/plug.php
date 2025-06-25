@@ -119,7 +119,7 @@ table {text-align: center; margin: auto;}
 	
 	<?php
 	//Dayton
-	$sql = 'select * from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and rtd_location_id=5 and serial not in (select name from goodAssets);';
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and rtd_location_id=5 and serial not in (select name from goodAssets);';
 	$result = $mysqli -> query($sql);
 	echo "<details>";
 	echo "<summary>Dayton (". $result->num_rows .")</summary>";
