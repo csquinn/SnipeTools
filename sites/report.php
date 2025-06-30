@@ -171,7 +171,7 @@ table {text-align: center; margin: auto;}
 
 	<?php
 	//Assets with no location
-	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where rtd_location_id = "" or rtd_location_id is null and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
+	$sql = 'select * from assets left join locations on assets.rtd_location_id = locations.id where rtd_location_id = "" or rtd_location_id is null and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 	getTagLocation($sql, $mysqli, $snipe_url, "Assets with No Location Set");
 	?>
 	<br>
