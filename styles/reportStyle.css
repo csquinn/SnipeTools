@@ -1,0 +1,22 @@
+body {
+    background-color: #337ab7; 
+    color: white;
+} 
+
+details {
+    text-align: center; 
+    margin: auto;
+}
+
+table {
+    text-align: center; 
+    margin: auto;
+}
+
+#info{
+    text-align: center;
+}
+
+#info a{
+    padding: 15px;
+}
