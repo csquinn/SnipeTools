@@ -1,0 +1,39 @@
+/*
+adds color to the body and sets
+standard text color
+*/
+body {
+    background-color: #337ab7;
+     color: white;
+}
+
+/*
+centers the details
+*/
+details {
+    text-align: center; 
+    margin: auto;
+}
+
+/*
+centers the table
+*/
+table {
+    text-align: center; 
+    margin: auto;
+}
+
+#instruction{
+    text-align: center;
+}
+
+body a {
+    padding:15px;
+}
+
+/*
+sets anchor colors to white
+*/
+a:link, a:visited, a:hover, a:focus, a:active {
+    color: white;
+}
