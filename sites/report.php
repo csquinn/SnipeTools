@@ -154,38 +154,14 @@ table {text-align: center; margin: auto;}
 	<?php
 	//Assets with 8 character or less asset tags, may not all be errors
 	$sql = 'select * from assets where length(asset_tag) < 8 and asset_tag not like "%TV%" and asset_tag not like "%TC%" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets with 8 Character or Less Asset Tags (may not all be errors) (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagSerial($sql, $mysqli, $snipe_url, "Assets with 8 Character or Less Asset Tags (may not all be errors)");
 	?>
 	<br>
  
 	<?php
 	//assigned assets who's asset tags aren't serial
 	$sql = 'select * from assets where assigned_to is not null and asset_tag != serial and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets Checked Out to Users with their Asset Tag not Matching their Serial (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagSerial($sql, $mysqli, $snipe_url, "Assets Checked Out to Users with their Asset Tag not Matching their Serial");
 	?>
 	<br>
 
@@ -287,19 +263,7 @@ table {text-align: center; margin: auto;}
 	<?php
 	//assets with no letters in the asset tag
 	$sql = 'select * from assets where asset_tag not regexp "[a-zA-Z]" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets Without Letters in their Asset Tags (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagSerial($sql, $mysqli, $snipe_url, "Assets Without Letters in their Asset Tags");
 	?>
 	<br>
 
