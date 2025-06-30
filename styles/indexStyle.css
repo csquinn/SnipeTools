@@ -57,3 +57,12 @@ hr {
     height:2px;
     border-width:0;
 }
+
+/*
+style for img
+*/
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
