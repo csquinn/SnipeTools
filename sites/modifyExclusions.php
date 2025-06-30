@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<style> 
-body {background-color: #337ab7; color: white;} 
-</style>
-
 <?php
 //initialize success message
 $successMessage = "";
@@ -28,9 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Modify Exclusions | SnipeTools</title>
+	<link rel = "stylesheet" href = "../styles/exclusionStyle.css">
 </head>
 <body>
-	<div style="text-align: center;">
+	<div id = "instructions">
 	<h2>Enter any Asset Tags, Serial Numbers, and Usernames (99#s) you would</h2>
 	<h2>like to exclude from the Inventory Health Report</h2>
 	<h3>Enter each value as a new line with <b>NO</b> commas</h3>
@@ -44,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	<a href = "report.php">Back to Inventory Health Report</a>
 	</div>
 
-	<div style="position: fixed; bottom: 0; right: 0; padding: 15px;">
+	<div id = "nut">
 	<a href="../sfx/nut/nut.html">Butternut</a>
 	</div>
 </body>

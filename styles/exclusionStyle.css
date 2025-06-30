@@ -1,0 +1,25 @@
+/*
+sets colors for the body
+*/
+body {
+    background-color: #337ab7; 
+    color: white;
+}
+
+/*
+sets the positon for
+the instructions
+*/
+#instructions{
+    text-align: center;
+}
+
+/*
+sets the position for nut
+*/
+#nut{
+    position: fixed; 
+    bottom: 0; 
+    right: 0; 
+    padding: 15px;
+}
