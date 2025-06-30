@@ -23,3 +23,10 @@ sets the position for nut
     right: 0; 
     padding: 15px;
 }
+
+/*
+sets anchor colors to white
+*/
+a:link, a:visited, a:hover, a:focus, a:active {
+    color: white;
+}

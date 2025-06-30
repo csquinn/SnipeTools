@@ -30,3 +30,10 @@ add padding around anchor elements
 #info a{
     padding: 15px;
 }
+
+/*
+sets anchor colors to white
+*/
+a:link, a:visited, a:hover, a:focus, a:active {
+    color: white;
+}
