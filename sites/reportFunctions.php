@@ -2,7 +2,7 @@
     /**
      * Gathers asset tag and serial information
      * from an SQL call and displays the information
-     * in a table
+     * in a table with a link to the asset
      */
     function getTagSerial($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
         $result = $mysql_arg -> query($sql_arg);
@@ -66,4 +66,70 @@
         $result -> free_result();
     }
 
+    /**
+     * Gathers asset tag and asset name 
+     * information from an SQL call and 
+     * displays the information in a table
+     * with a link to the asset
+     */
+    function getTagName($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
+        $result = $mysql_arg -> query($sql_arg);
+        echo "<details>";
+        echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
+        // Associative array
+        echo "<table border='1'>";
+        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Asset Name</td><td>Link</td></tr>";
+        while($row = $result -> fetch_assoc()){
+            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+        }
+        echo"</table>";
+        echo "</details>";
+        // Free result set
+        $result -> free_result();
+    }
+
+    /**
+     * Gathers asset tag and status 
+     * information from an SQL call and 
+     * displays the information in a table
+     * with a link to the asset
+     */
+    function getTagStatus($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
+        $result = $mysql_arg -> query($sql_arg);
+        echo "<details>";
+        echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
+        // Associative array
+        echo "<table border='1'>";
+        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Status</td><td>Link</td></tr>";
+        while($row = $result -> fetch_assoc()){
+            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td>".(($row['status_id'] == 2)?("Ready to Deploy"):("Deprovisioned"))."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+        }
+        echo"</table>";
+        echo "</details>";
+        // Free result set
+        $result -> free_result();
+    }
+
+
+    /**
+     * Gathers asset tag and location 
+     * information from an SQL call and 
+     * displays the information in a table
+     * with a link to the asset
+     */
+    function getTagLocation($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
+        $result = $mysql_arg -> query($sql_arg);
+        echo "<details>";
+        echo "<summary>". $cat_arg. " (". $result->num_rows .")</summary>";
+        // Associative array
+        echo "<table border='1'>";
+        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
+        while($row = $result -> fetch_assoc()){
+            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+        }
+        echo"</table>";
+        echo "</details>";
+        // Free result set
+        $result -> free_result();
+    }
 ?>

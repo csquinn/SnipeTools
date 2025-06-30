@@ -144,95 +144,35 @@ table {text-align: center; margin: auto;}
 	<?php
 	//look for weird student accounts
 	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and length(users.username) != 9 and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions) and username not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets Checked Out to Students with Strange Accounts (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagUserAsset($sql, $mysqli, $snipe_url, "Assets Checked Out to Students with Strange Accounts");
 	?>
 	<br>
 
 	<?php
 	//assets with non-necessary fields set
 	$sql = 'select * from assets where ((name != "" and name is not null)) and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets with Non-Necessary Fields Set (mostly asset name, this is huge) (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Asset Name</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagName($sql, $mysqli, $snipe_url, "Assets with Non-Necessary Fields Set (mostly asset name, this is huge)");
 	?>
 	<br>
 
 	<?php
 	//Ready to Deploy or Deprovisioned assets with improper locations
 	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where status_id != 4 and (rtd_location_id != 15 and rtd_location_id != 16) and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Ready to Deploy and Deprovisioned Assets with Improper Locations (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Status</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td>".(($row['status_id'] == 2)?("Ready to Deploy"):("Deprovisioned"))."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagStatus($sql, $mysqli, $snipe_url, "Ready to Deploy and Deprovisioned Assets with Improper Locations");
 	?>
 	<br>
 
 	<?php
 	//Deployed Assets with improper locations
 	$sql = 'select * from assets inner join locations on assets.rtd_location_id = locations.id where status_id = 4 and (rtd_location_id = 15 or rtd_location_id = 16) and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Deployed Assets with Improper Locations (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagLocation($sql, $mysqli, $snipe_url, "Deployed Assets with Improper Locations");
 	?>
 	<br>
 
 	<?php
 	//Assets with no location
 	$sql = 'select * from assets where rtd_location_id = "" or rtd_location_id is null and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets with No Location Set (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['rtd_location_id'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagLocation($sql, $mysqli, $snipe_url, "Assets with No Location Set");
 	?>
 	<br>
 
