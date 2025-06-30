@@ -11,7 +11,7 @@
 		<h1>SnipeTools</h1>
 	</div>
 
-	<?php echo ((time()-filemtime("../snipe-it/.github") > 30 * 24 * 3600)?("<h3 style='color: #FF474C;'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop.</h3>"):("")); ?>
+	<?php echo ((time()-filemtime("../snipe-it/.github") > 30 * 24 * 3600)?("<h3 class = 'alert'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop.</h3>"):("")); ?>
 	
 	<div id = "sites">
 		<a href="sites/validate.php">Asset Validation</a>

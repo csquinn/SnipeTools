@@ -1,10 +1,10 @@
 body{
     background-color: #337ab7;
     color: white;
+    margin: 0;
 }
 
-#title #sites{
-    margin: 0; 
+#title #sites{ 
     position: absolute; 
     top: 40%; 
     left: 50%; 
@@ -13,8 +13,13 @@ body{
     text-align: center;
 }
 
+.alert{
+    color: #FF474C;
+}
+
 #sites a{
     padding: 15px;
+    color: white;
 }
 
 #sites a:link, a:visited, a:hover, a:focus, a:active {
