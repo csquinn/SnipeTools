@@ -1,9 +1,15 @@
+/*
+sets body colors
+*/
 body{
     background-color: #337ab7;
     color: white;
     margin: 0;
 }
 
+/*
+Centers the title and sites
+*/
 .wrapper{
     display: flex;
     flex-direction: column;
@@ -13,8 +19,9 @@ body{
     text-align: center;
 }
 
-
-
+/*puts space between top 
+of sites and bottom of title
+*/
 #sites{
     margin-top: 20px;
 }
