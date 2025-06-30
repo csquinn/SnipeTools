@@ -63,7 +63,7 @@ while (($line = fgets($handle)) !== false) {
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Inventory Health Report | SnipeTools</title>
-	<link rel = "stylesheet" href = ".../styles/reportStyle.css">
+	<link rel = "stylesheet" href = "../styles/reportStyle.css">
 </head>
 <body>
 	<div id = "info">
