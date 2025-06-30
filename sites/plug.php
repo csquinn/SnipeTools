@@ -96,18 +96,14 @@ while (($line = fgets($handle)) !== false) {
 
 ?>
 
-<style> 
-body {background-color: #337ab7; color: white;} 
-details {text-align: center; margin: auto;}
-table {text-align: center; margin: auto;}
-</style>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel = "stylesheet" href = "../styles/plugStyle.css">
 	<title>Inventory Health Report | SnipeTools</title>
 </head>
 <body>
-	<div style="text-align: center;">
+	<div id = "instruction">
 	<h1>Missing Assets</h1>
 	<h4>This site shows all of the assets that have never been scanned into SnipeTools and aren't checked out</h4>
 	<h4>Each section below can be expanded by clicking the dropdown arrow.</h4>
@@ -116,7 +112,7 @@ table {text-align: center; margin: auto;}
 	<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
 	<br>
 	<br>
-	<a style="padding:15px;" href="../index.php">Return Home</a>
+	<a href="../index.php">Return Home</a>
 	<br>
 	<br>
 	
