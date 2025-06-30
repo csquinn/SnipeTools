@@ -1,0 +1,29 @@
+body{
+    background-color: #337ab7;
+    color: white;
+}
+
+#title{
+    margin: 0; 
+    position: absolute; 
+    top: 40%; 
+    left: 50%; 
+    -ms-transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%); 
+    text-align: center;
+}
+
+#sites a{
+    padding: 15px;
+}
+
+#sites a:link, a:visited, a:hover, a:focus, a:active {
+    color: white;
+}
+
+#cred {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 15px;
+}
