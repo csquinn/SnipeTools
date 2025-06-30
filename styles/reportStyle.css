@@ -1,8 +1,15 @@
+/*
+set color for body elements
+*/
 body {
     background-color: #337ab7; 
     color: white;
 } 
 
+/*
+align text to center for
+details table and info
+*/
 details {
     text-align: center; 
     margin: auto;
@@ -17,6 +24,9 @@ table {
     text-align: center;
 }
 
+/*
+add padding around anchor elements
+*/
 #info a{
     padding: 15px;
 }
