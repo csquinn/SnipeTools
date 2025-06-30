@@ -3,7 +3,7 @@ body{
     color: white;
 }
 
-#title{
+#title #sites{
     margin: 0; 
     position: absolute; 
     top: 40%; 
