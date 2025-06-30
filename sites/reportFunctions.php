@@ -1,4 +1,9 @@
 <?php
+    /**
+     * Gathers asset tag and serial information
+     * from an SQL call and displays the information
+     * in a table
+     */
     function getTagSerial($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
         $result = $mysqli_arg -> query($sql_arg);
         echo "<details>";
