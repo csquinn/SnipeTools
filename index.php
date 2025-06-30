@@ -11,7 +11,7 @@
 		<div id = "title">
 			<h1>SnipeTools</h1>
 		</div>
-		<hr style="color:white;background-color:white;width:20%;border-width:0;"
+		<hr style="color:white;background-color:white;width:20%;border-width:0;">
 
 		<?php echo ((time()-filemtime("../snipe-it/.github") > 30 * 24 * 3600)?("<h3 class = 'alert'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop.</h3>"):("")); ?>
 		
