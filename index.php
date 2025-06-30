@@ -7,7 +7,10 @@
 	<title>SnipeTools</title>
 </head>
 <body>
-	<img src = "styles/Logo/Logo.png" alt = "ASD Logo">
+	<div class = "imageWrapper">
+		<img src = "styles/Logo/Logo.png" alt = "ASD Logo">
+	</div>
+	
 	<div class = "wrapper">
 		<div id = "title">
 			<h1>SnipeTools</h1>

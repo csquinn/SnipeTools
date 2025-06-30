@@ -61,8 +61,7 @@ hr {
 /*
 style for img
 */
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.imageWrapper {
+    display: flex;
+    justify-content: center;
 }
