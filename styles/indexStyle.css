@@ -46,3 +46,14 @@ of sites and bottom of title
     right: 0;
     padding: 15px;
 }
+
+/*
+style for bar under title
+*/
+hr {
+    color:white;
+    background-color:white;
+    width:20%;
+    height:2px;
+    border-width:0;
+}
