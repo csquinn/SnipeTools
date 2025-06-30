@@ -5,7 +5,7 @@
      * in a table
      */
     function getTagSerial($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
-        $result = $mysqli_arg -> query($sql_arg);
+        $result = $mysql_arg -> query($sql_arg);
         echo "<details>";
         echo "<summary>". $cat_arg ." (". $result->num_rows .")</summary>";
         // Associative array
