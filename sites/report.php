@@ -102,19 +102,7 @@ table {text-align: center; margin: auto;}
 	<?php
 	//look for import error accounts
 	$sql = 'select * from users where username like "%delete%" and deleted_at is null and username not in (select name from tempExclusions);';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Assets Assigned to Mistakenly Created Accounts During CSV Import Errors (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagUser($sql, $mysqli, $snipe_url, "Assets Assigned to Mistakenly Created Accounts During CSV Import Errors")
 	?>
 	<br>
 
