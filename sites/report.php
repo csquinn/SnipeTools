@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+	include 'reportFunctions.php'
+?>
+<?php
 
 //get mysql password
 $db_password = file_get_contents("../user_variables/snipe_mysql_password.txt");
@@ -85,6 +88,7 @@ table {text-align: center; margin: auto;}
 	<?php
 	//Assets without a serial number or a highly shortened serial
 	$sql = 'select * from assets where (serial = "" or serial is null or serial = " " or length(serial) < 7) and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
+	/*
 	$result = $mysqli -> query($sql);
 	echo "<details>";
 	echo "<summary>Assets with Incorrect Serial Numbers (". $result->num_rows .")</summary>";
@@ -98,6 +102,8 @@ table {text-align: center; margin: auto;}
 	echo "</details>";
 	// Free result set
 	$result -> free_result();
+	*/
+	getTagSerial($sql, $mysqli, $snipe_url, "Assets with Incorrect Serial Numbers");
 	?>
 	<br>
 

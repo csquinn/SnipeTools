@@ -1,8 +1,8 @@
 <?php
-    function getTagSerial($sql_arg, $mysql_arg, $snipe_arg){
+    function getTagSerial($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
         $result = $mysqli_arg -> query($sql_arg);
         echo "<details>";
-        echo "<summary>Assets with Incorrect Serial Numbers (". $result->num_rows .")</summary>";
+        echo "<summary>". $cat_arg ." (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
         echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
@@ -11,5 +11,7 @@
         }
         echo"</table>";
         echo "</details>";
+        // Free result set
+	    $result -> free_result();
     }
 ?>
