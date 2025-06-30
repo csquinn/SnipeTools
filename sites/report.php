@@ -102,26 +102,14 @@ table {text-align: center; margin: auto;}
 	<?php
 	//look for import error accounts
 	$sql = 'select * from users where username like "%delete%" and deleted_at is null and username not in (select name from tempExclusions);';
-	getTagUser($sql, $mysqli, $snipe_url, "Assets Assigned to Mistakenly Created Accounts During CSV Import Errors")
+	getTagUserAsset($sql, $mysqli, $snipe_url, "Assets Assigned to Mistakenly Created Accounts During CSV Import Errors");
 	?>
 	<br>
 
 	<?php
 	//Accounts with more than 1 asset assigned
 	$sql = 'select assigned_to, username, first_name, last_name, count(assigned_to) as "num" from assets inner join users on assets.assigned_to = users.id where assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions) and username not in (select name from tempExclusions) group by assigned_to having count(*) > 1;';
-	$result = $mysqli -> query($sql);
-	echo "<details>";
-	echo "<summary>Users with More Than 1 Asset Assigned to Them (". $result->num_rows .")</summary>";
-	// Associative array
-	echo "<table border='1'>";
-	echo "<tr><td>Amount of Assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
-	while($row = $result -> fetch_assoc()){
-		echo "<tr><td>". $row['num'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_url . "/users/" . $row['assigned_to'] . "'>Link</a></td></tr>";
-	}
-	echo"</table>";
-	echo "</details>";
-	// Free result set
-	$result -> free_result();
+	getTagUser($sql, $mysqli, $snipe_url, "Users with More Than 1 Asset Assigned to Them");
 	?>
 	<br>
 

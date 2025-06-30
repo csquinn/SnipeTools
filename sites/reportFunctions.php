@@ -24,9 +24,10 @@
      * Gathers asset tag and user 
      * information (LDAP name, First and Last)
      * from an SQL call and displays the
-     * information in a table
+     * information in a table and link
+     * to the asset in inventory
      */
-    function getTagUser($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
+    function getTagUserAsset($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
         $result = $mysql_arg -> query($sql_arg);
         echo "<details>";
         echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
@@ -41,4 +42,28 @@
         // Free result set
         $result -> free_result();
     }
+
+    /**
+     * Gathers asset tag and user 
+     * information (LDAP name, First and Last)
+     * from an SQL call and displays the
+     * information in a table and link
+     * to the user in inventory
+     */
+    function getTagUser($sql_arg, $mysql_arg, $snipe_arg, $cat_arg){
+        $result = $mysql_arg -> query($sql_arg);
+        echo "<details>";
+        echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
+        // Associative array
+        echo "<table border='1'>";
+        echo "<tr><td>Amount of Assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
+        while($row = $result -> fetch_assoc()){
+            echo "<tr><td>". $row['num'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_arg . "/users/" . $row['assigned_to'] . "'>Link</a></td></tr>";
+        }
+        echo"</table>";
+        echo "</details>";
+        // Free result set
+        $result -> free_result();
+    }
+
 ?>
