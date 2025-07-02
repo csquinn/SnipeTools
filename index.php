@@ -20,10 +20,10 @@
 		<?php echo ((time()-filemtime("../snipe-it/.github") > 30 * 24 * 3600)?("<h3 class = 'alert'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop.</h3>"):("")); ?>
 		
 		<div id = "sites">
-			<a href="sites/validate.php">Asset Validation</a>
-			<a href="sites/office.php">Return to Office</a>
-			<a href="sites/deprovision.php">Deprovisioning</a>
-			<a href="sites/report.php">Inventory Health Report</a>
+			<button data-url ="sites/validate.php">Asset Validation</button>
+			<button data-url ="sites/office.php">Return to Office</button>
+			<button data-url ="sites/deprovision.php">Deprovisioning</button>
+			<button data-url = "sites/report.php">Inventory Health Report</button>
 			<button data-url = "sites/plug.php">TEMPORARY</button>
 			<script type = "module" src = "scripts/buttons.js"></script>
 		</div>	

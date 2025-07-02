@@ -1,6 +1,7 @@
 //search for event to occur within document
 document.addEventListener("DOMContentLoaded", function () {
-    
+    console.log("Script loaded");
+
     //const that selects all button elements with URLs
     const buttons = document.querySelectorAll("button[data-url]");
 
