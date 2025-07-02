@@ -10,9 +10,9 @@
         echo "<summary>". $cat_arg ." (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
-        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Link</td></tr>";
+        echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Serial</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row['serial'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";

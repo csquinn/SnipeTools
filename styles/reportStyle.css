@@ -48,3 +48,10 @@ button {
     text-align: center;
     font-size: 14px;
 }
+
+/*
+add space for each tableElement
+*/
+#tableElement{
+    padding: 10px;
+}
