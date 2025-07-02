@@ -38,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<input type="submit" value="Submit">
 	</form>
 	<h2><?php echo $successMessage; ?></h2>
-	<a href = "report.php">Back to Inventory Health Report</a>
+	<button data-url = "report.php">Back to Inventory Health Report</button>
+	<script src = "../scripts/buttons.js"></script>
 	</div>
 
 	<div id = "nut">

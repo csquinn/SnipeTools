@@ -74,12 +74,13 @@ while (($line = fgets($handle)) !== false) {
 		<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
 		<h5>Click the link below to specify exclusions from this report</h5>
 		<h5>(Exclusions will not appear in results even if they are errors)</h5>
-		<a href="modifyExclusions.php">Create Exclusions from Report</a>
+		<button data-url="modifyExclusions.php">Create Exclusions from Report</button>
 		<br>
 		<br>
-		<a href="../index.php">Return Home</a>
+		<button data-url ="../index.php">Return Home</button>
 		<br>
 		<br>
+		<script src = "../scripts/buttons.js"></script>
 	
 		<?php
 			//Assets without a serial number or a highly shortened serial
