@@ -39,9 +39,9 @@ a:link, a:visited, a:hover, a:focus, a:active {
 }
 
 /*
-style for buttons
+style for return button
 */
-#sites .button {
+#return {
     background-color: #FF474C;
     color: white;
     padding: 15px;

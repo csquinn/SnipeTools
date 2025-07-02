@@ -41,7 +41,7 @@ a:link, a:visited, a:hover, a:focus, a:active {
 /*
 style for buttons
 */
-#sites .button {
+button {
     background-color: #FF474C;
     color: white;
     padding: 15px;

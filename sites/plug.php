@@ -112,7 +112,7 @@ while (($line = fgets($handle)) !== false) {
 	<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
 	<br>
 	<br>
-	<a href="../index.php">Return Home</a>
+	<button id = "return" data-url ="../index.php">Return Home</a>
 	<br>
 	<br>
 	
