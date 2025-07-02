@@ -113,6 +113,7 @@ while (($line = fgets($handle)) !== false) {
 	<br>
 	<br>
 	<button id = "return" data-url ="../index.php">Return Home</button>
+	<script src = "../scripts/buttons.js"></script>
 	<br>
 	<br>
 	
