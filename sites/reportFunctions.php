@@ -33,9 +33,9 @@
         echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
-        echo "<tr><td>Asset Tag</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
+        echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Username/99#</td><td id = 'tableElement'>First Name</td><td id = 'tableElement'>Last Name</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row['username'] ."</td><td id = 'tableElement'>". $row['first_name'] ."</td><td id = 'tableElement'>". $row['last_name'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";
@@ -56,9 +56,9 @@
         echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
-        echo "<tr><td>Amount of Assets</td><td>Username/99#</td><td>First Name</td><td>Last Name</td><td>Link</td></tr>";
+        echo "<tr><td id = 'tableElement'>Amount of Assets</td><td id = 'tableElement'>Username/99#</td><td id = 'tableElement'>First Name</td><td id = 'tableElement'>Last Name</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td>". $row['num'] ."</td><td>". $row['username'] ."</td><td>". $row['first_name'] ."</td><td>". $row['last_name'] ."</td><td><a href='" . $snipe_arg . "/users/" . $row['assigned_to'] . "'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $row['num'] ."</td><td id = 'tableElement'>". $row['username'] ."</td><td id = 'tableElement'>". $row['first_name'] ."</td><td id = 'tableElement'>". $row['last_name'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users/" . $row['assigned_to'] . "'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";
@@ -78,9 +78,9 @@
         echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
-        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Asset Name</td><td>Link</td></tr>";
+        echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Serial</td><td id = 'tableElement'>Asset Name</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row['serial'] ."</td><td id = 'tableElement'>". $row['name'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";
@@ -100,9 +100,9 @@
         echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
-        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Status</td><td>Link</td></tr>";
+        echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Serial</td><td id = 'tableElement'>Location</td><td id = 'tableElement'>Status</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td>".(($row['status_id'] == 2)?("Ready to Deploy"):("Deprovisioned"))."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row['serial'] ."</td><td id = 'tableElement'>". $row['name'] ."</td><td id = 'tableElement'>".(($row['status_id'] == 2)?("Ready to Deploy"):("Deprovisioned"))."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";
@@ -123,9 +123,9 @@
         echo "<summary>". $cat_arg. " (". $result->num_rows .")</summary>";
         // Associative array
         echo "<table border='1'>";
-        echo "<tr><td>Asset Tag</td><td>Serial</td><td>Location</td><td>Link</td></tr>";
+        echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Serial</td><td id = 'tableElement'>Location</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td>". $row['asset_tag'] ."</td><td>". $row['serial'] ."</td><td>". $row['name'] ."</td><td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row['serial'] ."</td><td id = 'tableElement'>". $row['name'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";
