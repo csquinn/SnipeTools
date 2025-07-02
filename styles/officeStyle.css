@@ -1,0 +1,23 @@
+/*
+style for general page setup
+*/
+#page {
+    margin: 0; 
+    position: absolute; 
+    top: 40%; 
+    left: 50%; 
+    -ms-transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%); 
+    text-align: center;
+}
+
+/*
+style for return button
+*/
+#return {
+    background-color: #FF474C;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+}

@@ -11,67 +11,68 @@ include 'handleAssetMessages.php'
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Validate Assets | SnipeTools</title>
+	<link rel = "stylesheet" href = "../styles/validateStyle.css">
 </head>
 <body>
 	<?php echo $audioMessage; ?>
-	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
-	<h1>Validate Assets</h1>
-	
-	<form action="../api_requests/validateAPI.php" method="GET" autocomplete="on">
-		<label for="serial">Scan Serial #</label>
-		<input type="hidden" name="source" value="validate">
-		<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
-		<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
-		<br><br>
+	<div id = "page">
+		<h1>Validate Assets</h1>
+		
+		<form action="../api_requests/validateAPI.php" method="GET" autocomplete="on">
+			<label for="serial">Scan Serial #</label>
+			<input type="hidden" name="source" value="validate">
+			<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
+			<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
+			<br><br>
 
-		<label>Asset Status: </label>
-		<select name="status" id="location" required>
-			<option value="2" <?php echo ((isset($_GET['status']) and $_GET['status'] == "2")?("selected"):(""));?>>Ready to Deploy</option>
-			<option value="4" <?php echo ((isset($_GET['status']) and $_GET['status'] == "4")?("selected"):(""));?>>Deployed</option>
-			<option value="6" <?php echo ((isset($_GET['status']) and $_GET['status'] == "6")?("selected"):(""));?>>Deprovisioned</option>
-			<option value="lai" <?php echo ((isset($_GET['status']) and $_GET['status'] == "lai")?("selected"):(""));?>>Leave as is</option>
-		</select>
-		<br>
-		
-		<label>Asset Location: </label>
-		<select name="location" id="location" required>
-			<option value="5" <?php echo ((isset($_GET['location']) and $_GET['location'] == "5")?("selected"):(""));?>>Dayton</option>
-			<option value="7" <?php echo ((isset($_GET['location']) and $_GET['location'] == "7")?("selected"):(""));?>>Elderton Elementary</option>
-			<option value="9" <?php echo ((isset($_GET['location']) and $_GET['location'] == "9")?("selected"):(""));?>>Shannock Valley</option>
-			<option value="2" <?php echo ((isset($_GET['location']) and $_GET['location'] == "2")?("selected"):(""));?>>West Hills Primary</option>
-			<option value="4" <?php echo ((isset($_GET['location']) and $_GET['location'] == "4")?("selected"):(""));?>>West Hills Intermediate</option>
-			<option value="3" <?php echo ((isset($_GET['location']) and $_GET['location'] == "3")?("selected"):(""));?>>Armstrong High School</option>
-			<option value="6" <?php echo ((isset($_GET['location']) and $_GET['location'] == "6")?("selected"):(""));?>>West Shamokin High School</option>
-			<option value="1" <?php echo ((isset($_GET['location']) and $_GET['location'] == "1")?("selected"):(""));?>>Admin</option>
-			<option value="15" <?php echo ((isset($_GET['location']) and $_GET['location'] == "15")?("selected"):(""));?>>Office</option>
-			<option value="16" <?php echo ((isset($_GET['location']) and $_GET['location'] == "16")?("selected"):(""));?>>Elderton High School (Storage)</option>
-			<option value="lai" <?php echo ((isset($_GET['location']) and $_GET['location'] == "lai")?("selected"):(""));?>>Leave as is</option>
-		</select>
-		<br>
+			<label>Asset Status: </label>
+			<select name="status" id="location" required>
+				<option value="2" <?php echo ((isset($_GET['status']) and $_GET['status'] == "2")?("selected"):(""));?>>Ready to Deploy</option>
+				<option value="4" <?php echo ((isset($_GET['status']) and $_GET['status'] == "4")?("selected"):(""));?>>Deployed</option>
+				<option value="6" <?php echo ((isset($_GET['status']) and $_GET['status'] == "6")?("selected"):(""));?>>Deprovisioned</option>
+				<option value="lai" <?php echo ((isset($_GET['status']) and $_GET['status'] == "lai")?("selected"):(""));?>>Leave as is</option>
+			</select>
+			<br>
+			
+			<label>Asset Location: </label>
+			<select name="location" id="location" required>
+				<option value="5" <?php echo ((isset($_GET['location']) and $_GET['location'] == "5")?("selected"):(""));?>>Dayton</option>
+				<option value="7" <?php echo ((isset($_GET['location']) and $_GET['location'] == "7")?("selected"):(""));?>>Elderton Elementary</option>
+				<option value="9" <?php echo ((isset($_GET['location']) and $_GET['location'] == "9")?("selected"):(""));?>>Shannock Valley</option>
+				<option value="2" <?php echo ((isset($_GET['location']) and $_GET['location'] == "2")?("selected"):(""));?>>West Hills Primary</option>
+				<option value="4" <?php echo ((isset($_GET['location']) and $_GET['location'] == "4")?("selected"):(""));?>>West Hills Intermediate</option>
+				<option value="3" <?php echo ((isset($_GET['location']) and $_GET['location'] == "3")?("selected"):(""));?>>Armstrong High School</option>
+				<option value="6" <?php echo ((isset($_GET['location']) and $_GET['location'] == "6")?("selected"):(""));?>>West Shamokin High School</option>
+				<option value="1" <?php echo ((isset($_GET['location']) and $_GET['location'] == "1")?("selected"):(""));?>>Admin</option>
+				<option value="15" <?php echo ((isset($_GET['location']) and $_GET['location'] == "15")?("selected"):(""));?>>Office</option>
+				<option value="16" <?php echo ((isset($_GET['location']) and $_GET['location'] == "16")?("selected"):(""));?>>Elderton High School (Storage)</option>
+				<option value="lai" <?php echo ((isset($_GET['location']) and $_GET['location'] == "lai")?("selected"):(""));?>>Leave as is</option>
+			</select>
+			<br>
 
-		<input type="checkbox" id="remName" name="remName" value="on" <?php echo ((isset($_GET['remName']))?("checked"):(""));?>>
-		<label> Remove Asset Name</label>
-		<br>
-		
-		<input type="checkbox" id="retag" name="retag" value="on" <?php echo ((isset($_GET['retag']))?("checked"):(""));?>>
-		<label> Set Asset Tag equal to Serial Number</label>
-		<br>
-		
-		<input type="checkbox" id="checkin" name="checkin" value="on" <?php echo ((isset($_GET['checkin']))?("checked"):(""));?>>
-		<label> Check the Asset in from any Users</label>
-		<br>
-		
-		
-		<input type="checkbox" id="GAdmin" name="GAdmin" value="on" <?php echo (isset($_GET['GoogleRequestStatus']) ? 'checked' : ''); ?>>
-		<label> Make sure this asset is provisioned in Google Admin (optional, only for Chromebooks)</label>
-		<br>
-	</form>
+			<input type="checkbox" id="remName" name="remName" value="on" <?php echo ((isset($_GET['remName']))?("checked"):(""));?>>
+			<label> Remove Asset Name</label>
+			<br>
+			
+			<input type="checkbox" id="retag" name="retag" value="on" <?php echo ((isset($_GET['retag']))?("checked"):(""));?>>
+			<label> Set Asset Tag equal to Serial Number</label>
+			<br>
+			
+			<input type="checkbox" id="checkin" name="checkin" value="on" <?php echo ((isset($_GET['checkin']))?("checked"):(""));?>>
+			<label> Check the Asset in from any Users</label>
+			<br>
+			
+			
+			<input type="checkbox" id="GAdmin" name="GAdmin" value="on" <?php echo (isset($_GET['GoogleRequestStatus']) ? 'checked' : ''); ?>>
+			<label> Make sure this asset is provisioned in Google Admin (optional, only for Chromebooks)</label>
+			<br>
+		</form>
 
-	<h2><?php echo $assetMessage1; ?></h2> <!-- Generated by handleAssetMessages.php -->
-	<h3><?php echo $assetMessage2; ?></h2> <!-- Generated by handleAssetMessages.php -->
-	<h3><?php echo $assetLink; ?></h3> <!-- Generated by handleAssetMessages.php-->
-	<button data-url ="../index.php">Return Home</button>
-	<script src = "../scripts/buttons.js"></script>
+		<h2><?php echo $assetMessage1; ?></h2> <!-- Generated by handleAssetMessages.php -->
+		<h3><?php echo $assetMessage2; ?></h2> <!-- Generated by handleAssetMessages.php -->
+		<h3><?php echo $assetLink; ?></h3> <!-- Generated by handleAssetMessages.php-->
+		<button id = "return" data-url ="../index.php">Return Home</button>
+		<script src = "../scripts/buttons.js"></script>
 	</div>
 </body>
 </html>

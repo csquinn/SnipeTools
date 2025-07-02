@@ -5,10 +5,11 @@ include 'handleAssetMessages.php'
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Return Assets to Office | SnipeTools</title>
+	<link rel = "stylesheet" href = "../styles/officeStyle.css">
 </head>
 <body>
 	<?php echo $audioMessage; ?>
-	<div style="margin: 0; position: absolute; top: 40%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); text-align: center;">
+	<div id = "page">
 	<h1>Return Assets to Office</h1>
 
 	<form action="../api_requests/officeAPI.php" method="GET" autocomplete="on">
