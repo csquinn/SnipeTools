@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class = "imageWrapper">
-		<img src = "styles/Logo/Logo.png" alt = "ASD Logo">
+		<!-- <img src = "styles/Logo/Logo.png" alt = "ASD Logo"> Will eventually fix-->
 	</div>
 	
 	<div class = "wrapper">
