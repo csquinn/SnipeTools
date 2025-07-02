@@ -25,7 +25,7 @@
 			<a href="sites/deprovision.php">Deprovisioning</a>
 			<a href="sites/report.php">Inventory Health Report</a>
 			<button data-url = "sites/plug.php">TEMPORARY</button>
-			<script src = "scripts/buttons.js"></script>
+			<script type = "module" src = "scripts/buttons.js"></script>
 		</div>	
 		
 		<div id = "cred">
