@@ -70,7 +70,7 @@ style for img
 /*
 style for buttons
 */
-button {
+#sites .button {
     background-color: #FF474C;
     color: white;
     padding: 15px;
