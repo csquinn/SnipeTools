@@ -66,3 +66,14 @@ style for img
     justify-content: center;
     align-items: center;
 }
+
+/*
+style for buttons
+*/
+button {
+    background-color: #FF474C;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+}
