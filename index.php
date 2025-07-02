@@ -24,7 +24,8 @@
 			<a href="sites/office.php">Return to Office</a>
 			<a href="sites/deprovision.php">Deprovisioning</a>
 			<a href="sites/report.php">Inventory Health Report</a>
-			<a href="sites/plug.php">TEMPORARY</a>
+			<button data-url = "sites/plug.php">TEMPORARY</button>
+			<script src = "scripts/buttons.js"></script>
 		</div>	
 		
 		<div id = "cred">
