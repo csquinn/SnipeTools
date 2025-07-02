@@ -16,9 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //get URL attribute from the button clicked
             const targetUrl = button.getAttribute("data-url");
-            
-            //send response to console
-            sendResponse({success: true, data: "going to new page"});
 
             //if there is a URL present, change webpage to the URL
             if(targetUrl) {
