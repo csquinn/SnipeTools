@@ -21,3 +21,14 @@ style for return button
     text-align: center;
     font-size: 14px;
 }
+
+/*
+style for checkboxes
+*/
+.checkboxes {
+    padding-top: 10px;
+}
+
+.checkboxes input, label{
+    padding-bottom: 8px;
+}
