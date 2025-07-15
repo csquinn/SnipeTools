@@ -161,7 +161,7 @@ while (($line = fgets($handle)) !== false) {
 
 	<?php
 	//Lenape
-	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category,id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=8 and serial not in (select name from goodAssets);';
+	$sql = 'select assets.asset_tag, assets.serial, assets.name from assets inner join models on assets.model_id = models.id inner join categories on models.category_id = categories.id where categories.name = "Chromebook" and assets.deleted_at is null and (assets.assigned_to is null or assets.assigned_to = "")and rtd_location_id=8 and serial not in (select name from goodAssets);';
 	getTagName($sql, $mysqli, $snipe_url, "Lenape");
 	?>
 	<br>
