@@ -39,6 +39,7 @@ include 'handleAssetMessages.php'
 				<option value="5" <?php echo ((isset($_GET['location']) and $_GET['location'] == "5")?("selected"):(""));?>>Dayton</option>
 				<option value="7" <?php echo ((isset($_GET['location']) and $_GET['location'] == "7")?("selected"):(""));?>>Elderton Elementary</option>
 				<option value="9" <?php echo ((isset($_GET['location']) and $_GET['location'] == "9")?("selected"):(""));?>>Shannock Valley</option>
+				<option value="8" <?php echo ((isset($_GET['location']) and $_GET['location'] == "8")?("selected"):(""));?>>Lenape Elementary</option>
 				<option value="2" <?php echo ((isset($_GET['location']) and $_GET['location'] == "2")?("selected"):(""));?>>West Hills Primary</option>
 				<option value="4" <?php echo ((isset($_GET['location']) and $_GET['location'] == "4")?("selected"):(""));?>>West Hills Intermediate</option>
 				<option value="3" <?php echo ((isset($_GET['location']) and $_GET['location'] == "3")?("selected"):(""));?>>Armstrong High School</option>
