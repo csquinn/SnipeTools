@@ -37,13 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		echo "<style> body {background-color: red; color: black;} </style>";
 
 	} else if ($_GET['SnipeRequestStatus'] == 1) { //if SnipeRequestStatus is 1, then the asset was found and all desired actions were completed (this value is set in the xxxAPI.php)
-		//assetMessage is set to a scucess message
-		$assetMessage1 = "Successfully Updated Asset " . $_GET['serial'];
 
 		//create link to inventory for updated asset
 		if(isset($_GET['serial'])) {
 			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Check this action on inventory</a>';
+			$serial = $_GET['serial'];
+		} else {
+			$serial = "";
 		}
+
+		//assetMessage is set to a scucess message
+		$assetMessage1 = "Successfully Updated Asset " . $serial;
 
 		//set a pretty background color
 		echo "<style> body {background-color: green; color: black;} </style>";
