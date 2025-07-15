@@ -29,6 +29,6 @@ style for checkboxes
     padding-top: 10px;
 }
 
-.checkboxes input, label{
+.checkboxes input{
     padding-bottom: 8px;
 }
