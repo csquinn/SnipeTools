@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 
 		//create link to inventory for updated asset
 		if(isset($_GET['serial'])) {
-			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Check this action on inventory</a>';
+			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '" target = "_blank" rel = "noopener noreferrer">Check this action on inventory</a>';
 			$serial = $_GET['serial'];
 		} else {
 			$serial = "";
