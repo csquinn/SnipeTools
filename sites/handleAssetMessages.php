@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		//create a link to search inventory for the missing asset
 		//serial should always be set by getIDBySerial.php, but this is in an if statement in case it's not
 		if(isset($_GET['serial'])) {
-			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '">Try searching for the asset on inventory</a>';
+			$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['serial'] . '" target = "_blank" rel = "noopener noreferrer">Try searching for the asset on inventory</a>';
 		}
 
 		//set a pretty background color
