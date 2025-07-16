@@ -56,13 +56,13 @@ include 'handleAssetMessages.php'
 			<div class = "checkboxes">	
 				<input type="checkbox" id="remName" name="remName" value="on" <?php echo ((isset($_GET['remName']))?("checked"):(""));?>>
 				<label> Remove Asset Name</label>
-				<br><br>				
+				<br>				
 				<input type="checkbox" id="retag" name="retag" value="on" <?php echo ((isset($_GET['retag']))?("checked"):(""));?>>
 				<label> Set Asset Tag equal to Serial Number</label>
-				<br><br>				
+				<br>				
 				<input type="checkbox" id="checkin" name="checkin" value="on" <?php echo ((isset($_GET['checkin']))?("checked"):(""));?>>
 				<label> Check the Asset in from any Users</label>
-				<br><br>			
+				<br>			
 				<input type="checkbox" id="GAdmin" name="GAdmin" value="on" <?php echo (isset($_GET['GoogleRequestStatus']) ? 'checked' : ''); ?>>
 				<label> Make sure this asset is provisioned in Google Admin (optional, only for Chromebooks)</label>
 				<br>
