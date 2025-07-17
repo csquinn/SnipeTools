@@ -147,7 +147,7 @@ while (($line = fgets($handle)) !== false) {
 
 		<?php
 			//assets assigned to students that may have already graduated
-			$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and substring(users.username, 3, 2) <= DATE_FORMAT(now(), "%y") and assets.deleted_at is null;';
+			$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username like "%99%" and substring(users.username, 3, 2) <= DATE_FORMAT(now(), "%y") and assets.deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions) and username not in (select name from tempExclusions);';
 			getTagUserAsset($sql, $mysqli, $snipe_url, "Assets Belived to be Checked Out to Graduated Students");
 		?>
 		<br>
