@@ -17,7 +17,7 @@
 		</div>
 		<hr>
 
-		<?php echo ((time()-filemtime("../snipe-it/.github") > 30 * 24 * 3600)?("<h3 class = 'alert'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop.</h3>"):("")); ?>
+		<?php echo ((time()-filemtime("../snipe-it/.git") > 30 * 24 * 3600)?("<h3 class = 'alert'>SnipeIT hasn't been updated in over a month. Please remote into<br>this server and run the SnipeIT update script on the Desktop.</h3>"):("")); ?>
 		
 		<div id = "sites">
 			<button class = "button" data-url ="sites/validate.php">Asset Validation</button>
