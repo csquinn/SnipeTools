@@ -108,7 +108,8 @@ try {
 			$assetTag = $assetJsonArray["rows"][0]["asset_tag"];
 			$currentStatus = $assetJsonArray["rows"][0]["status_label"]["id"];
 
-			//restore the asset if it was deleted in the past
+			//restore the asset if it was deleted in the past with api call
+echo "made to call";
 			$client = new GuzzleClient();
 			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$id.'/restore', [
 				'headers' => [
@@ -117,6 +118,7 @@ try {
 					'accept' => 'application/json',
 				],
 			]);
+echo $response->getBody();
 echo $response->getBody();
 print_r($response);
 			//write to proper log
