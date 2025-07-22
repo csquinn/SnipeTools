@@ -70,14 +70,13 @@ try {
 	$client = new GuzzleClient();
 
 	//utilizes $api_key and $snipe_url
-	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial, [
+	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?all=true', [
 		'headers' => [
 			'Authorization' => 'Bearer '.$api_key,
 			'accept' => 'application/json',
 		],
 	]);
-echo $response->getBody();
-print_r($response);
+
 	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
