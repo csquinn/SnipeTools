@@ -76,6 +76,7 @@ try {
 			'accept' => 'application/json',
 		],
 	]);
+echo $response->getBody();
 print_r($response);
 	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
 	if ($response->getStatusCode() == 200) {
@@ -117,6 +118,7 @@ print_r($response);
 					'accept' => 'application/json',
 				],
 			]);
+echo $response->getBody();
 print_r($response);
 			//write to proper log
 			file_put_contents("../logs/".$source."LOG.txt", $serial."\n", FILE_APPEND);
