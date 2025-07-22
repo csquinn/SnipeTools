@@ -78,7 +78,7 @@ try {
 	]);
 
 	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
-echo $response->getStatusCode();
+
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
 		$assetJsonArray = json_decode($response->getBody(), true);
@@ -111,7 +111,7 @@ echo $response->getStatusCode();
 			$currentStatus = $assetJsonArray["rows"][0]["status_label"]["id"];
 
 			//restore the asset if it was deleted in the past with api call
-echo "made to call";
+echo "<script>alert('made to call');</script>";
 			$client = new GuzzleClient();
 			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$id.'/restore', [
 				'headers' => [
