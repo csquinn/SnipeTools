@@ -103,6 +103,16 @@ try {
 
 		} else { //if asset does exist in inventory
 			
+			//restore the asset if it was deleted in the past
+			$client = new GuzzleClient();
+			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'/restore', [
+				'headers' => [
+					'Accept' => 'application/json',
+					'Authorization' => 'Bearer '.$api_key,
+					'accept' => 'application/json',
+				],
+			]);
+
 			//write to proper log
 			file_put_contents("../logs/".$source."LOG.txt", $serial."\n", FILE_APPEND);
 
