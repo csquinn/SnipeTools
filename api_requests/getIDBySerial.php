@@ -111,18 +111,13 @@ try {
 			$currentStatus = $assetJsonArray["rows"][0]["status_label"]["id"];
 
 			//restore the asset if it was deleted in the past with api call
-echo "<script>alert('made to call');</script>";
 			$client = new GuzzleClient();
 			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$id.'/restore', [
 				'headers' => [
-					'Accept' => 'application/json',
 					'Authorization' => 'Bearer '.$api_key,
 					'accept' => 'application/json',
 				],
 			]);
-echo $response->getBody();
-echo $response->getBody();
-print_r($response);
 			//write to proper log
 			file_put_contents("../logs/".$source."LOG.txt", $serial."\n", FILE_APPEND);
 
