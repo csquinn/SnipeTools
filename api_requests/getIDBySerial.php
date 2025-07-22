@@ -76,7 +76,7 @@ try {
 			'accept' => 'application/json',
 		],
 	]);
-
+echo $response->getBody();
 	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
