@@ -119,14 +119,14 @@ while (($line = fgets($handle)) !== false) {
 
 		<?php
 			//Assets with 7 character or less asset tags
-			$sql = 'select * from assets where length(asset_tag) < 7 and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
-			getTagSerial($sql, $mysqli, $snipe_url, "Assets with 7 Character or Less Asset Tags");
+			$sql = 'select * from assets where length(asset_tag) < 6 and asset_tag not like "%TV%" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
+			getTagSerial($sql, $mysqli, $snipe_url, "Assets with 5 Character or Less Asset Tags");
 			?>
 		<br>
 
 		<?php
 			//Assets with 8 character or less asset tags, may not all be errors
-			$sql = 'select * from assets where length(asset_tag) < 8 and asset_tag not like "%TV%" and asset_tag not like "%TC%" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
+			$sql = 'select * from assets where length(asset_tag) < 9 and asset_tag not like "%TV%" and asset_tag not like "%TC%" and deleted_at is null and asset_tag not in (select name from tempExclusions) and serial not in (select name from tempExclusions);';
 			getTagSerial($sql, $mysqli, $snipe_url, "Assets with 8 Character or Less Asset Tags (may not all be errors)");
 		?>
 		<br>
