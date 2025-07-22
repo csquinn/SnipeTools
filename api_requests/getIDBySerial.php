@@ -78,6 +78,7 @@ try {
 	]);
 
 	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
+echo $response->getStatusCode();
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
 		$assetJsonArray = json_decode($response->getBody(), true);
@@ -90,8 +91,7 @@ try {
 			file_put_contents("../logs/badscans.txt", $serial."\n", FILE_APPEND);
 
 			//extra header information is optionally provided if the source is validate.php to keep previously checked boxes checked
-echo "why we here";
-print_r($response); 
+
 			header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial . 
 				(isset($_GET['GAdmin']) ? ("&GoogleRequestStatus") : "").
 				((isset($_GET['status']))?("&status=".$_GET['status']):("")).
