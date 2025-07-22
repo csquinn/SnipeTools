@@ -64,29 +64,13 @@ if (isset($_GET['GAdmin']) and $source != "office") {
 	}
 }
 
-//Snipe api call, restores asset if it was deleted
-try {
-	$client = new GuzzleClient();
-	$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'/restore', [
-		'headers' => [
-			'Accept' => 'application/json',
-			'Authorization' => 'Bearer '.$api_key,
-			'accept' => 'application/json',
-		],
-	]);
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-	echo 'API Request Error: ' . $e->getMessage();
-} catch (\Exception $e) {
-	echo 'General Error: ' . $e->getMessage();
-}
-
 //Snipe api call, a get request copied from SnipeIT's documentation
 //Gets Snipe ID
 try {
 	$client = new GuzzleClient();
 
 	//utilizes $api_key and $snipe_url
-	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?deleted=false', [
+	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial, [
 		'headers' => [
 			'Authorization' => 'Bearer '.$api_key,
 			'accept' => 'application/json',
@@ -118,15 +102,26 @@ try {
 			exit;
 
 		} else { //if asset does exist in inventory
-
-			//write to proper log
-			file_put_contents("../logs/".$source."LOG.txt", $serial."\n", FILE_APPEND);
-
-			//routes to the php file 
+			
 			$id = $assetJsonArray["rows"][0]["id"];
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
 			$assetTag = $assetJsonArray["rows"][0]["asset_tag"];
 			$currentStatus = $assetJsonArray["rows"][0]["status_label"]["id"];
+
+			//restore the asset if it was deleted in the past
+			$client = new GuzzleClient();
+			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$id.'/restore', [
+				'headers' => [
+					'Accept' => 'application/json',
+					'Authorization' => 'Bearer '.$api_key,
+					'accept' => 'application/json',
+				],
+			]);
+
+			//write to proper log
+			file_put_contents("../logs/".$source."LOG.txt", $serial."\n", FILE_APPEND);
+
+			//routes to the api php files now 
 		}
 	}
 //catch any internal/api/server errors
