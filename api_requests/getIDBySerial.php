@@ -112,7 +112,7 @@ try {
 
 			//restore the asset if it was deleted in the past with api call
 			$client = new GuzzleClient();
-			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/byserial/'.$id.'/restore', [
+			$response = $client->request('POST', $snipe_url.'/api/v1/hardware/'.$id.'/restore', [
 				'headers' => [
 					'Authorization' => 'Bearer '.$api_key,
 					'accept' => 'application/json',
