@@ -70,7 +70,7 @@ try {
 	$client = new GuzzleClient();
 
 	//utilizes $api_key and $snipe_url
-	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?all=true', [
+	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?deleted=true', [
 		'headers' => [
 			'Authorization' => 'Bearer '.$api_key,
 			'accept' => 'application/json',
