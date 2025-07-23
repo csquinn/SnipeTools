@@ -82,7 +82,7 @@ try {
 	if ($response->getStatusCode() == 200) {
 		$tmpJsonArr = json_decode($response->getBody(), true);
 
-		if (array_key_exists('status', $assetJsonArray)) {
+		if (array_key_exists('status', $tmpJsonArr)) {
 			$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?deleted=true', [
 				'headers' => [
 					'Authorization' => 'Bearer '.$api_key,
