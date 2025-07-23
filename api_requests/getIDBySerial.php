@@ -69,22 +69,36 @@ if (isset($_GET['GAdmin']) and $source != "office") {
 try {
 	$client = new GuzzleClient();
 
+	//First check to see if asset is found in undeleted
 	//utilizes $api_key and $snipe_url
-	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?deleted=true', [
+	$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?all=true', [
 		'headers' => [
 			'Authorization' => 'Bearer '.$api_key,
 			'accept' => 'application/json',
 		],
 	]);
 
-	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
+	//If not in undeleted assets, search deleted assets
+	if ($response->getStatusCode() == 200) {
+		$tmpJsonArr = json_decode($response->getBody(), true);
 
+		if (array_key_exists('status', $assetJsonArray)) {
+			$response = $client->request('GET', $snipe_url.'/api/v1/hardware/byserial/'.$serial.'?deleted=true', [
+				'headers' => [
+					'Authorization' => 'Bearer '.$api_key,
+					'accept' => 'application/json',
+				],
+			]);
+		}
+	}
+
+	//if asset is found or doesn't exist, basically if there's no internal/api/server errors
 	if ($response->getStatusCode() == 200) {
 		//convert json response into array
 		$assetJsonArray = json_decode($response->getBody(), true);
 
 		//if asset doesn't exist in inventory
-		if(array_key_exists('status',$assetJsonArray)) {
+		if (array_key_exists('status',$assetJsonArray)) {
 			//route back to where request came from sending error code and og serial, further logic handled in handleAssetMessage.php
 
 			//write this scan to the badscans.txt file for logging purposes
