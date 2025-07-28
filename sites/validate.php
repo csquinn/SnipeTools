@@ -19,8 +19,11 @@ include 'handleAssetMessages.php'
 		<h1>Validate Assets</h1>
 		
 		<form action="../api_requests/validateAPI.php" method="GET" autocomplete="on">
+			
 			<label for="newTag">Enter new Asset Tag</label>
 			<input type = "text" id = "newTag" name = "newTag" autofocus required autocomplete="off">
+			<br>
+			
 			<label for="serial">Scan Serial #</label>
 			<input type="hidden" name="source" value="validate">
 			<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
