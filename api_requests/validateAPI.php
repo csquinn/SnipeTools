@@ -96,6 +96,7 @@ try {
 		],
 	]);
 
+	//you'll use $response->getBody(), then need to explore it somehow
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
