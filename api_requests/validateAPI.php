@@ -71,6 +71,9 @@ if (isset($_GET['retag'])){
 if (isset($_GET['checkin'])){
 	$checkin=$_GET['checkin'];
 }
+if (isset($_GET['newTag'])){
+	$newTag = $_GET['newTag'];
+}
 
 //Two requests are sent by validateAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
 
@@ -96,7 +99,24 @@ try {
 		],
 	]);
 
+	//set assetTag to new assetTag
+	$response = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
+		'body' =>'{'
+		.((isset($newTag) and $newTag != '')?('"asset_tag": "'.$newTag.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
+		.'}',
+		'headers' => [
+			'Authorization' => 'Bearer ' . $api_key,
+			'accept' => 'application/json',
+			'content-type' => 'application/json',
+		],
+	]);
+
 	//you'll use $response->getBody(), then need to explore it somehow
+	//if asset tag is already in use, then do not replace asset tag
+	if ($response -> getStatusCode() == 200){
+		//check if error is due to assetTag
+		if (array_key_exists(''))
+	}
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
