@@ -22,7 +22,7 @@ include 'handleAssetMessages.php'
 			
 			<label for="newTag">Enter new Asset Tag</label>
 			<input type = "text" id = "newTag" name = "newTag" autofocus required autocomplete="off">
-			<br>
+			<br><br>
 			
 			<label for="serial">Scan Serial #</label>
 			<input type="hidden" name="source" value="validate">
