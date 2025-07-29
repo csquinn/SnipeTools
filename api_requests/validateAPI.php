@@ -71,6 +71,9 @@ if (isset($_GET['retag'])){
 if (isset($_GET['checkin'])){
 	$checkin=$_GET['checkin'];
 }
+if(isset($_GET['newTag'])){
+	$newTag=$_GET['newTag'];
+}
 
 //Two requests are sent by validateAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
 
