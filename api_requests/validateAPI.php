@@ -96,7 +96,30 @@ try {
 		],
 	]);
 
+<<<<<<< Updated upstream
 	//you'll use $response->getBody(), then need to explore it somehow
+=======
+	//set assetTag to new assetTag
+	$response = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
+		'body' =>'{'
+		.((isset($newTag) and $newTag != '')?('"asset_tag": "'.$newTag.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
+		.'}',
+		'headers' => [
+			'Authorization' => 'Bearer ' . $api_key,
+			'accept' => 'application/json',
+			'content-type' => 'application/json',
+		],
+	]);
+	
+	/*
+	//you'll use $response->getBody(), then need to explore it somehow
+	//if asset tag is already in use, then do not replace asset tag
+	if ($response -> getStatusCode() == 200){
+		//check if error is due to assetTag
+		if (array_key_exists(''))
+	}
+	*/
+>>>>>>> Stashed changes
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
