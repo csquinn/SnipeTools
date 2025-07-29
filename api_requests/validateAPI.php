@@ -96,9 +96,8 @@ try {
 		],
 	]);
 
-<<<<<<< Updated upstream
 	//you'll use $response->getBody(), then need to explore it somehow
-=======
+
 	//set assetTag to new assetTag
 	$response = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
 		'body' =>'{'
@@ -119,7 +118,6 @@ try {
 		if (array_key_exists(''))
 	}
 	*/
->>>>>>> Stashed changes
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();
