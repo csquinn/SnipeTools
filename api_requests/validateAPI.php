@@ -100,7 +100,7 @@ try {
 	]);
 
 	//set assetTag to new assetTag
-	$response = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
+	$tagResponse = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
 		'body' =>'{'
 		.((isset($newTag) and $newTag != '')?('"asset_tag": "'.$newTag.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
 		.'}',
@@ -113,9 +113,16 @@ try {
 
 	//you'll use $response->getBody(), then need to explore it somehow
 	//if asset tag is already in use, then do not replace asset tag
-	if ($response -> getStatusCode() == 200){
-		//check if error is due to assetTag
-		if (array_key_exists(''))
+	if ($tagResponse -> getStatusCode() == 200){
+		//convert JSON response to an array
+		$tagJsonArray = json_decode($tagResponse->getBody(), true);
+	
+		//if problem exists
+		if(array_key_exists('payload', $tagResponse)){
+			//find out how to execute the asset message in here
+			
+			exit;
+		}
 	}
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
