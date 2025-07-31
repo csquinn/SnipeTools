@@ -71,8 +71,8 @@ if (isset($_GET['retag'])){
 if (isset($_GET['checkin'])){
 	$checkin=$_GET['checkin'];
 }
-if(isset($_GET['newTag'])){
-	$newTag=$_GET['newTag'];
+if (isset($_GET['newTag'])){
+	$newTag = $_GET['newTag'];
 }
 
 //Two requests are sent by validateAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
@@ -99,18 +99,43 @@ try {
 		],
 	]);
 
-	//you'll use $response->getBody(), then need to explore it somehow
+	//set assetTag to new assetTag
+	$tagResponse = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
+		'body' =>'{'
+		.((isset($newTag) and $newTag != '')?('"asset_tag": "'.$newTag.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
+		.'}',
+		'headers' => [
+			'Authorization' => 'Bearer ' . $api_key,
+			'accept' => 'application/json',
+			'content-type' => 'application/json',
+		],
+	]);
 
-
-	
-	/*
 	//you'll use $response->getBody(), then need to explore it somehow
 	//if asset tag is already in use, then do not replace asset tag
-	if ($response -> getStatusCode() == 200){
-		//check if error is due to assetTag
-		if (array_key_exists(''))
+	if ($tagResponse -> getStatusCode() == 200){
+		//convert JSON response to an array
+		$tagJsonArray = json_decode($tagResponse->getBody(), true);
+	
+		//if problem exists
+		if(array_key_exists('status', $tagResponse)){
+			//find out how to execute the asset message in here
+			if (isset($tagJsonArray['status']) && $tagJsonArray['status'] === 'error'){
+				
+				header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-3&serial=". $serial .
+				(isset($_GET['newTag']) ? ("&newTag=".$_GET['newTag']) : ""). 
+				(isset($_GET['GAdmin']) ? ("&GoogleRequestStatus") : "").
+				((isset($_GET['status']))?("&status=".$_GET['status']):("")).
+				((isset($_GET['location']))?("&location=".$_GET['location']):("")).
+				((isset($_GET['remName']))?("&remName=on"):("")).
+				((isset($_GET['retag']))?("&retag=on"):("")).
+				((isset($_GET['checkin']))?("&checkin=on"):(""))
+				);
+
+			}
+			exit;
+		}
 	}
-	*/
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
 	echo 'API Request Error: ' . $e->getMessage();

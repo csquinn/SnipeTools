@@ -35,6 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 
 		//set a pretty background color
 		echo "<style> body {background-color: red; color: black;} </style>";
+	
+	} else if ($_GET['SnipeRequestStatus'] == -3) {
+		//assetMessage is set to a failure on tag message
+		$assetMessage1 = "This asset was not adjusted due to a bad asset tag :^(";
+
+		//create a link to search inventory for the asset tag sent by user
+		$assetLink = '<a href="' . $snipe_url . '/hardware?page=1&size=20&search=' . $_GET['newTag'] . '" target = "_blank" rel = "noopener noreferrer">Try searching for the asset tag on inventory</a>';
 
 	} else if ($_GET['SnipeRequestStatus'] == 1) { //if SnipeRequestStatus is 1, then the asset was found and all desired actions were completed (this value is set in the xxxAPI.php)
 
