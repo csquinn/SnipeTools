@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 		//set a pretty background color
 		echo "<style> body {background-color: red; color: black;} </style>";
 	
-	} else if ($_GET['SnipeRequestStatus'] == -3) {
+	} else if ($_GET['tagAvailability'] == -3) {
 		//assetMessage is set to a failure on tag message
 		$assetMessage1 = "This asset was not adjusted due to a bad asset tag :^(";
 
