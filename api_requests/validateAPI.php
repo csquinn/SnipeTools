@@ -118,9 +118,11 @@ try {
 		$tagJsonArray = json_decode($tagResponse->getBody(), true);
 	
 		//if problem exists
-		if(array_key_exists('payload', $tagResponse)){
+		if(array_key_exists('status', $tagResponse)){
 			//find out how to execute the asset message in here
-			
+			if (isset($tagJsonArray['status']) && $tagJsonArray['status'] === 'error'){
+				
+			}
 			exit;
 		}
 	}
