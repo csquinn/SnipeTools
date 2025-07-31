@@ -101,17 +101,7 @@ try {
 
 	//you'll use $response->getBody(), then need to explore it somehow
 
-	//set assetTag to new assetTag
-	$response = $client -> request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
-		'body' =>'{'
-		.((isset($newTag) and $newTag != '')?('"asset_tag": "'.$newTag.'"'):('"asset_tag": "'.$assetTag.'"'))	//asset_tag
-		.'}',
-		'headers' => [
-			'Authorization' => 'Bearer ' . $api_key,
-			'accept' => 'application/json',
-			'content-type' => 'application/json',
-		],
-	]);
+
 	
 	/*
 	//you'll use $response->getBody(), then need to explore it somehow
