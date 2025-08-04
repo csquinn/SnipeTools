@@ -131,9 +131,9 @@ try {
 				((isset($_GET['retag']))?("&retag=on"):("")).
 				((isset($_GET['checkin']))?("&checkin=on"):(""))
 				);
-
+				
+				exit;
 			}
-			exit;
 		}
 	}
 //catch internal/api/server errors
