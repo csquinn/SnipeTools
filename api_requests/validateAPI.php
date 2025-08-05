@@ -122,7 +122,7 @@ try {
 			//find out how to execute the asset message in here
 			if (isset($tagJsonArray['status']) && $tagJsonArray['status'] === 'error'){
 				
-				header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial . "tagAvailability=-3".
+				header("Location: ../sites/" . $source . ".php?SnipeRequestStatus=-1&serial=". $serial . "&tagAvailability=-3".
 				(isset($_GET['newTag']) ? ("&newTag=".$_GET['newTag']) : ""). 
 				(isset($_GET['GAdmin']) ? ("&GoogleRequestStatus") : "").
 				((isset($_GET['status']))?("&status=".$_GET['status']):("")).
@@ -131,7 +131,7 @@ try {
 				((isset($_GET['retag']))?("&retag=on"):("")).
 				((isset($_GET['checkin']))?("&checkin=on"):(""))
 				);
-				
+
 				exit;
 			}
 		}
