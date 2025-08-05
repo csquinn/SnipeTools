@@ -27,7 +27,7 @@ if ($mysqli -> connect_errno) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Inventory Status | SnipeTools</title>
+	<title>Chromebook Status | SnipeTools</title>
 	<link rel = "stylesheet" href = "../styles/reportStyle.css">
 </head>
 <body>
@@ -44,6 +44,19 @@ if ($mysqli -> connect_errno) {
 		<br>
 		<br>
 		<script src = "../scripts/buttons.js"></script>
+
+		<?php
+			$daytonLocations = array (
+				array("A104", 22),
+				array("A126", 17),
+				array("A110", 17),
+				array("C107", 22),
+				array("C106", 18),
+				array("C115", 21),
+				array("C114", 19)
+			);
+			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton");
+		?>
 
 </div>
 </body>
