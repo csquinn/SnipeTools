@@ -53,7 +53,8 @@ if ($mysqli -> connect_errno) {
 				array("C107", 22),
 				array("C106", 18),
 				array("C115", 21),
-				array("C114", 19)
+				array("C114", 19),
+				array("LNR", 61)
 			);
 			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton", "DE");
 		?>
