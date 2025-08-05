@@ -149,7 +149,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg){
 	echo "<summary>".$cat_arg."</summary>";
 	echo "<table border='1'>";
 	foreach($rooms as $class){//iterate through each room
-		for($x = 0; $x < (int)$class[1], $x++){//iterate through each CB in each room
+		for($x = 0; $x < (int)$class[1]; $x++){//iterate through each CB in each room
 			
 			//This is the MySQL statement that gets executed for each asset to generate the report
 			$mySQLCBS = "select * from assets where asset_tag = '".$class[0]."-".(($x < 10)?("0".$x):($x))."';";//ternary operator to add leading 0
@@ -170,3 +170,4 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg){
 }
 
 ?>
+
