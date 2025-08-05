@@ -68,7 +68,7 @@ while (($line = fgets($handle)) !== false) {
 <body>
 	<div id = "info">
 		<h1>Inventory Health Report</h1>
-		<h4>This site queries SnipeIT and returns potential asset errors.</h4>
+		<h4>This site queries SnipeIT and returns many common asset errors.</h4>
 		<h4>Each section below can be expanded by clicking the dropdown arrow.</h4>
 		<h4>This report is <b>NOT</b> exhaustive and inventory should be examined regularly in addition to this report</h4>
 		<h5><b>*Please note: This report does not actually modify SnipeIT in any way, it just queries it</b></h5>
