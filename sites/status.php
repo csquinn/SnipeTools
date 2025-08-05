@@ -56,7 +56,106 @@ if ($mysqli -> connect_errno) {
 				array("C114", 19),
 				array("LNR", 61)
 			);
-			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton", "DE", 5);
+			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton K-4", "DE", 5);
+
+			$eldertonLocations = array (
+				array("129", 13),
+				array("104", 13),
+				array("106", 22),
+				array("105", 19),
+				array("108", 17),
+				array("109", 22),
+				array("112", 15),
+				array("114", 15),
+				array("LNR", 10)
+			);
+			getK4Errors($eldertonLocations, $mysqli, $snipe_url, "Elderton K-4", "EE", 7);
+
+			$shannockLocations = array (
+				array("119", 15),
+				array("120", 16),
+				array("128", 18),
+				array("130", 16),
+				array("200", 27),
+				array("225", 25),
+				array("201", 22),
+				array("224", 22),
+				array("206", 21),
+				array("218", 21),
+				array("LNR", 13)
+			);
+			getK4Errors($shannockLocations, $mysqli, $snipe_url, "Shannock Valley K-4", "SV", 9);
+				
+			$lenapeLocations = array(
+				array("0101", 18),
+				array("0103", 18),
+				array("0104", 18),
+				array("0105", 18),
+				array("0106", 18),
+				array("1101", 22),
+				array("1103", 22),
+				array("1104", 22),
+				array("1105", 22),
+				array("1106", 22),
+				array("2101", 24),
+				array("2104", 24),
+				array("2105", 24),
+				array("2106", 24),
+				array("3101", 22),
+				array("3102", 22),
+				array("3103", 22),
+				array("3104", 22),
+				array("3105", 22),
+				array("4101", 25),
+				array("4103", 25),
+				array("4104", 25),
+				array("4105", 25),
+				array("LNR", 10)
+			);
+			getK4Errors($lenapeLocations, $mysqli, $snipe_url, "Lenape K-4", "LE", 8);
+
+			$westPrimaryLocations = array (
+				array("K1", 21),
+				array("K2", 21),
+				array("K3", 21),
+				array("K4", 21),
+				array("K5", 21),
+				array("K6", 21),
+				array("B1", 21),
+				array("A1", 21),
+				array("A2", 21),
+				array("A3", 24),
+				array("A4", 21),
+				array("B2", 22),
+				array("B3", 23),
+				array("B4", 23),
+				array("C2", 25),
+				array("C4", 25),
+				array("D1", 24),
+				array("D2", 24),
+				array("D4", 25),
+				array("G4", 25),
+				array("G5", 26),
+				array("H2", 25),
+				array("H3", 25),
+				array("H4", 25),
+				array("E1", 11),
+				array("E2", 12),
+				array("LNR", 10)
+			);
+			getK4Errors($westPrimaryLocations, $mysqli, $snipe_url, "West Hills Primary", "WHP", 2);
+
+			$westIntermediateLocations = array (
+				array("4004", 25),
+				array("4006", 25),
+				array("4007", 25),
+				array("4008", 25),
+				array("4009", 25),
+				array("4010", 25),
+				array("2040", 11),
+				array("LNR", 20)
+			);
+			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate 4th", "WI", 4);
 		?>
 
 </div>
