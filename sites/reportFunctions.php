@@ -143,7 +143,7 @@
  * room to check as well as the amount
  * of CBs supposed to be in the room
 */
-function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym){
+function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildingID){
 	
 	echo "<details>";
 	echo "<summary>".$cat_arg."</summary>";
@@ -156,12 +156,12 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym){
 		    	
 			$result = $mysql_arg -> query($mySQLCBS);
 			if($result->num_rows < 1){//didn't find it
-				echo "<tr><td id = 'tableElement'>". $acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1)) ."</td><td id = 'tableElement'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1)) . "' target = '_blank'>Link</a></td></tr>";
+				echo "<tr><td id = 'tableElement'>". $acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1)) ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1)) . "' target = '_blank'>Link</a></td></tr>";
 			} else if($result->num_rows > 1){//found more than 1, should never happen as asset tags are unique
 				echo "<tr><td id = 'tableElement'>You should not be seeing this</td></tr>";
 			} else if($result->num_rows ===1){//found it
 				$row = $result -> fetch_assoc();
-				echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
+				echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $buildingID)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Location</td><td id = 'tableElement'>Status</td><td id = 'tableElement' style='". ((($row['status_id'] == 4 and $class[0] != "LNR") or ($row['status_id'] == 2 and $class[0] == "LNR"))?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
 			}
 			// Free result set
       			  $result -> free_result();
@@ -172,6 +172,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym){
 }
 
 ?>
+
 
 
 
