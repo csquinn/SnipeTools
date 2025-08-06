@@ -57,6 +57,7 @@ if ($mysqli -> connect_errno) {
 				array("LNR", 61)
 			);
 			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton K-4", "DE", 5);
+			echo"<br>";
 
 			$eldertonLocations = array (
 				array("129", 13),
@@ -70,6 +71,7 @@ if ($mysqli -> connect_errno) {
 				array("LNR", 10)
 			);
 			getK4Errors($eldertonLocations, $mysqli, $snipe_url, "Elderton K-4", "EE", 7);
+			echo"<br>";
 
 			$shannockLocations = array (
 				array("119", 15),
@@ -85,7 +87,8 @@ if ($mysqli -> connect_errno) {
 				array("LNR", 13)
 			);
 			getK4Errors($shannockLocations, $mysqli, $snipe_url, "Shannock Valley K-4", "SV", 9);
-				
+			echo"<br>";
+	
 			$lenapeLocations = array(
 				array("0101", 18),
 				array("0103", 18),
@@ -113,6 +116,7 @@ if ($mysqli -> connect_errno) {
 				array("LNR", 10)
 			);
 			getK4Errors($lenapeLocations, $mysqli, $snipe_url, "Lenape K-4", "LE", 8);
+			echo"<br>";
 
 			$westPrimaryLocations = array (
 				array("K1", 21),
@@ -144,6 +148,7 @@ if ($mysqli -> connect_errno) {
 				array("LNR", 10)
 			);
 			getK4Errors($westPrimaryLocations, $mysqli, $snipe_url, "West Hills Primary", "WHP", 2);
+			echo"<br>";
 
 			$westIntermediateLocations = array (
 				array("4004", 25),
@@ -156,6 +161,7 @@ if ($mysqli -> connect_errno) {
 				array("LNR", 20)
 			);
 			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate 4th", "WI", 4);
+			echo"<br>";
 		?>
 
 </div>
