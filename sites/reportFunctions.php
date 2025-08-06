@@ -152,7 +152,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
 		for($x = 0; $x < (int)$class[1]; $x++){//iterate through each CB in each room
 			
 			//This is the MySQL statement that gets executed for each asset to generate the report
-			$mySQLCBS = "select * from assets where asset_tag = '".$acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1))."' and deleted_at is null;";//ternary operator to add leading 0
+			$mySQLCBS = "select * from assets inner join models on assets.model_id = models.id where assets.asset_tag = '".$acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1))."' and assets.deleted_at is null;";//ternary operator to add leading 0
 		    	
 			$result = $mysql_arg -> query($mySQLCBS);
 			if($result->num_rows < 1){//didn't find it
@@ -161,7 +161,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
 				echo "<tr><td id = 'tableElement'>You should not be seeing this</td></tr>";
 			} else if($result->num_rows ===1){//found it
 				$row = $result -> fetch_assoc();
-				echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $buildingID)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Location</td><td id = 'tableElement' style='". ((($row['status_id'] == 4 and $class[0] != "LNR") or ($row['status_id'] == 2 and $class[0] == "LNR"))?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Status</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
+				echo "<tr><td id = 'tableElement'>". $row['assets.asset_tag'] ."</td><td id = 'tableElement' style='". (($row['assets.rtd_location_id'] == $buildingID)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Location</td><td id = 'tableElement' style='". ((($row['assets.status_id'] == 4 and $class[0] != "LNR") or ($row['assets.status_id'] == 2 and $class[0] == "LNR"))?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Status</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['assets.serial'] . "' target = '_blank'>Link</a></td></tr>";
 			}
 			// Free result set
       			  $result -> free_result();
