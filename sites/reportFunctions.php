@@ -178,7 +178,7 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 
 	foreach($students as $s){
 		//mysql query
-		$mySQLCBS = "select assets.*, models.name as 'modelName', locations.name as 'locationName', status_labels.name as 'statusName' from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id where users.username = '". $s[2] ."' and assets.deleted_at is null;";
+		$mySQLCBS = "select assets.*, models.name as 'modelName', locations.name as 'locationName', status_labels.name as 'statusName' from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_rtd = locations.name where users.username = '". $s[2] ."' and assets.deleted_at is null;";
 		
 		$result = $mysql_arg -> query($mySQLCBS);
 		if(($result->num_rows < 1) and ($s[3] >= 5)) { //no cb assigned and is in grade that should have one
