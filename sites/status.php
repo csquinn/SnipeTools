@@ -36,7 +36,7 @@ while (($line = fgets($handle)) !== false) {
 	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
 		$temp = explode(',', $line);
 		if(substr($temp[4], 0, 2) == "99"){
-			$students[] = array($temp[3],$temp[1], $temp[4], $temp[7]);//last name, first name, 99#, grade
+			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])));//last name, first name, 99#, grade
 		}
 	}
 }
@@ -182,6 +182,9 @@ while (($line = fgets($handle)) !== false) {
 			);
 			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate 4th", "WI", 4);
 			echo"<br>";
+
+			get512Errors($students, $mysqli, $snipe_url, "All Schools 5th-12th Grades");
+			echo"<br>;
 		?>
 
 </div>
