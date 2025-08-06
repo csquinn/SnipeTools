@@ -177,8 +177,8 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 	echo "<table border='1'>";
 
 	foreach($students as $s){
-		//mysql query
-		$mySQLCBS = "select assets.*, models.name as 'modelName', locations.name as 'locationName', status_labels.name as 'statusName' from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_id = locations.name where users.username = '". $s[2] ."' and assets.deleted_at is null;";
+		//simple mysql query to determine if asset exists
+		$mySQLCBS = "select * from assets inner join users on assets.assigned_to = users.id where users.username = '". $s[2] ."' and assets.deleted_at is null;";
 		
 		$result = $mysql_arg -> query($mySQLCBS);
 		if(($result->num_rows < 1) and ($s[3] >= 5)) { //no cb assigned and is in grade that should have one
@@ -188,6 +188,13 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 		} else if($result -> num_rows === 1){ //one cb assigned
 			$row = $result -> fetch_assoc();
 			if($s[3] >= 5){//of age to have cb
+
+				//more advanced query to get finer data, shouldn't be run for every asset
+				$mySQLCBS = "select assets.*, models.name as 'modelName', locations.name as 'locationName', status_labels.name as 'statusName' from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_id = locations.name where users.username = '". $s[2] ."' and assets.deleted_at is null;";
+				$result -> free_result();
+				$result = $mysql_arg -> query($mySQLCBS);
+
+
 				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement'>". $row['locationName'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 			} else { //too young to have cb?
 				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Shouldn't have Chromebook (too young?)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
