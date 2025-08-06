@@ -36,7 +36,7 @@ while (($line = fgets($handle)) !== false) {
 	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
 		$temp = explode(',', $line);
 		if(substr($temp[4], 0, 2) == "99"){
-			$students[] = array($temp[3],$temp[1], $temp[4], $temp[7])//last name, first name, 99#, grade
+			$students[] = array($temp[3],$temp[1], $temp[4], $temp[7]);//last name, first name, 99#, grade
 		}
 	}
 }
