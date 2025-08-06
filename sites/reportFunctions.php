@@ -171,7 +171,18 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
         echo "</details>";
 }
 
-//function get512Errors($mysql_arg, $snipe_arg, $cat_arg, 
+function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
+	echo "<details>";
+	echo "<summary>".$cat_arg."</summary>";
+	echo "<table border='1'>";
+
+	foreach($students as $s){
+		
+	}
+
+	echo"</table>";
+        echo "</details>";
+}
 ?>
 
 
