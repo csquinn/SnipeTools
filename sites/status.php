@@ -57,7 +57,6 @@ array_multisort($grade, SORT_ASC, $lastNames, SORT_ASC, $students);
 </head>
 <body>
 	<div id = "info">
-		<?php echo print_r($students); ?>
 		<h1>Chromebook Status</h1>
 		<h4>This site queries SnipeIT and examines each individual Chromebook asset for errors.</h4>
 		<h4>Each section below can be expanded by clicking the dropdown arrow.</h4>
