@@ -223,7 +223,7 @@ function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
 
 	//add every student to the table
 	foreach($students as $s){
-		$mysql_arg -> query("insert into tempStudents (last_name, first_name, username, grade) values ('".$s[0]."','".$s[1]."','".$s[2]."','".$s[3]."');");
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
 	}
 
 	//find students with cbs that aren't in the district
