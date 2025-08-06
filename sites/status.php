@@ -40,6 +40,12 @@ while (($line = fgets($handle)) !== false) {
 		}
 	}
 }
+
+//sort by grade level then alphabetically
+$grade  = array_column($students, 3);
+$lastNames = array_column($students, 0); 
+
+array_multisort($grade, SORT_ASC, $lastNames, SORT_ASC, $students);
 ?>
 
 
