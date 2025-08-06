@@ -171,6 +171,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
         echo "</details>";
 }
 
+//function get512Errors($mysql_arg, $snipe_arg, $cat_arg, 
 ?>
 
 

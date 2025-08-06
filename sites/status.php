@@ -22,7 +22,26 @@ if ($mysqli -> connect_errno) {
   exit();
 }
 
+
+// Read students.txt file line by line to get array of all students
+$filename = '../student.csv';
+$handle = fopen($filename, 'r');
+$students= [];
+if (!$handle) {
+	die("Cannot open file: $filename");
+}
+
+while (($line = fgets($handle)) !== false) {
+	$line = trim($line);      // Remove line breaks and spaces
+	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
+		$temp = explode(',', $line);
+		if(substr($temp[4], 0, 2) == "99"){
+			$students[] = array($temp[3],$temp[1], $temp[4], $temp[7])//last name, first name, 99#, grade
+		}
+	}
+}
 ?>
+
 
 <head>
 	<meta charset="UTF-8">
@@ -32,6 +51,7 @@ if ($mysqli -> connect_errno) {
 </head>
 <body>
 	<div id = "info">
+		<?php echo print_r($students); ?>
 		<h1>Chromebook Status</h1>
 		<h4>This site queries SnipeIT and examines each individual Chromebook asset for errors.</h4>
 		<h4>Each section below can be expanded by clicking the dropdown arrow.</h4>
