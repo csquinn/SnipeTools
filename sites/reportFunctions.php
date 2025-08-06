@@ -245,7 +245,7 @@ function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
 
 	//drop table
 	$sql = 'drop table tempStudents;';
-	if($mysqli -> query($sql) === false){
+	if($mysql_arg -> query($sql) === false){
 		echo "couldn't drop table";
 	}
 
