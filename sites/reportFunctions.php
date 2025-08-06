@@ -181,20 +181,69 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 		$mySQLCBS = "select assets.*, models.name as 'modelName', locations.name as 'locationName', status_labels.name as 'statusName' from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id where users.username = '". $s[2] ."' and assets.deleted_at is null;
 		
 		$result = $mysql_arg -> query($mySQLCBS);
-		if(($result->num_rows < 1) and ($s[3] >= 5)) { //no cb assigned and is in grade that should have one
-			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
-		} else if($result -> num_rows > 1){ //more than 1 cb assigned
-			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Multiple Chromebooks assigned</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
-		} else if($result -> num_rows === 1){ //one cb assigned
-			$row = $result -> fetch_assoc();
-			if($s[3] >= 5){//of age to have cb
-				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement'>". $row['locationName'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
-			} else { //too young to have cb?
-				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Shouldn't have Chromebook (too young?)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
-			}
-			// Free result set
-      			$result -> free_result();
-		}
+		if (($result->num_rows < 1) && ($s[3] >= 5)) { 
+    // No Chromebook assigned and student is old enough to have one
+    echo "<tr>
+            <td class='tableElement'>". $s[0] ."</td>
+            <td class='tableElement'>". $s[1] ."</td>
+            <td class='tableElement'>". $s[2] ."</td>
+            <td class='tableElement'>Grade ". $s[3] ."</td>
+            <td class='tableElement' style='background-color: red; color: black;'>Not Found</td>
+            <td class='tableElement'>
+                <a href='". $snipe_arg . "/users?page=1&size=20&search=". urlencode($s[2]) ."' target='_blank'>Link</a>
+            </td>
+          </tr>";
+} else if ($result->num_rows > 1) { 
+    // More than 1 Chromebook assigned
+    echo "<tr>
+            <td class='tableElement'>". $s[0] ."</td>
+            <td class='tableElement'>". $s[1] ."</td>
+            <td class='tableElement'>". $s[2] ."</td>
+            <td class='tableElement'>Grade ". $s[3] ."</td>
+            <td class='tableElement' style='background-color: red; color: black;'>Multiple Chromebooks assigned</td>
+            <td class='tableElement'>
+                <a href='". $snipe_arg . "/users?page=1&size=20&search=". urlencode($s[2]) ."' target='_blank'>Link</a>
+            </td>
+          </tr>";
+} else if ($result->num_rows === 1) { 
+    // One Chromebook assigned
+    $row = $result->fetch_assoc();
+
+    if ($s[3] >= 5) { 
+        // Student old enough to have Chromebook
+        $statusStyle = ($row['status_id'] == 4) 
+            ? "background-color: green; color: black;" 
+            : "background-color: red; color: black;";
+
+        echo "<tr>
+                <td class='tableElement'>". $s[0] ."</td>
+                <td class='tableElement'>". $s[1] ."</td>
+                <td class='tableElement'>". $s[2] ."</td>
+                <td class='tableElement'>Grade ". $s[3] ."</td>
+                <td class='tableElement' style='background-color: green; color: black;'>". $row['serial'] ."</td>
+                <td class='tableElement' style='". $statusStyle ."'>". $row['statusName'] ."</td>
+                <td class='tableElement'>". $row['modelName'] ."</td>
+                <td class='tableElement'>". $row['locationName'] ."</td>
+                <td class='tableElement'>
+                    <a href='". $snipe_arg . "/users?page=1&size=20&search=". urlencode($s[2]) ."' target='_blank'>Link</a>
+                </td>
+              </tr>";
+    } else { 
+        // Too young to have Chromebook
+        echo "<tr>
+                <td class='tableElement'>". $s[0] ."</td>
+                <td class='tableElement'>". $s[1] ."</td>
+                <td class='tableElement'>". $s[2] ."</td>
+                <td class='tableElement'>Grade ". $s[3] ."</td>
+                <td class='tableElement' style='background-color: red; color: black;'>Shouldn't have Chromebook (too young?)</td>
+                <td class='tableElement'>
+                    <a href='". $snipe_arg . "/users?page=1&size=20&search=". urlencode($s[2]) ."' target='_blank'>Link</a>
+                </td>
+              </tr>";
+    }
+
+    // Free result set after using it
+    $result->free_result();
 	}
 
 	echo"</table>";
