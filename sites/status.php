@@ -184,7 +184,7 @@ while (($line = fgets($handle)) !== false) {
 			echo"<br>";
 
 			//get512Errors($students, $mysqli, $snipe_url, "All Schools 5th-12th Grades");
-			echo"<br>;
+			echo"<br>";
 		?>
 
 </div>
