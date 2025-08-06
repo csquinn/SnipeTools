@@ -228,7 +228,6 @@ function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
 
 	//find students with cbs that aren't in the district
 	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username not in (select username from tempStudents) and assets.deleted_at is null';
-	$result -> free_result();
 	$result = $mysql_arg -> query($sql);
 
 	echo "<details>";
