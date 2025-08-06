@@ -158,7 +158,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
 			if($result->num_rows < 1){//didn't find it
 				echo "<tr><td id = 'tableElement'>". $acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1)) ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $acronym." ".$class[0]."-".(($x+1 < 10)?("0".$x+1):($x+1)) . "' target = '_blank'>Link</a></td></tr>";
 			} else if($result->num_rows > 1){//found more than 1, should never happen as asset tags are unique
-				echo "<tr><td id = 'tableElement'>You should not be seeing this</td></tr>";
+				echo "<tr><td id = 'tableElement'>You should not be seeing this, asset tag duplication</td></tr>";
 			} else if($result->num_rows ===1){//found it
 				$row = $result -> fetch_assoc();
 				echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row ['name']."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $buildingID)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Location</td><td id = 'tableElement' style='". ((($row['status_id'] == 4 and $class[0] != "LNR") or ($row['status_id'] == 2 and $class[0] == "LNR"))?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Status</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
@@ -177,7 +177,24 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 	echo "<table border='1'>";
 
 	foreach($students as $s){
+		//mysql query
+		$mySQLCBS = "select assets.*, models.name as 'modelName', locations.name as 'locationName', status_labels.name as 'statusName' from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id where users.username = '". $s[2] ."' and assets.deleted_at is null;
 		
+		$result = $mysql_arg -> query($mySQLCBS);
+		if($result->num_rows < 1 and (int)$s[3] >= 5) { //no cb assigned and is in grade that should have one
+			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+		} else if($result -> num_rows > 1){ //more than 1 cb assigned
+			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Multiple Chromebooks assigned</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+		} else if($result -> num_rows === 1){ //one cb assigned
+			$row = $result -> fetch_assoc();
+			if($s[3] >= 5){//of age to have cb
+				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement'>". $row['locationName'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+			} else { //too young to have cb?
+				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Shouldn't have Chromebook (too young?)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+			}
+			// Free result set
+      			$result -> free_result();
+		}
 	}
 
 	echo"</table>";
