@@ -161,7 +161,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
 				echo "<tr><td id = 'tableElement'>You should not be seeing this</td></tr>";
 			} else if($result->num_rows ===1){//found it
 				$row = $result -> fetch_assoc();
-				echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row ['models.name']."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $buildingID)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Location</td><td id = 'tableElement' style='". ((($row['status_id'] == 4 and $class[0] != "LNR") or ($row['status_id'] == 2 and $class[0] == "LNR"))?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Status</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
+				echo "<tr><td id = 'tableElement'>". $row['asset_tag'] ."</td><td id = 'tableElement'>". $row ['name']."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $buildingID)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Location</td><td id = 'tableElement' style='". ((($row['status_id'] == 4 and $class[0] != "LNR") or ($row['status_id'] == 2 and $class[0] == "LNR"))?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>Status</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
 			}
 			// Free result set
       			  $result -> free_result();
