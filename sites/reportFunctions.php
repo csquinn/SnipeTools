@@ -210,6 +210,47 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 	echo"</table>";
         echo "</details>";
 }
+
+
+//finds cbs assigned to students not on the students list (likely graduated or moved)
+function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
+	//create temporary table
+	$mysql_arg -> query('drop table if exists tempStudents;');
+	$sql = 'create table tempStudents (last_name varchar(255) not null, first_name varchar(255) not null, username varchar(255) not null, grade varchar(255) not null) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
+	if($mysql_arg -> query($sql) === FALSE) {
+		echo "error creating the students table";
+	}
+
+	//add every student to the table
+	foreach($students as $s){
+		$mysql_arg -> query("insert into tempStudents values ('".$s[0]."','".$s[1]."','".$s[2]."','".$s[3]."');";
+		$result -> free_result();
+	}
+
+	//find students with cbs that aren't in the district
+	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username not in (select username from tempStudents) and assets.deleted_at is null';
+	$result = $mysql_arg -> query($sql);
+
+	echo "<details>";
+        echo "<summary>". $cat_arg . " (". $result->num_rows .")</summary>";
+        // Associative array
+        echo "<table border='1'>";
+        echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Serial</td><td id = 'tableElement'>Asset Name</td><td id = 'tableElement'>Link</td></tr>";
+        while($row = $result -> fetch_assoc()){
+            echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement'><td id = 'tableElement' style = 'background-color: red; color: black;'>". $row['serial'] ."</td><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
+        }
+        echo"</table>";
+        echo "</details>";
+        // Free result set
+        $result -> free_result();
+
+	//drop table
+	$sql = 'drop table tempStudents;';
+	if($mysqli -> query($sql) === false){
+		echo "couldn't drop table";
+	}
+
+}
 ?>
 
 
