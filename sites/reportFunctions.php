@@ -227,7 +227,7 @@ function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
 	}
 
 	//find students with cbs that aren't in the district
-	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username not in (select username from tempStudents) and assets.deleted_at is null';
+	$sql = 'select tempStudents.last_name as lname, tempStudents.first_name as fname, tempStudents.username as uname, assets.serial from assets inner join users on assets.assigned_to = users.id inner join tempStudents on users.username = tempStudents.username where users.username not in (select username from tempStudents) and assets.deleted_at is null';
 	$result = $mysql_arg -> query($sql);
 
 	echo "<details>";
@@ -236,7 +236,7 @@ function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
         echo "<table border='1'>";
         echo "<tr><td id = 'tableElement'>Asset Tag</td><td id = 'tableElement'>Serial</td><td id = 'tableElement'>Asset Name</td><td id = 'tableElement'>Link</td></tr>";
         while($row = $result -> fetch_assoc()){
-            echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>". $row['serial'] ."</td><td id='tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
+            echo "<tr><td id = 'tableElement'>". $s['lname'] ."</td><td id = 'tableElement'>". $s['fname'] ."</td><td id='tableElement'>". $s['uname'] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>". $row['serial'] ."</td><td id='tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $row['serial'] . "' target = '_blank'>Link</a></td></tr>";
         }
         echo"</table>";
         echo "</details>";
