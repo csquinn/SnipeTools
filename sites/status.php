@@ -188,7 +188,7 @@ array_multisort($grade, SORT_ASC, $lastNames, SORT_ASC, $students);
 			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate 4th", "WI", 4);
 			echo"<br>";
 
-			//get512Errors($students, $mysqli, $snipe_url, "All Schools 5th-12th Grades");
+			get512Errors($students, $mysqli, $snipe_url, "All Schools 5th-12th Grades");
 			echo"<br>";
 
 			getExtraStudentErrors($students, $mysqli, $snipe_url, "Students not on roster with assigned Chromebooks");
