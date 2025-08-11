@@ -190,7 +190,7 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 			if($s[3] >= 5){//of age to have cb
 
 				//more advanced query to get finer data, shouldn't be run for every asset
-				$mySQLCBS = "select assets.serial, assets.status_id, models.name as modelName, locations.name as locationName, status_labels.name as statusName from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_id = locations.id where users.username = '". $s[2] ."' and assets.deleted_at is null;";
+				$mySQLCBS = "select assets.serial, assets.rtd_location_id, assets.status_id, models.name as modelName, locations.name as locationName, status_labels.name as statusName from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_id = locations.id where users.username = '". $s[2] ."' and assets.deleted_at is null;";
 				$result -> free_result();
 				$result = $mysql_arg -> query($mySQLCBS);
 				$row = $result -> fetch_assoc();
