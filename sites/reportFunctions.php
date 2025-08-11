@@ -182,7 +182,41 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 		
 		$result = $mysql_arg -> query($mySQLCBS);
 		if(($result->num_rows < 1) and ((int)$s[3] >= 5)) { //no cb assigned and is in grade that should have one
-			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'>". $s[4] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+			$locationForMissingAsset = "Strange Location";
+			switch ($s[4]) { //get locations of students from roster and match the id of snipe database
+    				case 5: //Dayton
+    				    $locationForMissingAsset = "Dayton";
+   				    break 1;
+   				 case 7: //Elderton
+      				  $locationForMissingAsset = "Elderton";
+      				  break 1;
+   				 case 9: //Shannock
+       				  $locationForMissingAsset = "Shannock Valley";
+       				  break 1;
+				case 8: //Lenape
+					$locationForMissingAsset = "Lenape";
+					break 1;
+				case 2: //Primary
+					$locationForMissingAsset = "West Hills Primary";
+					break 1;
+				case 4: //Intermediate
+					$locationForMissingAsset = "West Hills Intermediate";
+					break 1;
+				case 3: //Armstrong
+					$locationForMissingAsset = "Armstrong HS";
+					break 1;
+				case 6: //WS
+					$locationForMissingAsset = "West Shamokin";
+					break 1;
+				case 12: //Cyber
+					$locationForMissingAsset = "Cyber";
+					break 1;
+				default:	//sets location to admin, will be used to mark as error
+					$locationForMissingAsset = "Strange Location";
+					break 1;
+			}
+
+			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'>". $locationForMissingAsset ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 		} else if($result -> num_rows > 1){ //more than 1 cb assigned
 			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Multiple Chromebooks assigned</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 		} else if($result -> num_rows === 1){ //one cb assigned

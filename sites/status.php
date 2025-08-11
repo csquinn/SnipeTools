@@ -57,7 +57,7 @@ while (($line = fgets($handle)) !== false) {
 					$location = 4;
 					break 1;
 				case "032": //Armstrong
-					$location = 5;
+					$location = 3;
 					break 1;
 				case "027": //WS
 					$location = 6;
