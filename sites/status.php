@@ -36,31 +36,32 @@ while (($line = fgets($handle)) !== false) {
 	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
 		$temp = explode(',', $line);
 		if(substr($temp[4], 0, 2) == "99"){
+			echo substr($temp[4], 0, 2) == "99";
 			$location = 0;
 			echo $line;
 			switch ($temp[0]) { //get locations of students from roster and match the id of snipe database
-    				case 5: //Dayton
+    				case "005": //Dayton
     				    $location = 5;
    				    break 1;
-   				 case 13: //Elderton
+   				 case "013": //Elderton
       				  $location = 7;
       				  break 1;
-   				 case 26: //Shannock
+   				 case "026": //Shannock
        				  $location = 9;
        				  break 1;
-				case 16: //Lenape
+				case "016": //Lenape
 					$location = 8;
 					break 1;
-				case 28: //Primary
+				case "028": //Primary
 					$location = 2;
 					break 1;
-				case 22: //Intermediate
+				case "022": //Intermediate
 					$location = 4;
 					break 1;
-				case 32: //Armstrong
+				case "032": //Armstrong
 					$location = 5;
 					break 1;
-				case 27: //WS
+				case "027": //WS
 					$location = 6;
 					break 1;
 			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])), $location);//last name, first name, 99#, grade, location
