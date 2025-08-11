@@ -66,6 +66,7 @@ while (($line = fgets($handle)) !== false) {
 		}
 	}
 }
+}
 
 //sort by grade level then alphabetically
 $location = array_column($students, 4);
