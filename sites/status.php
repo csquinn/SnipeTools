@@ -40,28 +40,28 @@ while (($line = fgets($handle)) !== false) {
 			switch ($temp[0]) { //get locations of students from roster and match the id of snipe database
     				case 5: //Dayton
     				    $location = 5;
-   				    break;
+   				    break 1;
    				 case 13: //Elderton
       				  $location = 7;
-      				  break;
+      				  break 1;
    				 case 26: //Shannock
        				  $location = 9;
-       				  break;
+       				  break 1;
 				case 16: //Lenape
 					$location = 8;
-					break;
+					break 1;
 				case 28: //Primary
 					$location = 2;
-					break;
+					break 1;
 				case 22: //Intermediate
 					$location = 4;
-					break;
+					break 1;
 				case 32: //Armstrong
 					$location = 5;
-					break;
+					break 1;
 				case 27: //WS
 					$location = 6;
-					break;
+					break 1;
 			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])), $location);//last name, first name, 99#, grade, location
 		}
 	}
