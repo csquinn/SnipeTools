@@ -63,7 +63,7 @@ while (($line = fgets($handle)) !== false) {
 					$location = 6;
 					break 1;
 			}
-			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])), $location);//last name, first name, 99#, grade, location
+			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 	}
 }
 }
@@ -72,9 +72,7 @@ while (($line = fgets($handle)) !== false) {
 $locationCol = array_column($students, 4);
 $grade  = array_column($students, 3);
 $lastNames = array_column($students, 0); 
-echo print_r($students);
 array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $students);
-echo print_r($students);
 ?>
 
 
