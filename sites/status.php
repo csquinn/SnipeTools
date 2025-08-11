@@ -74,6 +74,7 @@ $grade  = array_column($students, 3);
 $lastNames = array_column($students, 0); 
 
 array_multisort($location, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $students);
+echo print_r($students);
 ?>
 
 
