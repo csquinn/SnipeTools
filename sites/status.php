@@ -36,16 +36,43 @@ while (($line = fgets($handle)) !== false) {
 	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
 		$temp = explode(',', $line);
 		if(substr($temp[4], 0, 2) == "99"){
-			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])));//last name, first name, 99#, grade
-		}
+			$location = 0;
+			switch ($temp[0]) { //get locations of students from roster and match the id of snipe database
+    				case "005": //Dayton
+    				    $location = 5;
+   				    break 1;
+   				 case "013": //Elderton
+      				  $location = 7;
+      				  break 1;
+   				 case "026": //Shannock
+       				  $location = 9;
+       				  break 1;
+				case "016": //Lenape
+					$location = 8;
+					break 1;
+				case "028": //Primary
+					$location = 2;
+					break 1;
+				case "022": //Intermediate
+					$location = 4;
+					break 1;
+				case "032": //Armstrong
+					$location = 5;
+					break 1;
+				case "027": //WS
+					$location = 6;
+					break 1;
+			}
+			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 	}
+}
 }
 
 //sort by grade level then alphabetically
+$locationCol = array_column($students, 4);
 $grade  = array_column($students, 3);
 $lastNames = array_column($students, 0); 
-
-array_multisort($grade, SORT_ASC, $lastNames, SORT_ASC, $students);
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $students);
 ?>
 
 

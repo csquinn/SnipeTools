@@ -8,3 +8,4 @@ logs/deprovisionLOG.txt
 logs/officeLOG.txt
 logs/validateLOG.txt
 logs/badscans.txt
+student.csv
