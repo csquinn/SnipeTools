@@ -182,7 +182,7 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 		
 		$result = $mysql_arg -> query($mySQLCBS);
 		if(($result->num_rows < 1) and ((int)$s[3] >= 5)) { //no cb assigned and is in grade that should have one
-			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'>". $s[4] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 		} else if($result -> num_rows > 1){ //more than 1 cb assigned
 			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Multiple Chromebooks assigned</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 		} else if($result -> num_rows === 1){ //one cb assigned
