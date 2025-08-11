@@ -36,7 +36,7 @@ while (($line = fgets($handle)) !== false) {
 	if(!($line == "null" or $line == " " or $line == "" or $line == null)){
 		$temp = explode(',', $line);
 		if(substr($temp[4], 0, 2) == "99"){
-			echo substr($temp[4], 0, 2) == "99". "substring <br>";
+			echo substr($temp[4], 0, 2). "substring <br>";
 			$location = 0;
 			echo $line."<br>";
 			switch ($temp[0]) { //get locations of students from roster and match the id of snipe database
