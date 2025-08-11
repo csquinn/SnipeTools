@@ -62,8 +62,8 @@ while (($line = fgets($handle)) !== false) {
 				case "027": //WS
 					$location = 6;
 					break 1;
-			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])));//last name, first name, 99#, grade, location
-		}
+			}
+			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[7] == "KG")?(0):((int)$temp[7])), $location);//last name, first name, 99#, grade, location
 	}
 }
 }
