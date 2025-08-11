@@ -62,6 +62,12 @@ while (($line = fgets($handle)) !== false) {
 				case "027": //WS
 					$location = 6;
 					break 1;
+				case "040": //Cyber
+					$location = 12;
+					break 1;
+				default:	//sets location to admin, will be used to mark as error
+					$location = 1;
+					break 1;
 			}
 			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 	}
