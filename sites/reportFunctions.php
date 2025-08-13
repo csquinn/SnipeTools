@@ -182,7 +182,41 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 		
 		$result = $mysql_arg -> query($mySQLCBS);
 		if(($result->num_rows < 1) and ((int)$s[3] >= 5)) { //no cb assigned and is in grade that should have one
-			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+			$locationForMissingAsset = "Strange Location";
+			switch ($s[4]) { //get locations of students from roster and match the id of snipe database
+    				case 5: //Dayton
+    				    $locationForMissingAsset = "Dayton";
+   				    break 1;
+   				 case 7: //Elderton
+      				  $locationForMissingAsset = "Elderton";
+      				  break 1;
+   				 case 9: //Shannock
+       				  $locationForMissingAsset = "Shannock Valley";
+       				  break 1;
+				case 8: //Lenape
+					$locationForMissingAsset = "Lenape";
+					break 1;
+				case 2: //Primary
+					$locationForMissingAsset = "West Hills Primary";
+					break 1;
+				case 4: //Intermediate
+					$locationForMissingAsset = "West Hills Intermediate";
+					break 1;
+				case 3: //Armstrong
+					$locationForMissingAsset = "Armstrong HS";
+					break 1;
+				case 6: //WS
+					$locationForMissingAsset = "West Shamokin";
+					break 1;
+				case 12: //Cyber
+					$locationForMissingAsset = "Cyber";
+					break 1;
+				default:	//sets location to admin, will be used to mark as error
+					$locationForMissingAsset = "Strange Location";
+					break 1;
+			}
+
+			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Not Found</td><td id = 'tableElement'>". $locationForMissingAsset ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 		} else if($result -> num_rows > 1){ //more than 1 cb assigned
 			echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Multiple Chromebooks assigned</td><td id = 'tableElement'><a href='" . $snipe_arg . "/users?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 		} else if($result -> num_rows === 1){ //one cb assigned
@@ -190,14 +224,14 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 			if($s[3] >= 5){//of age to have cb
 
 				//more advanced query to get finer data, shouldn't be run for every asset
-				$mySQLCBS = "select assets.serial, assets.status_id, models.name as modelName, locations.name as locationName, status_labels.name as statusName from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_id = locations.id where users.username = '". $s[2] ."' and assets.deleted_at is null;";
+				$mySQLCBS = "select assets.serial, assets.rtd_location_id, assets.status_id, models.name as modelName, locations.name as locationName, status_labels.name as statusName from assets inner join users on assets.assigned_to = users.id inner join models on assets.model_id = models.id inner join status_labels on assets.status_id = status_labels.id inner join locations on assets.rtd_location_id = locations.id where users.username = '". $s[2] ."' and assets.deleted_at is null;";
 				$result -> free_result();
 				$result = $mysql_arg -> query($mySQLCBS);
 				$row = $result -> fetch_assoc();
 				if($result -> num_rows != 1){
 					echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Critical field not set (likely location)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 				} else if ($result -> num_rows ===1){
-					echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $s[4])?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['locationName'] ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+					echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $s[4])?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". (($s[4] == 1)?("Strange Location on Roster"):($row['locationName'])) ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 				}
 			} else { //too young to have cb?
 				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Shouldn't have Chromebook (too young?)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
