@@ -72,7 +72,7 @@ while (($line = fgets($handle)) !== false) {
         <h4>This was done so that the TC import could be completed without the need of Windows 11</h4>
         <h4>These computers may still need Windows 11 imaged to them. The assets then need their serial numbers properly set in inventory</h4>
         <h5>Please do <b>NOT</b> set the serial numbers until the computer is imaged to Windows 11</h5>
-        <h5>Note that this list is not all of the machines needing Windows 11. Reference the google doc for a complete list</h5>
+        <h5>Note that this list is not all of the machines needing Windows 11. Reference the google sheet for a complete list</h5>
         <br>
         <br>
         <button data-url = "../index.php">Return Home</button>
@@ -83,6 +83,6 @@ while (($line = fgets($handle)) !== false) {
         <?php
             //Assets that need to be updated to Windows 11
             //then properly have serial numbers set in inventory
-            $sql = 'select * from assets where categories.name = "Computers" and serial = "VOID"';
+            $sql = 'select * from assets where inner join categories on models.category_id = categories.id where categories.name = "Computers" and serial = "VOID"';
             getTagSerial($sql, $mysqli, $snipe_url, "Assets needing Windows 11");
         ?>
