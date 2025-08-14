@@ -88,6 +88,6 @@ while (($line = fgets($handle)) !== false) {
 
             //Assets that need to be updated to Windows 11
             //but already have serial numbers properly set
-            $sql = 'select * from assets where serial = "VOID"';
+            $sql = 'select * from assets where notes like "%Needs updated to Windows 11%"';
             getTagSerial($sql, $mysqli, $snipe_url, "Assets needing Windows 11");
         ?>
