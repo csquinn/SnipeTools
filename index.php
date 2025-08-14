@@ -25,6 +25,7 @@
 			<button class = "button" data-url ="sites/deprovision.php">Deprovisioning</button>
 			<button class = "button" data-url = "sites/report.php">Inventory Health Report</button>
 			<button class = "button" data-url = "sites/status.php">Chromebook Status</button>
+			<button class = "button" data-url = "sites/windows.php">Windows 11 Updates</button>
 			<button class = "button" data-url = "sites/plug.php">TEMPORARY</button>
 			<script type = "module" src = "scripts/buttons.js"></script>
 		</div>	
