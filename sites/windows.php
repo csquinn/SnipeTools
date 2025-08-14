@@ -83,6 +83,6 @@ while (($line = fgets($handle)) !== false) {
         <?php
             //Assets that need to be updated to Windows 11
             //then properly have serial numbers set in inventory
-            $sql = 'select * from assets inner join categories on models.category_id = categories.id where categories.name = "Computers" and serial = "VOID"';
+            $sql = 'select * from assets inner join categories on assets.category_id = categories.id where categories.name = "Computers" and serial = "VOID"';
             getTagSerial($sql, $mysqli, $snipe_url, "Assets needing Windows 11");
         ?>
