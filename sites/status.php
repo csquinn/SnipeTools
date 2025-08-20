@@ -26,7 +26,16 @@ if ($mysqli -> connect_errno) {
 // Read students.txt file line by line to get array of all students
 $filename = '../student.csv';
 $handle = fopen($filename, 'r');
-$students= [];
+$Daytonstudents= [];
+$Eldertonstudents= [];
+$Shannockstudents= [];
+$Lenapestudents= [];
+$Primarystudents= [];
+$Intermediatestudents= [];
+$Armstrongstudents= [];
+$WSstudents= [];
+$Cyberstudents= [];
+$Otherstudents= [];
 if (!$handle) {
 	die("Cannot open file: $filename");
 }
@@ -40,45 +49,105 @@ while (($line = fgets($handle)) !== false) {
 			switch ($temp[0]) { //get locations of students from roster and match the id of snipe database
     				case "005": //Dayton
     				    $location = 5;
+					$Daytonstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
    				    break 1;
    				 case "013": //Elderton
       				  $location = 7;
+					$Eldertonstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
       				  break 1;
    				 case "026": //Shannock
        				  $location = 9;
+					$Shannockstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
        				  break 1;
 				case "016": //Lenape
 					$location = 8;
+					$Lenapestudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 				case "028": //Primary
 					$location = 2;
+					$Primarystudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 				case "022": //Intermediate
 					$location = 4;
+					$Intermediatestudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 				case "032": //Armstrong
 					$location = 3;
+					$Armstrongstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 				case "027": //WS
 					$location = 6;
+					$WSstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 				case "040": //Cyber
 					$location = 12;
+					$Cyberstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
+					break 1;
+				case "700": //also cyber I guess
+					$location = 12;
+					$Cyberstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 				default:	//sets location to admin, will be used to mark as error
 					$location = 1;
+					$Otherstudents[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
 					break 1;
 			}
-			$students[] = array($temp[3],$temp[1], $temp[4], (($temp[5] == "KG")?(0):((int)$temp[5])), $location);//last name, first name, 99#, grade, location
+			
 	}
 }
 }
 
-//sort by grade level then alphabetically
-$locationCol = array_column($students, 4);
-$grade  = array_column($students, 3);
-$lastNames = array_column($students, 0); 
-array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $students);
+//sort by grade level then alphabetically for every list
+//sorting by location isn't necessary but I don't want to remove it right now
+$locationCol = array_column($Daytonstudents, 4);
+$grade  = array_column($Daytonstudents, 3);
+$lastNames = array_column($Daytonstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Daytonstudents);
+
+$locationCol = array_column($Eldertonstudents, 4);
+$grade  = array_column($Eldertonstudents, 3);
+$lastNames = array_column($Eldertonstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Eldertonstudents);
+
+$locationCol = array_column($Shannockstudents, 4);
+$grade  = array_column($Shannockstudents, 3);
+$lastNames = array_column($Shannockstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Shannockstudents);
+
+$locationCol = array_column($Lenapestudents, 4);
+$grade  = array_column($Lenapestudents, 3);
+$lastNames = array_column($Lenapestudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Lenapestudents);
+
+$locationCol = array_column($Primarystudents, 4);
+$grade  = array_column($Primarystudents, 3);
+$lastNames = array_column($Primarystudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Primarystudents);
+
+$locationCol = array_column($Intermediatestudents, 4);
+$grade  = array_column($Intermediatestudents, 3);
+$lastNames = array_column($Intermediatestudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Intermediatestudents);
+
+$locationCol = array_column($Armstrongstudents, 4);
+$grade  = array_column($Armstrongstudents, 3);
+$lastNames = array_column($Armstrongstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Armstrongstudents);
+
+$locationCol = array_column($WSstudents, 4);
+$grade  = array_column($WSstudents, 3);
+$lastNames = array_column($WSstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $WSstudents);
+
+$locationCol = array_column($Cyberstudents, 4);
+$grade  = array_column($Cyberstudents, 3);
+$lastNames = array_column($Cyberstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Cyberstudents);
+
+$locationCol = array_column($Otherstudents, 4);
+$grade  = array_column($Otherstudents, 3);
+$lastNames = array_column($Otherstudents, 0); 
+array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, $Otherstudents);
 ?>
 
 
@@ -117,6 +186,9 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton K-4", "DE", 5);
 			echo"<br>";
 
+			get512Errors($Daytonstudents, $mysqli, $snipe_url, "Dayton 5-6");
+			echo"<br>";
+
 			$eldertonLocations = array (
 				array("129", 13),
 				array("104", 13),
@@ -129,6 +201,9 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 				array("LNR", 10)
 			);
 			getK4Errors($eldertonLocations, $mysqli, $snipe_url, "Elderton K-4", "EE", 7);
+			echo"<br>";
+
+			get512Errors($Eldertonstudents, $mysqli, $snipe_url, "Elderton 5-6");
 			echo"<br>";
 
 			$shannockLocations = array (
@@ -147,6 +222,9 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 			getK4Errors($shannockLocations, $mysqli, $snipe_url, "Shannock Valley K-4", "SV", 9);
 			echo"<br>";
 	
+			get512Errors($Shannockstudents, $mysqli, $snipe_url, "Shannock Valley 5-6");
+			echo"<br>";
+
 			$lenapeLocations = array(
 				array("0101", 18),
 				array("0103", 18),
@@ -174,6 +252,9 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 				array("LNR", 10)
 			);
 			getK4Errors($lenapeLocations, $mysqli, $snipe_url, "Lenape K-4", "LE", 8);
+			echo"<br>";
+
+			get512Errors($Lenapestudents, $mysqli, $snipe_url, "Lenape 5-6");
 			echo"<br>";
 
 			$westPrimaryLocations = array (
@@ -208,6 +289,9 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 			getK4Errors($westPrimaryLocations, $mysqli, $snipe_url, "West Hills Primary", "WHP", 2);
 			echo"<br>";
 
+			get512Errors($Primarystudents, $mysqli, $snipe_url, "West Hills Primary Assigned Chromebooks (should likely be 0)");
+			echo"<br>";
+
 			$westIntermediateLocations = array (
 				array("4004", 25),
 				array("4006", 25),
@@ -221,7 +305,19 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate 4th", "WI", 4);
 			echo"<br>";
 
-			get512Errors($students, $mysqli, $snipe_url, "All Schools 5th-12th Grades");
+			get512Errors($Intermediatestudents, $mysqli, $snipe_url, "West Hills Intermediate 5-6");
+			echo"<br>";
+
+			get512Errors($Armstrongstudents, $mysqli, $snipe_url, "Armstrong");
+			echo"<br>";
+
+			get512Errors($WSstudents, $mysqli, $snipe_url, "West Shamokin");
+			echo"<br>";
+
+			get512Errors($Cyberstudents, $mysqli, $snipe_url, "Cyber");
+			echo"<br>";
+	
+			get512Errors($Otherstudents, $mysqli, $snipe_url, "Other students on roster (marked as Census?)");
 			echo"<br>";
 
 			getExtraStudentErrors($students, $mysqli, $snipe_url, "Students not on roster with assigned Chromebooks");

@@ -171,6 +171,7 @@ function getK4Errors($rooms, $mysql_arg, $snipe_arg, $cat_arg, $acronym, $buildi
         echo "</details>";
 }
 
+//function is confusing and unoptimized. Was originally created for one large list of all students and was called once, now is called multiple times with lists based on different schools
 function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 	echo "<details>";
 	echo "<summary>".$cat_arg."</summary>";
@@ -212,7 +213,7 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 					$locationForMissingAsset = "Cyber";
 					break 1;
 				default:	//sets location to admin, will be used to mark as error
-					$locationForMissingAsset = "Strange Location";
+					$locationForMissingAsset = "Strange Location (Maybe Census?)";
 					break 1;
 			}
 
@@ -231,7 +232,7 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 				if($result -> num_rows != 1){
 					echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Critical field not set (likely location)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 				} else if ($result -> num_rows ===1){
-					echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $s[4])?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". (($s[4] == 1)?("Strange Location on Roster"):($row['locationName'])) ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
+					echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: green; color: black;'>". $row['serial'] ."</td><td id = 'tableElement' style='". (($row['status_id'] == 4)?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". $row['statusName'] ."</td><td id = 'tableElement'>". $row['modelName'] ."</td><td id = 'tableElement' style='". (($row['rtd_location_id'] == $s[4])?("background-color: green; color: black;"):("background-color: red; color: black;")) ."'>". (($s[4] == 1)?("Strange Location on Roster (Maybe Census?)"):($row['locationName'])) ."</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
 				}
 			} else { //too young to have cb?
 				echo "<tr><td id = 'tableElement'>". $s[0] ."</td><td id = 'tableElement'>". $s[1] ."</td><td id='tableElement'>". $s[2] ."</td><td id = 'tableElement'>Grade ". $s[3] ."</td><td id = 'tableElement' style = 'background-color: red; color: black;'>Shouldn't have Chromebook (too young?)</td><td id = 'tableElement'><a href='" . $snipe_arg . "/hardware?page=1&size=20&search=" . $s[2] . "' target = '_blank'>Link</a></td></tr>";
