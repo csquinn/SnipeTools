@@ -62,7 +62,7 @@ while (($line = fgets($handle)) !== false) {
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <title>Windows 11 Status | SnipeTools</title>
+    <title>Recent Asset Updates | SnipeTools</title>
     <link rel = "stylesheet" href = "../styles/reportStyle.css">
 </head>
 <body>
@@ -80,10 +80,10 @@ while (($line = fgets($handle)) !== false) {
         <?php
     
             $sql = 'select * from assets where created_at > NOW() - INTERVAL 1 WEEK  or updated_at > NOW() - INTERVAL 1 WEEK';
-            getTagSerial($sql, $mysqli, $snipe_url, "Assets needing serial numbers");
+            getTagSerial($sql, $mysqli, $snipe_url, "Assets updated within the last week");
 
             //Assets that need to be updated to Windows 11
             //but already have serial numbers properly set
-            $sql = 'select * from assets where notes like "%Needs updated to Windows 11%"';
-            getTagSerial($sql, $mysqli, $snipe_url, "Assets needing Windows 11");
+            $sql = 'select * from assets where (created_at < NOW() - INTERVAL 1 WEEK and created_at > NOW() - INTERVAL 4 WEEK)  or (updated_at < NOW() - INTERVAL 1 WEEK and updated_at > NOW() - INTERVAL 4 WEEK)';
+            getTagSerial($sql, $mysqli, $snipe_url, "Assets updated within the last month");
         ?>
