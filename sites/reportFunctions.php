@@ -248,7 +248,7 @@ function get512Errors($students, $mysql_arg, $snipe_arg, $cat_arg){
 
 
 //finds cbs assigned to students not on the students list (likely graduated or moved)
-function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
+function getExtraStudentErrors($Daytonstudents, $Eldertonstudents, $Shannockstudents, $Lenapestudents, $Primarystudents, $Intermediatestudents, $Armstrongstudents, $WSstudents, $Cyberstudents, $Otherstudents, $mysql_arg, $snipe_arg, $cat_arg){
 	//create temporary table
 	$mysql_arg -> query('drop table if exists tempStudents;');
 	$sql = 'create table tempStudents (last_name varchar(255) not null, first_name varchar(255) not null, username varchar(255) not null, grade varchar(255) not null) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;';
