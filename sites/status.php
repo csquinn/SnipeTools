@@ -320,7 +320,7 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 			get512Errors($Otherstudents, $mysqli, $snipe_url, "Other students on roster (marked as Census?)");
 			echo"<br>";
 
-			getExtraStudentErrors($Daytonstudents, $Eldertonstudents, $Shannockstudents, $Lenapestudents, $Primarystudents, $Intermediatestudents, $Armstrongstudents, $WSStudents, $Cyberstudents, $Otherstudents, $mysqli, $snipe_url, "Students not on roster with assigned Chromebooks");
+			getExtraStudentErrors($Daytonstudents, $Eldertonstudents, $Shannockstudents, $Lenapestudents, $Primarystudents, $Intermediatestudents, $Armstrongstudents, $WSstudents, $Cyberstudents, $Otherstudents, $mysqli, $snipe_url, "Students not on roster with assigned Chromebooks");
 			echo"<br>";
 
 			
