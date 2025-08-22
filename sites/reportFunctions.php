@@ -257,10 +257,36 @@ function getExtraStudentErrors($students, $mysql_arg, $snipe_arg, $cat_arg){
 	}
 
 	//add every student to the table
-	foreach($students as $s){
+	foreach($Daytonstudents as $s){
 		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
 	}
-
+	foreach($Eldertonstudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Shannockstudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Lenapestudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Primarystudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Intermediatestudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Armstrongstudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($WSstudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Cyberstudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
+	foreach($Otherstudents as $s){
+		$mysql_arg -> query('insert into tempStudents (last_name, first_name, username, grade) values ("'.$s[0].'","'.$s[1].'","'.$s[2].'","'.$s[3].'");');
+	}
 	//find students with cbs that aren't in the district
 	$sql = 'select * from assets inner join users on assets.assigned_to = users.id where users.username not in (select username from tempStudents) and assets.deleted_at is null and users.username like "99%"';
 	$result = $mysql_arg -> query($sql);
