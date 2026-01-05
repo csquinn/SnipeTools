@@ -1,3 +1,10 @@
+# README
+This repo is largely no longer used by ASD. As such, it was internally renamed "SummerTools" and is only used by summer techs during asset management.
+As such, there is no proper documentation for this repo.
+
+The new and improved SnipeTools used by ASD can be found at https://github.com/csquinn/snipe2ools
+
+All information below is partly innaccurate
 # SnipeTools
 SnipeTools is a web app that contains various tools for the Snipe IT Asset Management platform. These tools were designed specifically for my internship's Snipe IT implementation.
 
