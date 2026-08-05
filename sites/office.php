@@ -16,6 +16,10 @@ include 'handleAssetMessages.php'
 		<label for="serial">Scan Serial #</label>
 		<input type="hidden" name="source" value="office">
 		<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
+		<br><br>
+		<label for="newNotes">Notes</label>
+		<input type = "text" id = "newNotes" name = "newNotes" <?php echo ((isset($_GET['newNotes']))?('value="'.$_GET['newNotes'].'"'):(""));?>>
+		<br>
 		<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
 		<br>
 		<input type="checkbox" id="GAdmin" name="GAdmin" value="on" <?php echo (isset($_GET['GoogleRequestStatus']) ? 'checked' : ''); ?>>
