@@ -174,138 +174,108 @@ array_multisort($locationCol, SORT_ASC, $grade, SORT_ASC, $lastNames, SORT_ASC, 
 
 		<?php
 			$daytonLocations = array (
-				array("A104", 22),
-				array("A126", 17),
-				array("A110", 17),
-				array("C107", 22),
-				array("C106", 18),
-				array("C115", 21),
-				array("C114", 19),
-				array("LNR", 61)
+				array("CART1", 30),
+				array("CART2", 30),
+				array("CART3", 25),
+				array("CART4", 25),
+				array("CART5", 25),
+				array("HEALTH", 24),
+				array("LIBRARY", 24),
 			);
-			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton K-4", "DE", 5);
-			echo"<br>";
-
-			get512Errors($Daytonstudents, $mysqli, $snipe_url, "Dayton 5-6");
+			getK4Errors($daytonLocations, $mysqli, $snipe_url, "Dayton K-6", "DE", 5);
 			echo"<br>";
 
 			$eldertonLocations = array (
-				array("129", 13),
-				array("104", 13),
-				array("106", 22),
-				array("105", 19),
-				array("108", 17),
-				array("109", 22),
-				array("112", 15),
-				array("114", 15),
-				array("LNR", 10)
+				array("CART1", 30),
+				array("CART2", 30),
+				array("CART3", 25),
+				array("CART4", 25),
+				array("CART5", 25),
+				array("LIBRARY", 28),
+				array("HEALTH", 28),
+				array("LOBBYDISPLAY", 1),
+				array("STREAMING", 1)
 			);
-			getK4Errors($eldertonLocations, $mysqli, $snipe_url, "Elderton K-4", "EE", 7);
-			echo"<br>";
-
-			get512Errors($Eldertonstudents, $mysqli, $snipe_url, "Elderton 5-6");
+			getK4Errors($eldertonLocations, $mysqli, $snipe_url, "Elderton K-6", "EE", 7);
 			echo"<br>";
 
 			$shannockLocations = array (
-				array("119", 15),
-				array("120", 16),
-				array("128", 18),
-				array("130", 16),
-				array("200", 27),
-				array("225", 25),
-				array("201", 22),
-				array("224", 22),
-				array("206", 21),
-				array("218", 21),
-				array("LNR", 13)
+				array("CART1", 30),
+				array("CART2", 30),
+				array("CART3", 30),
+				array("CART4", 30),
+				array("CART5", 30),
+				array("CART6", 30),
+				array("CART7", 30),
+				array("TUB1", 5),
+				array("TUB2", 5),
+				array("HEALTH", 26),
+				array("LIBRARY", 27)
 			);
-			getK4Errors($shannockLocations, $mysqli, $snipe_url, "Shannock Valley K-4", "SV", 9);
-			echo"<br>";
-	
-			get512Errors($Shannockstudents, $mysqli, $snipe_url, "Shannock Valley 5-6");
+			getK4Errors($shannockLocations, $mysqli, $snipe_url, "Shannock Valley K-6", "SV", 9);
 			echo"<br>";
 
 			$lenapeLocations = array(
-				array("0101", 18),
-				array("0103", 18),
-				array("0104", 18),
-				array("0105", 18),
-				array("0106", 18),
-				array("1101", 22),
-				array("1103", 22),
-				array("1104", 22),
-				array("1105", 22),
-				array("1106", 22),
-				array("2101", 24),
-				array("2104", 24),
-				array("2105", 24),
-				array("2106", 24),
-				array("3101", 22),
-				array("3102", 22),
-				array("3103", 22),
-				array("3104", 22),
-				array("3105", 22),
-				array("4101", 25),
-				array("4103", 25),
-				array("4104", 25),
-				array("4105", 25),
-				array("LNR", 10)
+				array("CART1", 30),
+				array("CART2", 30),
+				array("CART3", 30),
+				array("CART4", 30),
+				array("CART5", 30),
+				array("CART6", 30),
+				array("CART7", 30),
+				array("CART8", 30),
+				array("CART9", 30),
+				array("CART10", 30),
+				array("CART11", 30),
+				array("CART12", 30),
+				array("CART13", 30),
+				array("CART14", 30),
+				array("CART15", 30),
+				array("HEALTH", 26),
+				array("LIBRARY", 26)
 			);
-			getK4Errors($lenapeLocations, $mysqli, $snipe_url, "Lenape K-4", "LE", 8);
-			echo"<br>";
-
-			get512Errors($Lenapestudents, $mysqli, $snipe_url, "Lenape 5-6");
+			getK4Errors($lenapeLocations, $mysqli, $snipe_url, "Lenape K-6", "LE", 8);
 			echo"<br>";
 
 			$westPrimaryLocations = array (
-				array("K1", 21),
-				array("K2", 21),
-				array("K3", 21),
-				array("K4", 21),
-				array("K5", 21),
-				array("K6", 21),
-				array("B1", 21),
-				array("A1", 21),
-				array("A2", 21),
-				array("A3", 24),
-				array("A4", 21),
-				array("B2", 22),
-				array("B3", 23),
-				array("B4", 23),
-				array("C2", 25),
-				array("C4", 25),
-				array("D1", 24),
-				array("D2", 24),
-				array("D4", 25),
-				array("G4", 25),
-				array("G5", 26),
-				array("H2", 25),
-				array("H3", 25),
-				array("H4", 25),
-				array("E1", 11),
-				array("E2", 12),
-				array("LNR", 10)
+				array("CART1", 30),
+				array("CART2", 30),
+				array("CART3", 30),
+				array("CART4", 30),
+				array("CART5", 30),
+				array("CART6", 30),
+				array("CART7", 30),
+				array("CART8", 30),
+				array("CART9", 30),
+				array("CART10", 30),
+				array("CART11", 28),
+				array("CART12", 28),
+				array("CART13", 28),
+				array("HEALTH", 25),
+				array("LIBRARY", 25)
 			);
-			getK4Errors($westPrimaryLocations, $mysqli, $snipe_url, "West Hills Primary", "WHP", 2);
+			getK4Errors($westPrimaryLocations, $mysqli, $snipe_url, "West Hills Primary", "WP", 2);
 			echo"<br>";
 
 			get512Errors($Primarystudents, $mysqli, $snipe_url, "West Hills Primary Assigned Chromebooks (should likely be 0)");
 			echo"<br>";
 
 			$westIntermediateLocations = array (
-				array("4004", 25),
-				array("4006", 25),
-				array("4007", 25),
-				array("4008", 25),
-				array("4009", 25),
-				array("4010", 25),
-				array("2040", 11),
-				array("LNR", 20)
+				array("CART1", 30),
+				array("CART2", 30),
+				array("CART3", 30),
+				array("CART4", 30),
+				array("CART5", 30),
+				array("CART6", 30),
+				array("CART7", 30),
+				array("CART8", 30),
+				array("CART9", 30),
+				array("HEALTH", 27),
+				array("LIBRARY", 27),
+				array("1002", 1),
+				array("GYMPROJECTOR", 1)
 			);
-			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate 4th", "WI", 4);
-			echo"<br>";
-
-			get512Errors($Intermediatestudents, $mysqli, $snipe_url, "West Hills Intermediate 5-6");
+			getK4Errors($westIntermediateLocations, $mysqli, $snipe_url, "West Hills Intermediate", "WI", 4);
 			echo"<br>";
 
 			get512Errors($Armstrongstudents, $mysqli, $snipe_url, "Armstrong");
