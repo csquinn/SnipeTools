@@ -112,6 +112,7 @@ try {
 				((isset($_GET['location']))?("&location=".$_GET['location']):("")).
 				((isset($_GET['remName']))?("&remName=on"):("")).
 				((isset($_GET['retag']))?("&retag=on"):("")).
+				((isset($_GET['newNotes']))?("&newNotes=".$_GET['newNotes']):("")).
 				((isset($_GET['checkin']))?("&checkin=on"):(""))
 				);
 
@@ -123,6 +124,7 @@ try {
 			$modelID = $assetJsonArray["rows"][0]["model"]["id"];
 			$assetTag = $assetJsonArray["rows"][0]["asset_tag"];
 			$currentStatus = $assetJsonArray["rows"][0]["status_label"]["id"];
+			$notes = $assetJsonArray["rows"][0]["notes"];
 
 			//restore the asset if it was deleted in the past with api call
 			$client = new GuzzleClient();
