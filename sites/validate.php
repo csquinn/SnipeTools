@@ -21,12 +21,16 @@ include 'handleAssetMessages.php'
 		<form action="../api_requests/validateAPI.php" method="GET" autocomplete="on">
 			
 			<label for="newTag">Enter new Asset Tag</label>
-			<input type = "text" id = "newTag" name = "newTag">
+			<input type = "text" id = "newTag" name = "newTag" <?php echo ((isset($_GET['sequentialTags']) and isset($_GET['newTag']))?('value="'.$_GET['newTag'].'"'):(""));?>>
 			<br><br>
 			
 			<label for="serial">Scan Serial #</label>
 			<input type="hidden" name="source" value="validate">
 			<input type="text" id="serial" name="serial" autofocus required autocomplete="off">
+			<br><br>
+			<label for="newNotes">Notes</label>
+			<input type = "text" id = "newNotes" name = "newNotes" <?php echo ((isset($_GET['newNotes']))?('value="'.$_GET['newNotes'].'"'):(""));?>>
+			<br>
 			<button type="submit">Submit</button> <!-- Submit button is here for convenience if manually typing in serial, pressing enter works fine-->
 			<br><br>
 			
@@ -59,6 +63,9 @@ include 'handleAssetMessages.php'
 				<br>
 			</div>	
 			<div class = "checkboxes">	
+				<input type="checkbox" id="sequentialTags" name="sequentialTags" value="on" <?php echo ((isset($_GET['sequentialTags']))?("checked"):(""));?>>
+				<label> Enable sequential asset tag pre-filling (kind of buggy, only works with two digit asset tags)</label>
+				<br>				
 				<input type="checkbox" id="remName" name="remName" value="on" <?php echo ((isset($_GET['remName']))?("checked"):(""));?>>
 				<label> Remove Asset Name</label>
 				<br>				
