@@ -67,9 +67,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['SnipeRequestStatus']))
 	}
 
 	//set sound effect
-	if ($_GET['SnipeRequestStatus'] >= 1){
-		$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
-	} else if ($_GET['SnipeRequestStatus'] <= -1){
+	if ($_GET['SnipeRequestStatus'] >= 1){ //request went through properly
+
+		//checks if an asset was deprovisioned as part of the request and plays a different sfx if true.
+		//done so that it's harder to accidentally be on the deprovision page
+		if($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['GoogleRequestStatus'])){
+			if($_GET['GoogleRequestStatus'] >= 2){
+				$audioMessage = "<audio src='../sfx/whistle.mp3' autoplay='autoplay'></audio>";
+			} else {
+				$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
+			}
+
+		} else {
+			$audioMessage = "<audio src='../sfx/ding.mp3' autoplay='autoplay'></audio>";
+		}
+
+	} else if ($_GET['SnipeRequestStatus'] <= -1){ //request didn't go through properly
 		$audioMessage = "<audio src='../sfx/buzzer.mp3' autoplay='autoplay'></audio>";
 	}
 	
