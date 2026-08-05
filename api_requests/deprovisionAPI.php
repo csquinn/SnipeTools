@@ -58,6 +58,11 @@ if (isset($_GET['GAdmin']) and ($googleId != -1)) {
 }
 
 
+//assign the notes variable if being used
+if (isset($_GET['newNotes']) && $_GET['newNotes'] != ''){
+	$newNotes=$_GET['newNotes'];
+}
+
 //Two requests are sent by deprovisionAPI.php to SnipeIT. A post request checks the asset in from any users, and a put request updates everything else as deprovisioned
 
 //checkin
@@ -92,7 +97,7 @@ try {
 	//important note: I did not have to list every single asset field in this request, just the ones I wanted to update. Anything not mentioned is not touched
 	//rtd_location_id 16 = Storage, status_id 6 = Deprovisioned
 	$response = $client->request('PUT', $snipe_url.'/api/v1/hardware/'.$id, [
-		'body' =>'{"rtd_location_id":16,"asset_tag":"' . $serial .'","status_id":6,"model_id":' . $modelID . '}',
+		'body' =>'{"rtd_location_id":16,"asset_tag":"' . $serial .'","status_id":6,"model_id":' . $modelID . ((isset($newNotes))?(',"notes":"'. $notes . ' | ' . $newNotes . '"'):('')) . '}',
 		'headers' => [
 			'Authorization' => 'Bearer ' . $api_key,
 			'accept' => 'application/json',
@@ -101,7 +106,7 @@ try {
 	]);
 
 	//redirect back to deprovision.php with a request statuses so that handleAssetMessages.php can display right info
-	header("Location: ../sites/deprovision.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial);
+	header("Location: ../sites/deprovision.php?SnipeRequestStatus=1". (($gSuccess == 0) ? '' : "&GoogleRequestStatus=".$gSuccess) ."&serial=". $serial . ((isset($newNotes)?('&newNotes='.$newNotes):(''))));
 
 //catch internal/api/server errors
 } catch (\GuzzleHttp\Exception\RequestException $e) {
