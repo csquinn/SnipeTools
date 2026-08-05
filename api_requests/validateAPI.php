@@ -62,6 +62,9 @@ if (isset($_GET['status'])){
 if (isset($_GET['location'])){
 	$location=$_GET['location'];
 }
+if (isset($_GET['sequentialTags'])){
+	$sequentialTags=$_GET['sequentialTags'];
+}
 if (isset($_GET['remName'])){
 	$remName=$_GET['remName'];
 }
@@ -73,6 +76,9 @@ if (isset($_GET['checkin'])){
 }
 if (isset($_GET['newTag'])){
 	$newTag = $_GET['newTag'];
+}
+if (isset($_GET['newNotes']) && $_GET['newNotes'] != ''){
+	$newNotes=$_GET['newNotes'];
 }
 
 //Two requests are sent by validateAPI.php to SnipeIT. A put request updates everything besides being checked in or checked out, and a post request checks the asset out
@@ -89,6 +95,7 @@ try {
 		.((isset($newTag) and $newTag != '')?('"asset_tag": "'.$newTag.'"'):((isset($retag) and $retag=="on")?('"asset_tag": "'.$serial.'"'):('"asset_tag": "'.$assetTag.'"')))	//asset_tag
 		.((isset($status) and $status != "lai")?(', "status_id": '.$status):(', "status_id": '.$currentStatus))	//status_id
 		.', "model_id": '.$modelID	//model_id
+		.((isset($newNotes))?(',"notes":"'. $notes . ' | ' . $newNotes . '"'):(''))
 		.((isset($location) and $location != "lai")?(', "rtd_location_id": '.$location):(''))	//rtd_location_id
 		.((isset($remName) and $remName=="on")?(', "name": null'):(''))	//name
 		.'}',
@@ -111,7 +118,6 @@ try {
 		],
 	]);
 
-	//you'll use $response->getBody(), then need to explore it somehow
 	//if asset tag is already in use, then do not replace asset tag
 	if ($tagResponse -> getStatusCode() == 200){
 		//convert JSON response to an array
@@ -134,6 +140,21 @@ try {
 
 				exit;
 			}
+		}
+	}
+
+	//logic for incrementing asset tags. Should add 1 to the last digit
+	if(isset($sequentialTags) and $sequentialTags=="on"){
+		try{
+			$currentDigits = substr($newTag, -2);
+			if(is_numeric($currentDigits) and $currentDigits > 0){
+				$incrementedDigits = sprintf("%02d", ($currentDigits+1));
+				$newTag = substr_replace($newTag, $incrementedDigits, -2);
+			} else {
+				$sequentialTags = null;
+			}
+		} catch (\Exception $e) {
+			$sequentialTags = null;
 		}
 	}
 //catch internal/api/server errors
@@ -176,6 +197,8 @@ header("Location: ../sites/validate.php?SnipeRequestStatus=1". (($gSuccess == 0)
 	((isset($location))?("&location=".$location):("")).
 	((isset($remName))?("&remName=on"):("")).
 	((isset($retag))?("&retag=on"):("")).
-	((isset($checkin))?("&checkin=on"):(""))
+	((isset($checkin))?("&checkin=on"):("")).
+	((isset($sequentialTags))?("&sequentialTags=on&newTag=".$newTag):("")).
+	((isset($newNotes)?('&newNotes='.$newNotes):('')))
 	);
 ?>
